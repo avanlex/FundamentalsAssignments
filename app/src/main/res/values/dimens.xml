@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_cover_height">400dp</dimen>
+    <dimen name="size_pg_text">16sp</dimen>
+    <dimen name="size_movie_name">40sp</dimen>
+    <dimen name="size_tagline">14sp</dimen>
+</resources>
