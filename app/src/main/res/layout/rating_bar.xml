@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reviews"
+    android:layout_width="wrap_content"
+    android:layout_height="20dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <include layout="@layout/star_on_layout" />
+    <include layout="@layout/star_on_layout" />
+    <include layout="@layout/star_on_layout" />
+    <include layout="@layout/star_on_layout" />
+
+    <ImageView
+            android:id="@+id/star5"
+            android:layout_width="@dimen/star_size"
+            android:layout_height="@dimen/star_size"
+            app:srcCompat="@drawable/ic_star_off" />
+
+</LinearLayout>
