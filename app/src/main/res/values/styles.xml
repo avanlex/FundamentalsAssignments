@@ -5,23 +5,6 @@
         <item name="cornerSize">@dimen/size_actor_corner_size</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="circleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="actor_card">
-        <item name="android:layout_width">@dimen/size_actor</item>
-        <item name="android:layout_height">@dimen/size_actor_height</item>
-        <item name="android:drawablePadding">@dimen/actor_text_margin</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/color_white1</item>
-    </style>
-    
     <style name="actorNameStyle">
         <item name="android:layout_marginTop">@dimen/actor_text_margin</item>
         <item name="android:textColor">@color/color_white1</item>
