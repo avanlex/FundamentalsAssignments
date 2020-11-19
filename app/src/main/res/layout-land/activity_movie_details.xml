@@ -167,20 +167,18 @@
             android:id="@+id/layoutActor1"
             style="@style/ActorLayoutStyle"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/layoutActor2"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_details">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image1"
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
-                app:srcCompat="@drawable/actor_downey"
-                 />
+                app:srcCompat="@drawable/actor_downey" />
 
             <TextView
                 android:id="@+id/text1"
@@ -193,17 +191,17 @@
         <LinearLayout
             android:id="@+id/layoutActor2"
             style="@style/ActorLayoutStyle"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/layoutActor3"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/layoutActor1"
             app:layout_constraintTop_toBottomOf="@+id/movie_details">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
                 app:srcCompat="@drawable/actor_evans" />
 
@@ -218,8 +216,7 @@
         <LinearLayout
             android:id="@+id/layoutActor3"
             style="@style/ActorLayoutStyle"
-            android:layout_weight="1"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/layoutActor4"
             app:layout_constraintStart_toEndOf="@+id/layoutActor2"
             app:layout_constraintTop_toBottomOf="@+id/movie_details">
@@ -227,7 +224,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
                 app:srcCompat="@drawable/actor_ruffalo" />
 
@@ -242,18 +239,14 @@
         <LinearLayout
             android:id="@+id/layoutActor4"
             style="@style/ActorLayoutStyle"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/layoutActor3"
             app:layout_constraintTop_toBottomOf="@+id/movie_details">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:shapeAppearanceOverlay="@style/roundedImageView"
                 app:srcCompat="@drawable/actor_hemsworth" />
 

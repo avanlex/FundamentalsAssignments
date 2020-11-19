@@ -4,12 +4,12 @@
     <string name="movie_cover_gradient">movie_cover_gradient</string>
     <string name="string_back">Back</string>
     <string name="string_pg13">13+</string>
-    <string name="string_avengers_end_game">Avengers: \nEnd Game</string>
+    <string name="string_avengers_end_game">Avengers: End Game</string>
     <string name="string_tags">Action, Adventure, Fantasy</string>
-    <string name="string_robert_downey_jr">Robert <br/>Downey Jr.</string>
-    <string name="string_chris_evans">Chris <br/>Evans</string>
-    <string name="string_mark_ruffalo">Mark <br/>Ruffalo</string>
-    <string name="string_chris_hemsworth">Chris <br/>Hemsworth</string>
+    <string name="string_robert_downey_jr">Robert Downey Jr.</string>
+    <string name="string_chris_evans">Chris Evans</string>
+    <string name="string_mark_ruffalo">Mark Ruffalo</string>
+    <string name="string_chris_hemsworth">Chris Hemsworth</string>
     <string name="string_cast">Cast</string>
     <string name="string_storyline">Storyline</string>
     <string name="string_storyline_content">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
