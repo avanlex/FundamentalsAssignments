@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="roundedImageView" parent="">
+    <style name="RoundedImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/size_actor_corner_size</item>
     </style>
 
-    <style name="actorNameStyle">
+    <style name="ActorNameStyle">
         <item name="android:layout_marginTop">@dimen/actor_text_margin</item>
         <item name="android:textColor">@color/color_white1</item>
     </style>
 
-    <style name="ActorLayoutStyle">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:maxLines">2</item>
-    </style>
 </resources>

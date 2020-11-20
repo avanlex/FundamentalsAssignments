@@ -12,7 +12,6 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="@dimen/movie_cover_height"
             android:alpha="0.25"
@@ -153,11 +152,11 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_details"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:srcCompat="@drawable/actor_downey" />
 
         <TextView
-            style="@style/actorNameStyle"
+            style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/string_robert_downey_jr"
@@ -177,11 +176,11 @@
             app:layout_constraintEnd_toStartOf="@+id/imageActor3"
             app:layout_constraintStart_toEndOf="@+id/imageActor1"
             app:layout_constraintTop_toBottomOf="@+id/movie_details"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:srcCompat="@drawable/actor_evans" />
 
         <TextView
-            style="@style/actorNameStyle"
+            style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/string_chris_evans"
@@ -201,11 +200,11 @@
             app:layout_constraintEnd_toStartOf="@+id/imageActor4"
             app:layout_constraintStart_toEndOf="@+id/imageActor2"
             app:layout_constraintTop_toBottomOf="@+id/movie_details"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:srcCompat="@drawable/actor_ruffalo" />
 
         <TextView
-            style="@style/actorNameStyle"
+            style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/string_mark_ruffalo"
@@ -224,11 +223,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageActor3"
             app:layout_constraintTop_toBottomOf="@+id/movie_details"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:srcCompat="@drawable/actor_hemsworth" />
 
         <TextView
-            style="@style/actorNameStyle"
+            style="@style/ActorNameStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
