@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    app:layout_constraintDimensionRatio="1:1">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/movie_cover_height"
+            android:alpha="0.25"
+            android:contentDescription="@string/movie_cover"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/poster" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/movie_cover_height"
+            android:contentDescription="@string/movie_cover_gradient"
+            android:src="@drawable/gradient_transpartent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/movie_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_back_height"
+                android:layout_marginTop="@dimen/size_back_margin_top"
+                android:alpha="0.25"
+                android:drawablePadding="@dimen/back_image_padding"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/back_padding_start"
+                android:paddingEnd="@dimen/back_padding_start"
+                android:text="@string/string_back"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_back" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/movie_name_layout_height"
+                android:layout_marginTop="@dimen/movie_name_layout_margin_top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_pg13"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_pg_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="0.9"
+                    android:text="@string/string_avengers_end_game"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_movie_name"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/string_tags"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/size_tagline" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <include layout="@layout/rating_bar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8.9dp"
+                    android:text="@string/string_reviews"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="124dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_storyline"
+                    android:textColor="@color/color_white1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0.75"
+                    android:letterSpacing="0.08"
+                    android:text="@string/string_storyline_content"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="7dp"
+                android:text="@string/string_cast"
+                android:textColor="@color/color_white1"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageActor1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/actor_downey" />
+
+        <TextView
+            style="@style/ActorNameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_robert_downey_jr"
+            app:layout_constraintEnd_toEndOf="@+id/imageActor1"
+            app:layout_constraintStart_toStartOf="@+id/imageActor1"
+            app:layout_constraintTop_toBottomOf="@+id/imageActor1" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageActor2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/imageActor3"
+            app:layout_constraintStart_toEndOf="@+id/imageActor1"
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/actor_evans" />
+
+        <TextView
+            style="@style/ActorNameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_chris_evans"
+            app:layout_constraintEnd_toEndOf="@+id/imageActor2"
+            app:layout_constraintStart_toStartOf="@+id/imageActor2"
+            app:layout_constraintTop_toBottomOf="@+id/imageActor2" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageActor3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/imageActor4"
+            app:layout_constraintStart_toEndOf="@+id/imageActor2"
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/actor_ruffalo" />
+
+        <TextView
+            style="@style/ActorNameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_mark_ruffalo"
+            app:layout_constraintEnd_toEndOf="@+id/imageActor3"
+            app:layout_constraintStart_toStartOf="@+id/imageActor3"
+            app:layout_constraintTop_toBottomOf="@+id/imageActor3" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageActor4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageActor3"
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/actor_hemsworth" />
+
+        <TextView
+            style="@style/ActorNameStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/string_chris_hemsworth"
+            app:layout_constraintEnd_toEndOf="@+id/imageActor4"
+            app:layout_constraintStart_toStartOf="@+id/imageActor4"
+            app:layout_constraintTop_toBottomOf="@+id/imageActor4" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+
