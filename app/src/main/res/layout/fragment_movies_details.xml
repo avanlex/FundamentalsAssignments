@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    app:layout_constraintDimensionRatio="1:1">
+    app:layout_constraintDimensionRatio="1:1"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/movie_cover_height"
             android:contentDescription="@string/movie_cover_gradient"
-            android:src="@drawable/gradient_transpartent"
+            android:src="@drawable/gradient_poster_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/string_tags"
-                android:textColor="@color/text_red"
+                android:textColor="@color/pink"
                 android:textSize="@dimen/size_tagline" />
 
 
@@ -96,7 +97,20 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <include layout="@layout/rating_bar" />
+                <com.github.avanlex.fundamentalsassignments.RatingBarSvg
+                    android:id="@+id/rb_ratingbarsvg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/grey"
+                    android:progressDrawable="@drawable/ratingbar_svg_selector"
+                    android:progressTint="@color/pink"
+                    android:rating="3"
+                    android:secondaryProgressTint="@color/grey"
+                    app:drawableHeight="12dp"
+                    app:drawableWidth="12dp"
+                    app:innerPadding="3.9dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -235,7 +249,6 @@
             app:layout_constraintEnd_toEndOf="@+id/imageActor4"
             app:layout_constraintStart_toStartOf="@+id/imageActor4"
             app:layout_constraintTop_toBottomOf="@+id/imageActor4" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movieItem"
+    android:layout_width="170dp"
+    android:layout_height="296dp"
+    app:cardCornerRadius="8dp"
+    android:background="@drawable/shape_movie_card">
+
+    <TextView
+        android:id="@+id/textCardMovieName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/string_avengers_end_game"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shImageMoviePoster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/card_border_width"
+        android:layout_marginTop="@dimen/card_border_width"
+        android:layout_marginEnd="@dimen/card_border_width"
+        android:layout_marginBottom="@dimen/image_bottom_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        app:srcCompat="@drawable/endgame_card" />
+
+    <ImageView
+        android:id="@+id/imageCardGradient"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/gradient_poster_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagePG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_pg_rectangle" />
+
+    <ImageView
+        android:id="@+id/imageFavorit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_heart" />
+
+    <TextView
+        android:id="@+id/textCardTagline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="22dp"
+        android:text="@string/string_tags"
+        android:textColor="@color/pink"
+        android:textSize="@dimen/size_card_tagline"
+        app:layout_constraintBottom_toBottomOf="@+id/shImageMoviePoster"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/shImageMoviePoster"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.github.avanlex.fundamentalsassignments.RatingBarSvg
+            android:id="@+id/rb_ratingbarsvg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/grey"
+            android:progressDrawable="@drawable/ratingbar_svg_selector"
+            android:progressTint="@color/pink"
+            android:rating="4"
+            android:secondaryProgressTint="@color/grey"
+            app:drawableHeight="@dimen/star_card_size"
+            app:drawableWidth="@dimen/star_card_size"
+            app:innerPadding="@dimen/star_card_padding" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/string_reviews"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textPgRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="@string/movie_pg"
+        app:layout_constraintBottom_toBottomOf="@+id/imagePG"
+        app:layout_constraintEnd_toEndOf="@+id/imagePG"
+        app:layout_constraintStart_toStartOf="@+id/imagePG"
+        app:layout_constraintTop_toTopOf="@+id/imagePG"/>
+
+    <TextView
+        android:id="@+id/textReviewCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:text="@string/string_reviews"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
