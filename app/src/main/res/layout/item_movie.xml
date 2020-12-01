@@ -6,6 +6,7 @@
     android:layout_width="170dp"
     android:layout_height="296dp"
     app:cardCornerRadius="8dp"
+    tools:layout_margin = "12dp"
     android:background="@drawable/shape_movie_card">
 
     <TextView
@@ -35,7 +36,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        app:srcCompat="@drawable/endgame_card" />
+        app:srcCompat="@drawable/endgame_card"
+        tools:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageCardGradient"
