@@ -12,9 +12,10 @@
                 android:centerY="0.1"
                 android:angle="315"
                 android:type="linear"/>
-            <corners android:radius="8dp" />
+            <corners android:radius="8dp"/>
         </shape>
     </item>
+
     <item
         android:bottom="@dimen/item_movie_border_width"
         android:left="@dimen/item_movie_border_width"
@@ -22,16 +23,14 @@
         android:top="@dimen/item_movie_border_width">
         <shape>
             <size android:width="10dp"/>
-            <!--    <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp"/>-->
             <gradient
                 android:startColor="#404056"
                 android:endColor="#222232"
                 android:centerX="0.1"
                 android:centerY="0.1"
                 android:gradientRadius="600"
-                android:type="radial"
-                />
-            <corners android:radius="8dp" />
+                android:type="radial"/>
+            <corners android:radius="8dp"/>
         </shape>
     </item>
 
