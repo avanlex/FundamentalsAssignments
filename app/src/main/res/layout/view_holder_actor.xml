@@ -9,14 +9,14 @@
 
 
     <com.github.avanlex.fundamentalsassignments.SquareImageView
-        android:id="@+id/imageActor"
+        android:id="@+id/iv_actor_photo"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
         app:srcCompat="@drawable/actor_downey" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_actor_name"
         style="@style/ActorNameStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
