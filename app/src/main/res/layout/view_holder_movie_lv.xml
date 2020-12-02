@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movieItem"
+    android:layout_width="170dp"
+    android:layout_height="296dp"
+    android:background="@drawable/shape_movie_card"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_border_width"
+        android:layout_marginTop="@dimen/card_border_width"
+        android:layout_marginEnd="@dimen/card_border_width">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shImageMoviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/endgame_card" />
+
+        <ImageView
+            android:id="@+id/imageCardGradient"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/gradient_poster_card" />
+
+        <ImageView
+            android:id="@+id/imagePG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/ic_pg_rectangle" />
+
+        <TextView
+            android:id="@+id/textPgRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9.8dp"
+            android:layout_marginTop="11dp"
+            android:text="@string/movie_pg"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageFavorit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/ic_heart" />
+
+        <TextView
+            android:id="@+id/textCardTagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="22dp"
+            android:text="@string/string_tags"
+            android:textColor="@color/pink"
+            android:textSize="@dimen/size_card_tagline" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.github.avanlex.fundamentalsassignments.RatingBarSvg
+                android:id="@+id/rb_ratingbarsvg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/grey"
+                android:progressDrawable="@drawable/ratingbar_svg_selector"
+                android:progressTint="@color/pink"
+                android:rating="4"
+                android:secondaryProgressTint="@color/grey"
+                app:drawableHeight="@dimen/star_card_size"
+                app:drawableWidth="@dimen/star_card_size"
+                app:innerPadding="@dimen/star_card_padding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@string/string_reviews"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textCardMovieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/string_avengers_end_game"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textReviewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:text="@string/string_reviews"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="8sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
