@@ -26,11 +26,10 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/movie_cover_height"
             android:contentDescription="@string/movie_cover_gradient"
-            android:src="@drawable/gradient_transpartent"
+            android:src="@drawable/gradient_poster_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <LinearLayout
             android:id="@+id/movie_details"
@@ -42,8 +41,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <TextView
+                android:id="@+id/text_back"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_back_height"
                 android:layout_marginTop="@dimen/size_back_margin_top"
@@ -85,9 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/string_tags"
-                android:textColor="@color/text_red"
+                android:textColor="@color/pink"
                 android:textSize="@dimen/size_tagline" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +94,20 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <include layout="@layout/rating_bar" />
+                <com.github.avanlex.fundamentalsassignments.RatingBarSvg
+                    android:id="@+id/rb_ratingbarsvg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/grey"
+                    android:progressDrawable="@drawable/ratingbar_svg_selector"
+                    android:progressTint="@color/pink"
+                    android:rating="3"
+                    android:secondaryProgressTint="@color/grey"
+                    app:drawableHeight="12dp"
+                    app:drawableWidth="12dp"
+                    app:innerPadding="3.9dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,7 +118,6 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,7 +152,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageActor1"
             android:layout_width="0dp"
@@ -163,7 +172,6 @@
             app:layout_constraintEnd_toEndOf="@+id/imageActor1"
             app:layout_constraintStart_toStartOf="@+id/imageActor1"
             app:layout_constraintTop_toBottomOf="@+id/imageActor1" />
-
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageActor2"
@@ -212,7 +220,6 @@
             app:layout_constraintStart_toStartOf="@+id/imageActor3"
             app:layout_constraintTop_toBottomOf="@+id/imageActor3" />
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageActor4"
             android:layout_width="0dp"
@@ -236,8 +243,8 @@
             app:layout_constraintStart_toStartOf="@+id/imageActor4"
             app:layout_constraintTop_toBottomOf="@+id/imageActor4" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
 
 
