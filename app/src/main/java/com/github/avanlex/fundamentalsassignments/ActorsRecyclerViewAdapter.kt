@@ -10,7 +10,9 @@ import com.github.avanlex.fundamentalsassignments.data.models.Actor
 import java.lang.reflect.Field
 
 
-class ActorsRecyclerView : RecyclerView.Adapter<ActorViewHolder>() {
+class ActorsRecyclerViewAdapter(
+    private val actors: List<Actor>
+) : RecyclerView.Adapter<ActorViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         TODO("Not yet implemented")
     }

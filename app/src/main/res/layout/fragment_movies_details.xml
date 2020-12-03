@@ -94,8 +94,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.github.avanlex.fundamentalsassignments.RatingBarSvg
-                    android:id="@+id/rb_ratingbarsvg"
+                <com.github.avanlex.fundamentalsassignments.VectorRatingBar
+                    android:id="@+id/rbs_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8.9dp"
-                    android:text="@string/string_reviews"
+                    android:text="@string/string_review_count"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp"
                     android:textStyle="bold" />

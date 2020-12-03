@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/plant_list"
+        android:id="@+id/rv_movie_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-
         tools:layoutManager="GridLayoutManager"
         tools:listitem="@layout/view_holder_movie"
         tools:spanCount="2"

@@ -16,21 +16,21 @@
         android:layout_marginEnd="@dimen/card_border_width">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shImageMoviePoster"
+            android:id="@+id/siv_card_poster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:srcCompat="@drawable/endgame_card" />
 
         <ImageView
-            android:id="@+id/imageCardGradient"
+            android:id="@+id/iv_card_gradient"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="@drawable/gradient_poster_card" />
 
         <ImageView
-            android:id="@+id/imagePG"
+            android:id="@+id/iv_card_pg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -38,7 +38,7 @@
             app:srcCompat="@drawable/ic_pg_rectangle" />
 
         <TextView
-            android:id="@+id/textPgRating"
+            android:id="@+id/tv_card_pg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="9.8dp"
@@ -49,7 +49,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageFavorit"
+            android:id="@+id/iv_favorit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -58,7 +58,7 @@
             app:srcCompat="@drawable/ic_heart" />
 
         <TextView
-            android:id="@+id/textCardTagline"
+            android:id="@+id/tv_card_tag_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -70,7 +70,7 @@
             android:textSize="@dimen/size_card_tagline" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/ll_card_rating"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_gravity="bottom"
@@ -78,8 +78,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.github.avanlex.fundamentalsassignments.RatingBarSvg
-                android:id="@+id/rb_ratingbarsvg"
+            <com.github.avanlex.fundamentalsassignments.VectorRatingBar
+                android:id="@+id/rbs_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text="@string/string_reviews"
+                android:text="@string/string_review_count"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -106,7 +106,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textCardMovieName"
+        android:id="@+id/tv_card_movie_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -117,14 +117,14 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textReviewCount"
+        android:id="@+id/tv_card_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:text="@string/string_reviews"
+        android:text="@string/string_review_count"
         android:textColor="@android:color/darker_gray"
         android:textSize="8sp"
         android:textStyle="bold" />
