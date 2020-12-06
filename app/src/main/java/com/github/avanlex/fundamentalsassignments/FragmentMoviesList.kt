@@ -22,7 +22,7 @@ class FragmentMoviesList : Fragment() {
     ): View  {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
-        val recyclerView : RecyclerView = view.findViewById(R.id.rv_actor_list);
+        val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list);
         recycler = recyclerView
 
         // RecyclerView ограничен и имеет фиксированный размер
