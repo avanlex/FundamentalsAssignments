@@ -72,7 +72,7 @@
                     android:textSize="@dimen/size_pg_text"
                     android:textStyle="bold" />
 
-                <TextView
+                <com.github.avanlex.fundamentalsassignments.FontFitTextView
                     android:id="@+id/tv_details_movie_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
