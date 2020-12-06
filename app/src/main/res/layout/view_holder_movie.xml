@@ -6,7 +6,7 @@
     android:layout_width="170dp"
     android:layout_height="296dp"
     app:cardCornerRadius="8dp"
-    tools:layout_margin = "12dp"
+    tools:layout_margin = "0dp"
     android:background="@drawable/shape_movie_card">
 
     <com.google.android.material.imageview.ShapeableImageView

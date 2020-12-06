@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:layoutManager="GridLayoutManager"
         tools:listitem="@layout/view_holder_movie"

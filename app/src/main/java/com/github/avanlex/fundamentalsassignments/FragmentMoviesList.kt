@@ -28,7 +28,7 @@ class FragmentMoviesList : Fragment() {
         recyclerView.setHasFixedSize(true);
 
         // Здесь мы устанавливаем отступ, равный 20
-        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(48));
+        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24));
 
         // Установите требуемый LayoutManager
         val layoutManager = GridLayoutManager(context, 2);
