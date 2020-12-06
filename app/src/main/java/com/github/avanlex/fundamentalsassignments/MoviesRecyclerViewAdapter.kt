@@ -7,12 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.avanlex.fundamentalsassignments.data.models.Actor
 import com.github.avanlex.fundamentalsassignments.data.models.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesRecyclerViewAdapter (
-    private val clickListener: OnRecyclerItemClicked
+    private val clickListener: OnRecyclerMovieItemClicked
 ): RecyclerView.Adapter<MovieViewHolder>() {
 
     private var movies: List<Movie> = listOf()
@@ -24,14 +23,14 @@ class MoviesRecyclerViewAdapter (
 
     override fun getItemViewType(position: Int): Int {
         return when (movies.size) {
-            0 -> VIEW_TYPE_EMPTY
-            else -> VIEW_TYPE_ACTORS
+            0 -> VIEW_TYPE_NO_MOVIES
+            else -> VIEW_TYPE_MOVIES
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return when (viewType) {
-            VIEW_TYPE_EMPTY ->
+            VIEW_TYPE_NO_MOVIES ->
                 MovieEmptyViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_movies_empty, parent, false)
@@ -59,12 +58,12 @@ class MoviesRecyclerViewAdapter (
 
 }
 
-interface OnRecyclerItemClicked {
+interface OnRecyclerMovieItemClicked {
     fun onClick(movie: Movie)
 }
 
-private const val VIEW_TYPE_EMPTY = 0
-private const val VIEW_TYPE_ACTORS = 1
+private const val VIEW_TYPE_NO_MOVIES = 0
+private const val VIEW_TYPE_MOVIES = 1
 
 abstract class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -74,7 +73,7 @@ private class MovieDataViewHolder(itemView: View) : MovieViewHolder(itemView) {
     private val name: TextView = itemView.findViewById(R.id.tv_card_movie_name)
     private val duration: TextView = itemView.findViewById(R.id.tv_card_duration)
     private val pg: TextView = itemView.findViewById(R.id.tv_card_pg)
-    private val rating: VectorRatingBar = itemView.findViewById(R.id.rbs_rating)
+    private val rating: VectorRatingBar = itemView.findViewById(R.id.vrb_details_rating)
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
 
@@ -85,7 +84,6 @@ private class MovieDataViewHolder(itemView: View) : MovieViewHolder(itemView) {
         rating.rating = movie.rating.toFloat()
         reviewCount.text = context.getString(R.string.string_review_count, movie.reviewCount)
 //        storyline.text = movie.storyline
-
 
         Glide.with(context)
             .load(movie.poster)

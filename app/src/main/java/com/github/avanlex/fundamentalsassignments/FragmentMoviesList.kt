@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.models.Movie
@@ -21,16 +22,16 @@ class FragmentMoviesList : Fragment() {
     ): View  {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
-        val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list);
+        val recyclerView : RecyclerView = view.findViewById(R.id.rv_actor_list);
         recycler = recyclerView
 
-        // Установите true, если ваш RecyclerView ограничен и имеет фиксированный размер
+        // RecyclerView ограничен и имеет фиксированный размер
         recyclerView.setHasFixedSize(true);
 
-        // Здесь мы устанавливаем отступ, равный 20
+        // Здесь мы устанавливаем отступ
         recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24));
 
-        // Установите требуемый LayoutManager
+        // Установите табличный LayoutManager
         val layoutManager = GridLayoutManager(context, 2);
         recyclerView.layoutManager = layoutManager;
 
@@ -39,14 +40,6 @@ class FragmentMoviesList : Fragment() {
         moviesAdapter.bindMovies(MoviesDataSource().getList())
         recyclerView.adapter = moviesAdapter;
 
-//        view.findViewById<ShapeableImageView>(R.id.siv_card_poster)
-//            .setOnClickListener {
-//                fragmentManager!!.beginTransaction()
-//                    .replace(R.id.main_activity, FragmentMoviesDetails())
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                    .addToBackStack(null)
-//                    .commit()
-//            }
         return view
     }
 
@@ -54,13 +47,19 @@ class FragmentMoviesList : Fragment() {
         recycler?.let { rv ->
             Snackbar.make(
                 rv,
-                getString(R.string.chosen_movie_name, movie.name),
+                getString(R.string.chosen_item_name, movie.name),
                 Snackbar.LENGTH_SHORT)
                 .show()
+
+            fragmentManager!!.beginTransaction()
+                    .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
+                    .commit()
         }
     }
 
-    private val clickListener = object : OnRecyclerItemClicked {
+    private val clickListener = object : OnRecyclerMovieItemClicked {
         override fun onClick(movie: Movie) {
             doOnClick(movie)
         }
