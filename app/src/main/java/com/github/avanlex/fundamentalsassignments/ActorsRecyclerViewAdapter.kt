@@ -18,7 +18,7 @@ class ActorsRecyclerViewAdapter (
 
     private var actors: List<Actor> = listOf()
 
-    fun bindMovies(actorList: List<Actor>) {
+    fun bindActors(actorList: List<Actor>) {
         actors = actorList
         notifyDataSetChanged()
     }

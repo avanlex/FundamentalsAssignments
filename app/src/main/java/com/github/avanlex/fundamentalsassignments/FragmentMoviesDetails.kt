@@ -36,8 +36,8 @@ class  FragmentMoviesDetails : Fragment() {
             .setOnClickListener {
                 fragmentManager?.popBackStack()
             }
-/*
-        val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list);
+
+        val recyclerView : RecyclerView = view.findViewById(R.id.rv_actor_list);
         recycler = recyclerView
 
         // RecyclerView ограничен и имеет фиксированный размер
@@ -48,17 +48,16 @@ class  FragmentMoviesDetails : Fragment() {
 
         // Установите линейного LayoutManager
         val layoutManager = LinearLayoutManager(context);
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = layoutManager;
 
         // Инициализирование и установка адаптера в RecyclerView
         val moviesAdapter = ActorsRecyclerViewAdapter(clickListener);
-        moviesAdapter.bindMovies(ActorsDataSource().getList())
+        movie?.let { moviesAdapter.bindActors(it.actors) }
         recyclerView.adapter = moviesAdapter;
-
- */
         return view
     }
-/*
+
     private fun doOnClick(actor: Actor) {
         recycler?.let { rvMoviesList ->
             Snackbar.make(
@@ -74,7 +73,7 @@ class  FragmentMoviesDetails : Fragment() {
             doOnClick(actor)
         }
     }
-*/
+
     companion object {
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
