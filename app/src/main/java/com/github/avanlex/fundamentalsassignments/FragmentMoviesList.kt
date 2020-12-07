@@ -27,17 +27,17 @@ class FragmentMoviesList : Fragment() {
         val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list);
         recycler = recyclerView
 
-        // RecyclerView ограничен и имеет фиксированный размер
+        // Optimaze perfomance a little
         recyclerView.setHasFixedSize(true);
 
-        // Здесь мы устанавливаем отступ
+        // Offset between items workaround
         recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24));
 
-        // Установите табличный LayoutManager
+        // Setting adapter to RecyclerView
         val layoutManager = GridLayoutManager(context, 2);
         recyclerView.layoutManager = layoutManager;
 
-        // Инициализирование и установка адаптера в RecyclerView
+        // Setting adapter to RecyclerView
         val moviesAdapter = MoviesRecyclerViewAdapter(clickListener);
         moviesAdapter.bindMovies(MoviesDataSource().getList())
         recyclerView.adapter = moviesAdapter;
@@ -46,14 +46,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun doOnClick(movie: Movie) {
-        recycler?.let { rv ->
-            Snackbar.make(
-                rv,
-                getString(R.string.chosen_item_name, movie.name),
-                Snackbar.LENGTH_SHORT
-            )
-                .show()
-
+        recycler?.let {
             fragmentManager!!.beginTransaction()
                              .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
                              .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

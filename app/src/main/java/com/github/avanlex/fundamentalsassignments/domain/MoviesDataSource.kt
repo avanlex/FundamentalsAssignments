@@ -22,9 +22,10 @@ class MoviesDataSource {
                 "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
                     "poster_tenet",
                 listOf(
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
+                    Actor("Robert Downey Jr.", "actor_downey"),
+                    Actor("Chris Evans", "actor_evans"),
+                    Actor("Chris Hemsworth", "actor_hemsworth"),
+                    Actor("Mark Ruffalo", "actor_ruffalo"),
                 )
             ),
             Movie(
@@ -32,9 +33,10 @@ class MoviesDataSource {
                 "A film about Natasha Romanoff in her quests between the films Civil War and Infinity War.",
                     "poster_black_widow",
                 listOf(
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
+                    Actor("Robert Downey Jr.", "actor_downey"),
+                    Actor("Chris Evans", "actor_evans"),
+                    Actor("Chris Hemsworth", "actor_hemsworth"),
+                    Actor("Mark Ruffalo", "actor_ruffalo"),
                 )
             ),
             Movie(
@@ -42,9 +44,10 @@ class MoviesDataSource {
                 "Fast forward to the 1980s as Wonder Woman's next big screen adventure finds her facing two all-new foes: Max Lord and The Cheetah.",
                     "poster_wonder_woman_1984",
                 listOf(
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
+                    Actor("Robert Downey Jr.", "actor_downey"),
+                    Actor("Chris Evans", "actor_evans"),
+                    Actor("Chris Hemsworth", "actor_hemsworth"),
+                    Actor("Mark Ruffalo", "actor_ruffalo"),
                 )
             ),
             Movie(
@@ -52,9 +55,10 @@ class MoviesDataSource {
                 "Biochemist Michael Morbius tries to cure himself of a rare blood disease, but he inadvertently infects himself with a form of vampirism instead.",
                     "poster_morbius",
                 listOf(
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
+                    Actor("Robert Downey Jr.", "actor_downey"),
+                    Actor("Chris Evans", "actor_evans"),
+                    Actor("Chris Hemsworth", "actor_hemsworth"),
+                    Actor("Mark Ruffalo", "actor_ruffalo"),
                 )
             ),
             Movie(
@@ -62,9 +66,10 @@ class MoviesDataSource {
                 "Plot unknown. Sequel to the 2016 Marvel film 'Doctor Strange'.",
                     "poster_doctor_strange_in_the_multiverse_of_madness",
                 listOf(
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
-                        Actor("Chris Evans", "actor_evans"),
+                    Actor("Robert Downey Jr.", "actor_downey"),
+                    Actor("Chris Evans", "actor_evans"),
+                    Actor("Chris Hemsworth", "actor_hemsworth"),
+                    Actor("Mark Ruffalo", "actor_ruffalo"),
                 )
             ),
         )

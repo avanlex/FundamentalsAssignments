@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        app:srcCompat="@drawable/actor_downey"
         tools:src="@tools:sample/avatars"/>
 
     <TextView
