@@ -12,8 +12,12 @@ import com.github.avanlex.fundamentalsassignments.data.models.Movie
 import com.github.avanlex.fundamentalsassignments.domain.MoviesDataSource
 import com.google.android.material.snackbar.Snackbar
 
+
 class FragmentMoviesList : Fragment() {
     private var recycler : RecyclerView ?= null
+    private val TYPE_HEADER = 0
+    private val TYPE_ITEM = 1
+    private val TYPE_FOOTER = 2
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +52,8 @@ class FragmentMoviesList : Fragment() {
             Snackbar.make(
                 rv,
                 getString(R.string.chosen_item_name, movie.name),
-                Snackbar.LENGTH_SHORT)
+                Snackbar.LENGTH_SHORT
+            )
                 .show()
 
             fragmentManager!!.beginTransaction()

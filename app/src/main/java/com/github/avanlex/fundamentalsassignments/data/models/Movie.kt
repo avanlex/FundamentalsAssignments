@@ -1,5 +1,9 @@
 package com.github.avanlex.fundamentalsassignments.data.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Movie(
     val name: String,
     val year: Int,
@@ -10,4 +14,4 @@ data class Movie(
     val storyline: String,
     val poster: String,
     val actors: List<Actor>
-)
+) : Parcelable

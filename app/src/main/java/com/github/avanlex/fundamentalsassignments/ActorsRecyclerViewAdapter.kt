@@ -13,7 +13,7 @@ import java.lang.reflect.Field
 
 
 class ActorsRecyclerViewAdapter (
-        private val clickListener: OnRecyclerActorItemClicked
+        //private val clickListener: OnRecyclerActorItemClicked
 ):  RecyclerView.Adapter<ActorViewHolder>() {
 
     private var actors: List<Actor> = listOf()
@@ -48,9 +48,9 @@ class ActorsRecyclerViewAdapter (
         when (holder) {
             is ActorDataViewHolder -> {
                 holder.onBind(actors[position])
-                holder.itemView.setOnClickListener {
-                    clickListener.onClick(actors[position])
-                }
+//                holder.itemView.setOnClickListener {
+//                    clickListener.onClick(actors[position])
+//                }
             }
             is ActorEmptyViewHolder -> { /* nothing to bind */ }
         }
