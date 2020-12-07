@@ -24,23 +24,23 @@ class FragmentMoviesList : Fragment() {
     ): View  {
         val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
-        val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list);
+        val recyclerView : RecyclerView = view.findViewById(R.id.rv_movie_list)
         recycler = recyclerView
 
         // Optimaze perfomance a little
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true)
 
         // Offset between items workaround
-        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24));
+        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24))
 
         // Setting adapter to RecyclerView
-        val layoutManager = GridLayoutManager(context, 2);
-        recyclerView.layoutManager = layoutManager;
+        val layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = layoutManager
 
         // Setting adapter to RecyclerView
-        val moviesAdapter = MoviesRecyclerViewAdapter(clickListener);
+        val moviesAdapter = MoviesRecyclerViewAdapter(clickListener)
         moviesAdapter.bindMovies(MoviesDataSource().getList())
-        recyclerView.adapter = moviesAdapter;
+        recyclerView.adapter = moviesAdapter
 
         return view
     }

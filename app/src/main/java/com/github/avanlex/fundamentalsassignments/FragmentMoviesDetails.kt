@@ -44,24 +44,24 @@ class  FragmentMoviesDetails : Fragment() {
                     fragmentManager?.popBackStack()
             }
 
-        val recyclerView: RecyclerView = v.findViewById(R.id.rv_actor_list);
+        val recyclerView: RecyclerView = v.findViewById(R.id.rv_actor_list)
         recycler = recyclerView
 
         // Optimaze perfomance a little
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true)
 
         // Offset between items workaround
-        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24));
+        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24))
 
         // Linear List
-        val layoutManager = LinearLayoutManager(context);
+        val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        recyclerView.layoutManager = layoutManager;
+        recyclerView.layoutManager = layoutManager
 
         // Setting adapter to RecyclerView
-        val moviesAdapter = ActorsRecyclerViewAdapter();
+        val moviesAdapter = ActorsRecyclerViewAdapter()
         movie?.let { moviesAdapter.bindActors(it.actors) }
-        recyclerView.adapter = moviesAdapter;
+        recyclerView.adapter = moviesAdapter
 
         // Get poster drawable by ID
         val poster: ImageView = v.findViewById(R.id.iv_details_poster) as ImageView

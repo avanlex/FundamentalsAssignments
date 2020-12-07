@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.models.Actor
 
 
-class ActorsRecyclerViewAdapter (
-
-):  RecyclerView.Adapter<ActorViewHolder>() {
+class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
 
     private var actors: List<Actor> = listOf()
 

@@ -23,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        app:srcCompat="@drawable/endgame_card"
         android:scaleType="centerCrop"
         tools:scaleType="fitCenter"
         tools:src="@tools:sample/backgrounds/scenic" />
@@ -39,7 +38,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/iv_card_pg"
@@ -49,7 +49,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pg_rectangle" />
+        app:srcCompat="@drawable/ic_pg_rectangle"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/iv_favorit"
@@ -59,7 +60,8 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_heart" />
+        app:srcCompat="@drawable/ic_heart"
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:id="@+id/tv_card_pg"

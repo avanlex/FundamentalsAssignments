@@ -13,9 +13,9 @@ class MoviesListItemOffsetDecorator(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.right = 0;
-        outRect.left = offset;
-        outRect.top = offset;
-        outRect.bottom = offset;
+        outRect.right = 0
+        outRect.left = offset
+        outRect.top = offset
+        outRect.bottom = offset
     }
 }

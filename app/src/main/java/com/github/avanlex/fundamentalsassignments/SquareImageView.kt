@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 
 class SquareImageView : com.google.android.material.imageview.ShapeableImageView {
-    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?) : super(context!!)
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!, attrs
     )
