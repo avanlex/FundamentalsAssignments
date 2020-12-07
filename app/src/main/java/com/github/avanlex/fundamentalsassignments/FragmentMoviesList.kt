@@ -52,10 +52,10 @@ class FragmentMoviesList : Fragment() {
                 .show()
 
             fragmentManager!!.beginTransaction()
-                    .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit()
+                             .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
+                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                             .addToBackStack(null)
+                             .commit()
         }
     }
 

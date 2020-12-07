@@ -1,17 +1,22 @@
 package com.github.avanlex.fundamentalsassignments
 
+
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.models.Actor
 import com.github.avanlex.fundamentalsassignments.data.models.Movie
-import com.github.avanlex.fundamentalsassignments.domain.ActorsDataSource
 import com.google.android.material.snackbar.Snackbar
+
 
 class  FragmentMoviesDetails : Fragment() {
     private var movie: Movie ?= null
@@ -19,9 +24,9 @@ class  FragmentMoviesDetails : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
 
@@ -55,6 +60,18 @@ class  FragmentMoviesDetails : Fragment() {
         val moviesAdapter = ActorsRecyclerViewAdapter(clickListener);
         movie?.let { moviesAdapter.bindActors(it.actors) }
         recyclerView.adapter = moviesAdapter;
+
+        val poster: ImageView = view.findViewById(R.id.iv_details_poster) as ImageView
+        val posterId = context!!.resources.getIdentifier(movie?.poster,
+                "drawable",
+                context!!.packageName)
+        poster.setImageDrawable(context?.let { ContextCompat.getDrawable(it, posterId) })
+
+        // Apply grayscale filter
+        val matrix = ColorMatrix()
+        matrix.setSaturation(0f)
+        val filter = ColorMatrixColorFilter(matrix)
+        poster.colorFilter = filter
         return view
     }
 
@@ -81,6 +98,4 @@ class  FragmentMoviesDetails : Fragment() {
             return fragment
         }
     }
-
-
 }

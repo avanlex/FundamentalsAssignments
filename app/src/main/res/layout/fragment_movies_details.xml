@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_details_poster"
             android:layout_width="0dp"
             android:layout_height="@dimen/movie_cover_height"
             android:alpha="0.25"
@@ -22,9 +22,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/poster" />
+            app:srcCompat="@drawable/end_game_poster_bw" />
 
         <ImageView
+            android:id="@+id/iv_details_poster_gradient"
             android:layout_width="0dp"
             android:layout_height="@dimen/movie_cover_height"
             android:contentDescription="@string/movie_cover_gradient"
@@ -58,6 +59,7 @@
                 app:drawableStartCompat="@drawable/ic_back" />
 
             <LinearLayout
+                android:id="@+id/ll_movie"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/movie_name_layout_height"
                 android:layout_marginTop="@dimen/movie_name_layout_margin_top"
@@ -93,6 +95,7 @@
                 android:textSize="@dimen/size_tagline" />
 
             <LinearLayout
+                android:id="@+id/ll_rating"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="4dp"
@@ -150,6 +153,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_details_storyline_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

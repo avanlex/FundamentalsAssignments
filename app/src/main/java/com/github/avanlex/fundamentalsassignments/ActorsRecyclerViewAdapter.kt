@@ -79,18 +79,9 @@ private class ActorDataViewHolder(itemView: View) : ActorViewHolder(itemView) {
 
     fun onBind(actor: Actor) {
         name.text = actor.name
-//        avatar.setImageDrawable(ContextCompat.getDrawable(context, getResId(actor.avatar, R.drawable::class.java)))
-//        avatar.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.actor_evans))
-    }
-
-}
-
-fun getResId(resName: String, c: Class<*>): Int {
-    return try {
-        val idField: Field = c.getDeclaredField(resName)
-        idField.getInt(idField)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        -1
+         val avatarId = context.resources.getIdentifier(actor.avatar,
+                                                      "drawable",
+                                                       context.packageName)
+        avatar.setImageDrawable(ContextCompat.getDrawable(context, avatarId))
     }
 }

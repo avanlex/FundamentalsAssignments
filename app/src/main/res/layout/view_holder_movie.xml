@@ -17,13 +17,15 @@
         android:layout_marginTop="@dimen/card_border_width"
         android:layout_marginEnd="@dimen/card_border_width"
         android:layout_marginBottom="@dimen/image_bottom_margin"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
         app:srcCompat="@drawable/endgame_card"
-        tools:scaleType="centerCrop"
+        android:scaleType="centerCrop"
+        tools:scaleType="fitCenter"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <ImageView
@@ -131,12 +133,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
+        android:ellipsize="end"
         android:textColor="@color/white"
         android:textStyle="bold"
-        tools:text="Some Awesome Movie"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Some Awesome Movie" />
 
     <TextView
         android:id="@+id/tv_card_duration"

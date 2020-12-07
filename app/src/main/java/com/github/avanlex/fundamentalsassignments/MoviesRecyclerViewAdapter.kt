@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -85,11 +86,15 @@ private class MovieDataViewHolder(itemView: View) : MovieViewHolder(itemView) {
         reviewCount.text = context.getString(R.string.string_review_count, movie.reviewCount)
 //        storyline.text = movie.storyline
 
-        Glide.with(context)
-            .load(movie.poster)
-            .apply(imageOption)
-            .into(poster)
+//        Glide.with(context)
+//            .load(movie.poster)
+//            .apply(imageOption)
+//            .into(poster)
         //poster.setImageResource(R.drawable.endgame_card)
+        val posterId = context.resources.getIdentifier(movie.poster,
+                "drawable",
+                context.packageName)
+        poster.setImageDrawable(ContextCompat.getDrawable(context, posterId))
     }
 
     companion object {
