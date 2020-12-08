@@ -51,7 +51,7 @@ class  FragmentMoviesDetails : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         // Offset between items workaround
-        recyclerView.addItemDecoration(MoviesListItemOffsetDecorator(24))
+        recyclerView.addItemDecoration(ActorsListItemOffsetDecorator(24))
 
         // Linear List
         val layoutManager = LinearLayoutManager(context)

@@ -55,10 +55,10 @@ class MoviesDataSource {
                 "Biochemist Michael Morbius tries to cure himself of a rare blood disease, but he inadvertently infects himself with a form of vampirism instead.",
                     "poster_morbius",
                 listOf(
-                    Actor("Robert Downey Jr.", "actor_downey"),
-                    Actor("Chris Evans", "actor_evans"),
-                    Actor("Chris Hemsworth", "actor_hemsworth"),
-                    Actor("Mark Ruffalo", "actor_ruffalo"),
+                    Actor("Jared Leto", "jared_leto"),
+                    Actor("Matt Smith", "actor_downey"),
+                    Actor("Jared Harris", "jared_harris"),
+                    Actor("Tyrese Gibson", "tyrese_gibson"),
                 )
             ),
             Movie(
