@@ -32,8 +32,8 @@ class  FragmentMoviesDetails : Fragment() {
         }
 
         v.findViewById<TextView>(R.id.tv_details_movie_name).text = movie?.name
-
         v.findViewById<TextView>(R.id.tv_details_pg).text = movie?.pg
+        v.findViewById<TextView>(R.id.tv_details_tagline).text = movie?.tagline
         v.findViewById<TextView>(R.id.tv_details_storyline).text = movie?.storyline
         v.findViewById<VectorRatingBar>(R.id.vrb_details_rating).rating =
                 movie!!.rating.toFloat()

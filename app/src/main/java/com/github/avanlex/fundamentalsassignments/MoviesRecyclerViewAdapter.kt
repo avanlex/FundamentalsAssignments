@@ -1,5 +1,6 @@
 package com.github.avanlex.fundamentalsassignments
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,12 +45,14 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val name: TextView = itemView.findViewById(R.id.tv_card_movie_name)
     private val duration: TextView = itemView.findViewById(R.id.tv_card_duration)
+    private val tagline: TextView = itemView.findViewById(R.id.tv_card_tagline)
     private val pg: TextView = itemView.findViewById(R.id.tv_card_pg)
     private val rating: VectorRatingBar = itemView.findViewById(R.id.vrb_details_rating)
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
 
     fun onBind(movie: Movie) {
+        tagline.text = movie.tagline
         name.text = movie.name
         duration.text = context.getString(R.string.string_duration, movie.duration)
         pg.text = movie.pg

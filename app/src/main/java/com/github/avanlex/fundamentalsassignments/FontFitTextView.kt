@@ -10,7 +10,7 @@ class FontFitTextView : AppCompatTextView {
 
     //Attributes
     private var mTestPaint: Paint? = null
-    private val TEXT_LINES = 2
+    private val TEXT_LINES = 1
 
     constructor(context: Context?) : super(context!!) {
         initialise()
