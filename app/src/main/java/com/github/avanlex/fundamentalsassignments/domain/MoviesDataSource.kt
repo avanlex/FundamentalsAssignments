@@ -33,8 +33,8 @@ class MoviesDataSource {
                 )
             ),
             Movie(
-                "Action, Adventure, Sci-Fi", 2021,
-                "",
+                "Black Widow", 2021,
+                "Action, Adventure, Sci-Fi",
                 102, "13+", 5, 68,
                 "A film about Natasha Romanoff in her quests between the films Civil War and Infinity War.",
                 "poster_black_widow",
