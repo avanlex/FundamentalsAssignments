@@ -33,8 +33,10 @@ class  FragmentMoviesDetails : Fragment() {
         val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
+            val bundle = Bundle()
+            bundle.putParcelable(MOVIE_KEY, movie)
             fragment.movie = movie
-            fragment.arguments?.putParcelable(MOVIE_KEY, movie)
+            fragment.arguments = bundle
             return fragment
         }
     }
@@ -53,9 +55,7 @@ class  FragmentMoviesDetails : Fragment() {
     }
 
     private fun loadSavedState(savedInstanceState: Bundle?){
-        if (savedInstanceState != null) {
-            movie = savedInstanceState.getParcelable(MOVIE_KEY)!!
-        }
+         movie = savedInstanceState?.getParcelable(MOVIE_KEY)!!
     }
 
     private fun setupUi(v : View){
@@ -94,7 +94,8 @@ class  FragmentMoviesDetails : Fragment() {
         rvActors.setHasFixedSize(true)
 
         // Offset between items workaround
-        rvActors.addItemDecoration(ActorsListItemOffsetDecorator(R.dimen.actor_item_spacing))
+        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        rvActors.addItemDecoration(ActorsListItemOffsetDecorator(offset))
 
         // Linear List
         val layoutManager = LinearLayoutManager(context)
@@ -107,8 +108,8 @@ class  FragmentMoviesDetails : Fragment() {
         rvActors.adapter = moviesAdapter
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+/*    override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable("MOVIE", movie)
         super.onSaveInstanceState(outState)
-    }
+    }*/
 }

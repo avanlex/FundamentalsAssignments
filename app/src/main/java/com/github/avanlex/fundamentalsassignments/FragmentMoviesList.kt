@@ -1,7 +1,6 @@
 package com.github.avanlex.fundamentalsassignments
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.models.Movie
 import com.github.avanlex.fundamentalsassignments.domain.MoviesDataSource
-import kotlin.math.roundToInt
 
 
 class FragmentMoviesList : Fragment() {
@@ -37,7 +35,8 @@ class FragmentMoviesList : Fragment() {
         rvMovies.setHasFixedSize(true)
 
         // Offset between items workaround
-        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(R.dimen.movie_item_spacing))
+        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
 
         val columns = 2
         val layoutManager = GridLayoutManager(context, columns)
