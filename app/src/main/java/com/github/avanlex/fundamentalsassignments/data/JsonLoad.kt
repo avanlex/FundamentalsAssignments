@@ -95,7 +95,7 @@ internal fun parseMovies(
         poster = jsonMovie.posterPicture,
         backdrop = jsonMovie.backdropPicture,
         ratings = jsonMovie.ratings,
-        numberOfRatings = jsonMovie.votesCount,
+        numberOfRatings = jsonMovie.votesCount / 2,
         minimumAge = if (jsonMovie.adult) 16 else 13,
         runtime = jsonMovie.runtime,
         genres = jsonMovie.genreIds.map {

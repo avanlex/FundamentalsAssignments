@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -45,14 +44,10 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageOption = RequestOptions()
             .placeholder(R.drawable.ic_movie_placeholder)
             .fallback(R.drawable.ic_movie_placeholder)
-            .circleCrop()
     }
 
     fun onBind(actor: Actor) {
         name.text = actor.name
-//         val avatarId = context.resources
-//             .getIdentifier(actor.picture,"drawable", context.packageName)
-//        avatar.setImageDrawable(ContextCompat.getDrawable(context, avatarId))
         Glide.with(context)
             .load(actor.picture)
             .apply(imageOption)

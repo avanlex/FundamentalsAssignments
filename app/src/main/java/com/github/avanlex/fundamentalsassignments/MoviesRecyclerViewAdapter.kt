@@ -57,7 +57,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageOption = RequestOptions()
             .placeholder(R.drawable.ic_movie_placeholder)
             .fallback(R.drawable.ic_movie_placeholder)
-            .circleCrop()
     }
 
     fun onBind(movie: Movie) {
@@ -65,7 +64,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
         pg.text = context.getString(R.string.string_pg, movie.minimumAge)
-        rating.rating = movie.ratings / 2
+        rating.rating = movie.ratings
         reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
 
         Glide.with(context)

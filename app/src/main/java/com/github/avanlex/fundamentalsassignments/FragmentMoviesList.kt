@@ -1,7 +1,5 @@
 package com.github.avanlex.fundamentalsassignments
 
-//import com.github.avanlex.fundamentalsassignments.data.models.Movie
-//import com.github.avanlex.fundamentalsassignments.domain.MoviesDataSource
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

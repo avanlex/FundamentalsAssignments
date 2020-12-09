@@ -47,7 +47,6 @@ class VectorRatingBar @JvmOverloads constructor(
 
     init {
         attrs?.let { getSettingsFromAttr(it) }
-
         halfOfInnerPadding = (innerPadding / 2)
         val drawable = tileify(progressDrawable, false) as LayerDrawable
         progressDrawable = drawable
@@ -57,13 +56,15 @@ class VectorRatingBar @JvmOverloads constructor(
      *  Remove this function if you aren't using attr.xml
      */
     private fun getSettingsFromAttr(attrs: AttributeSet) {
-        context.obtainStyledAttributes(attrs, R.styleable.RatingBarSvg).run {
+        context.obtainStyledAttributes(attrs, R.styleable.VectorRatingBar).run {
             innerPadding =
-                getDimension(R.styleable.RatingBarSvg_innerPadding, innerPadding.toFloat()).toInt()
-            drawableHeight = getDimension(R.styleable.RatingBarSvg_drawableHeight, 0f).toInt()
-            drawableWidth = getDimension(R.styleable.RatingBarSvg_drawableWidth, 0f).toInt()
+                getDimension(R.styleable.VectorRatingBar_innerPadding, innerPadding.toFloat()).toInt()
+            drawableHeight =
+                getDimension(R.styleable.VectorRatingBar_drawableHeight, 0f).toInt()
+            drawableWidth =
+                getDimension(R.styleable.VectorRatingBar_drawableWidth, 0f).toInt()
             isCompensatingMarginActive =
-                getBoolean(R.styleable.RatingBarSvg_isCompensatingMarginActive, true)
+                getBoolean(R.styleable.VectorRatingBar_isCompensatingMarginActive, true)
             recycle()
         }
     }
