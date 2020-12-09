@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.github.avanlex.fundamentalsassignments.data.models.Movie
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.github.avanlex.fundamentalsassignments.data.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesRecyclerViewAdapter (
@@ -51,16 +53,24 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
 
-    fun onBind(movie: Movie) {
-        tagline.text = movie.tagline
-        name.text = movie.name
-        duration.text = context.getString(R.string.string_duration, movie.duration)
-        pg.text = movie.pg
-        rating.rating = movie.rating.toFloat()
-        reviewCount.text = context.getString(R.string.string_review_count, movie.reviewCount)
+    companion object {
+        private val imageOption = RequestOptions()
+            .placeholder(R.drawable.ic_movie_placeholder)
+            .fallback(R.drawable.ic_movie_placeholder)
+            .circleCrop()
+    }
 
-        val posterId = context.resources
-            .getIdentifier(movie.poster,"drawable", context.packageName)
-        poster.setImageDrawable(ContextCompat.getDrawable(context, posterId))
+    fun onBind(movie: Movie) {
+        tagline.text = movie.genres.map{ it.name }.joinToString()
+        name.text = movie.title
+        duration.text = context.getString(R.string.string_duration, movie.runtime)
+        pg.text = context.getString(R.string.string_pg, movie.minimumAge)
+        rating.rating = movie.ratings / 2
+        reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
+
+        Glide.with(context)
+            .load(movie.poster)
+            .apply(imageOption)
+            .into(poster)
     }
 }

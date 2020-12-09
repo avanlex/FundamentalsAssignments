@@ -4,9 +4,9 @@ import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.Serializable
 
 
 private val jsonFormat = Json { ignoreUnknownKeys = true }
@@ -36,6 +36,8 @@ private class JsonMovie(
     val actors: List<Int>,
     @SerialName("vote_average")
     val ratings: Float,
+    @SerialName("vote_count")
+    val votesCount: Int,
     val overview: String,
     val adult: Boolean
 )
@@ -65,6 +67,7 @@ internal fun parseActors(data: String): List<Actor> {
     return jsonActors.map { Actor(id = it.id, name = it.name, picture = it.profilePicture) }
 }
 
+@Suppress("unused")
 internal suspend fun loadMovies(context: Context): List<Movie> = withContext(Dispatchers.IO) {
     val genresMap = loadGenres(context)
     val actorsMap = loadActors(context)
@@ -74,9 +77,9 @@ internal suspend fun loadMovies(context: Context): List<Movie> = withContext(Dis
 }
 
 internal fun parseMovies(
-        data: String,
-        genres: List<Genre>,
-        actors: List<Actor>
+    data: String,
+    genres: List<Genre>,
+    actors: List<Actor>
 ): List<Movie> {
     val genresMap = genres.associateBy { it.id }
     val actorsMap = actors.associateBy { it.id }
@@ -84,21 +87,23 @@ internal fun parseMovies(
     val jsonMovies = jsonFormat.decodeFromString<List<JsonMovie>>(data)
 
     return jsonMovies.map { jsonMovie ->
-        Movie(
-            id = jsonMovie.id,
-            title = jsonMovie.title,
-            overview = jsonMovie.overview,
-            poster = jsonMovie.posterPicture,
-            backdrop = jsonMovie.backdropPicture,
-            ratings = jsonMovie.ratings,
-            adult = jsonMovie.adult,
-            runtime = jsonMovie.runtime,
-            genres = jsonMovie.genreIds.map {
-                genresMap[it] ?: throw IllegalArgumentException("Genre not found")
-            },
-            actors = jsonMovie.actors.map {
-                actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
-            }
-        )
+        @Suppress("unused")
+        (Movie(
+        id = jsonMovie.id,
+        title = jsonMovie.title,
+        overview = jsonMovie.overview,
+        poster = jsonMovie.posterPicture,
+        backdrop = jsonMovie.backdropPicture,
+        ratings = jsonMovie.ratings,
+        numberOfRatings = jsonMovie.votesCount,
+        minimumAge = if (jsonMovie.adult) 16 else 13,
+        runtime = jsonMovie.runtime,
+        genres = jsonMovie.genreIds.map {
+            genresMap[it] ?: throw IllegalArgumentException("Genre not found")
+        },
+        actors = jsonMovie.actors.map {
+            actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
+        }
+    ))
     }
 }
