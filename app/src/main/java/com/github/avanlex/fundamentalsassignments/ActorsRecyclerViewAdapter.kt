@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.models.Actor
 
-
 class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
 
     private var actors: List<Actor> = listOf()
@@ -26,8 +25,9 @@ class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
         return ActorViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: ActorViewHolder, position: Int) = holder.onBind(actors[position])
+    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
+        holder.onBind(actors[position])
+    }
 
     override fun getItemCount(): Int = actors.size
 }
@@ -41,8 +41,6 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun onBind(actor: Actor) {
         name.text = actor.name
-         val avatarId = context.resources
-             .getIdentifier(actor.avatar,"drawable", context.packageName)
-        avatar.setImageDrawable(ContextCompat.getDrawable(context, avatarId))
+        avatar.setImageDrawable(ContextCompat.getDrawable(context, actor.avatar))
     }
 }

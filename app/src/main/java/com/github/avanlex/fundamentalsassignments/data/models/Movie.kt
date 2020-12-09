@@ -13,6 +13,6 @@ data class Movie(
     val rating: Int,
     val reviewCount: Int,
     val storyline: String,
-    val poster: String,
+    val poster: Int,
     val actors: List<Actor>
 ) : Parcelable
