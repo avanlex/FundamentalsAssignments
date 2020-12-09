@@ -62,13 +62,6 @@ class  FragmentMoviesDetails : Fragment() {
         return v
     }
 
-/*    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadSavedState(savedInstanceState)
-        setupUi()
-        loadPoster()
-        initActorsRecyclerView()
-    }*/
-
     private fun loadSavedState(savedInstanceState: Bundle?){
         if (savedInstanceState != null) {
             movieID = savedInstanceState.getInt(MOVIE_ID_KEY)
@@ -130,21 +123,6 @@ class  FragmentMoviesDetails : Fragment() {
             .apply(imageOption)
             .into(poster)
     }
-
-//    private fun loadMoviesData(v: View) {
-//        scope.launch {
-//            val movieList = loadMovies(v.context)
-//            activity?.runOnUiThread{
-//                movie = movieList.find{ it.id == movieID }!!
-//                movieID
-//            }
-//        }
-//    }
-
-
-//    val mes = Message()
-//    mes.data.putString(MESSAGE_KEY, getString(R.string.thread_worked))
-//    handler.sendMessage(mes)
 
     private fun loadMoviesData() {
         scope.launch {
