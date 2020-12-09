@@ -19,10 +19,11 @@
 
     <TextView
         android:id="@+id/tv_actor_name"
-        android:textColor="@color/color_white1"
-        android:layout_marginTop="@dimen/actor_text_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/actor_text_margin"
         android:text="@string/string_robert_downey_jr"
-        tools:text="@tools:sample/full_names"/>
+        android:textColor="@color/color_white1"
+        android:textStyle="bold"
+        tools:text="@tools:sample/full_names" />
 </LinearLayout>

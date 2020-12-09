@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.data.models.Movie
 
 
@@ -55,7 +54,9 @@ class  FragmentMoviesDetails : Fragment() {
     }
 
     private fun loadSavedState(savedInstanceState: Bundle?){
-         movie = savedInstanceState?.getParcelable(MOVIE_KEY)!!
+        if (savedInstanceState != null) {
+            movie = savedInstanceState.getParcelable(MOVIE_KEY)!!
+        }
     }
 
     private fun setupUi(v : View){
