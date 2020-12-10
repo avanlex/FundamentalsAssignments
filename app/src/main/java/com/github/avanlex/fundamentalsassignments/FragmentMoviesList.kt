@@ -27,7 +27,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun initUi(v: View) {
-        rvMovies = v.findViewById(R.id.rv_movie_list)!!
+        rvMovies = v.findViewById(R.id.rv_movie_list)
     }
 
     private fun initMoviesRecyclerView() {

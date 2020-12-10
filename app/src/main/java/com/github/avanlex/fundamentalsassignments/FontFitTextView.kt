@@ -9,8 +9,8 @@ import androidx.appcompat.widget.AppCompatTextView
 class FontFitTextView : AppCompatTextView {
 
     //Attributes
-    private var mTestPaint: Paint? = null
-    private val TEXT_LINES = 1
+    private lateinit var mTestPaint: Paint
+    private val TEXT_LINES = 2
 
     constructor(context: Context?) : super(context!!) {
         initialise()
@@ -22,7 +22,7 @@ class FontFitTextView : AppCompatTextView {
 
     private fun initialise() {
         mTestPaint = Paint()
-        mTestPaint!!.set(this.paint)
+        mTestPaint.set(this.paint)
         //max size defaults to the initially specified text size unless it is too small
     }
 
@@ -35,11 +35,11 @@ class FontFitTextView : AppCompatTextView {
         var hi = 100f
         var lo = 2f
         val threshold = 0.5f // How close we have to be
-        mTestPaint!!.set(this.paint)
+        mTestPaint.set(this.paint)
         while (hi - lo > threshold) {
             val size = (hi + lo) / 2
-            mTestPaint!!.textSize = size
-            if (mTestPaint!!.measureText(text) >= targetWidth) hi = size // too big
+            mTestPaint.textSize = size
+            if (mTestPaint.measureText(text) >= targetWidth) hi = size // too big
             else lo = size // too small
         }
         // Use lo so that we undershoot rather than overshoot
@@ -49,7 +49,7 @@ class FontFitTextView : AppCompatTextView {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val parentWidth = MeasureSpec.getSize(widthMeasureSpec)
-        val height = measuredHeight
+        val height = this.measuredHeight
         refitText(this.text.toString(), parentWidth)
         setMeasuredDimension(parentWidth, height)
     }
