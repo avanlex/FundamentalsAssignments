@@ -42,23 +42,19 @@ class FragmentMoviesList : Fragment() {
         val layoutManager = GridLayoutManager(context, columns)
         rvMovies.layoutManager = layoutManager
 
-        // Setting adapter to RecyclerView
-        val adapterMovies = MoviesRecyclerViewAdapter(object : OnRecyclerMovieItemClicked {
-            override fun onClick(movie: Movie) {
-                openMovieDetails(movie)
-            }
-        })
+        val adapterMovies = MoviesRecyclerViewAdapter()
+        adapterMovies.setOnClickListener{ movieItem ->
+             openMovieDetails(movieItem)
+        }
         adapterMovies.bindMovies(MoviesDataSource().getList())
         rvMovies.adapter = adapterMovies
     }
 
     private fun openMovieDetails(movie: Movie) {
-        rvMovies.let {
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
-                .commit()
-        }
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .addToBackStack(null)
+            .commit()
     }
 }

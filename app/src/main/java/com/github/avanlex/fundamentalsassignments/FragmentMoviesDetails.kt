@@ -1,6 +1,7 @@
 package com.github.avanlex.fundamentalsassignments
 
 
+import android.graphics.ColorFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
@@ -32,10 +33,9 @@ class  FragmentMoviesDetails : Fragment() {
         val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
-            val bundle = Bundle()
-            bundle.putParcelable(MOVIE_KEY, movie)
-            fragment.movie = movie
-            fragment.arguments = bundle
+            val args = Bundle()
+            args.putParcelable(MOVIE_KEY, movie)
+            fragment.arguments = args
             return fragment
         }
     }
@@ -46,17 +46,15 @@ class  FragmentMoviesDetails : Fragment() {
         savedInstanceState: Bundle?
     ):View {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
-        loadSavedState(savedInstanceState)
+        loadSavedState()
         setupUi(v)
         loadPoster(v)
         initActorsRecyclerView()
         return v
     }
 
-    private fun loadSavedState(savedInstanceState: Bundle?){
-        if (savedInstanceState != null) {
-            movie = savedInstanceState.getParcelable(MOVIE_KEY)!!
-        }
+    private fun loadSavedState(){
+        movie = arguments?.getParcelable(MOVIE_KEY)!!
     }
 
     private fun setupUi(v : View){
@@ -80,14 +78,16 @@ class  FragmentMoviesDetails : Fragment() {
         // Listener
         tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
     }
+
+    private fun getGreyScaleFilter() : ColorFilter{
+        val matrix = ColorMatrix()
+        matrix.setSaturation(0f)
+        return ColorMatrixColorFilter(matrix)
+    }
     
     private fun loadPoster(v: View) {
         poster.setImageDrawable( ContextCompat.getDrawable(v.context, movie.poster))
-        // Apply grayscale filter
-        val matrix = ColorMatrix()
-        matrix.setSaturation(0f)
-        val filter = ColorMatrixColorFilter(matrix)
-        poster.colorFilter = filter
+        poster.colorFilter = getGreyScaleFilter()
     }
 
     private fun initActorsRecyclerView() {
@@ -108,9 +108,4 @@ class  FragmentMoviesDetails : Fragment() {
         movie.let { moviesAdapter.bindActors(it.actors) }
         rvActors.adapter = moviesAdapter
     }
-
-/*    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable("MOVIE", movie)
-        super.onSaveInstanceState(outState)
-    }*/
 }
