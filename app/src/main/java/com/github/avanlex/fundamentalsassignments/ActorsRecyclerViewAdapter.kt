@@ -32,9 +32,6 @@ class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
     override fun getItemCount(): Int = actors.size
 }
 
-val RecyclerView.ViewHolder.context: Context
-    get() = this.itemView.context
-
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val avatar: ImageView = itemView.findViewById(R.id.iv_actor_photo)
     private val name: TextView = itemView.findViewById(R.id.tv_actor_name)
