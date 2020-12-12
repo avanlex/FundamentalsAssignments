@@ -12,15 +12,21 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.data.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
-class MoviesRecyclerViewAdapter (
-    private val clickListener: OnRecyclerMovieItemClicked
-): RecyclerView.Adapter<MovieViewHolder>() {
+class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+    private lateinit var clickListener: OnRecyclerMovieItemClickListener
 
     private var movies: List<Movie> = listOf()
+
+    fun setOnClickListener( listener : OnRecyclerMovieItemClickListener?){
+        if (listener != null) {
+            clickListener = listener
+        }
+    }
 
     fun bindMovies(movieList: List<Movie>) {
         movies = movieList
         notifyDataSetChanged()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -39,7 +45,7 @@ class MoviesRecyclerViewAdapter (
     override fun getItemCount(): Int = movies.size
 }
 
-interface OnRecyclerMovieItemClicked {
+fun interface OnRecyclerMovieItemClickListener {
     fun onClick(movie: Movie)
 }
 

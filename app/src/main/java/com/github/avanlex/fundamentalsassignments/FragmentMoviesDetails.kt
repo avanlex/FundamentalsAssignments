@@ -1,6 +1,6 @@
 package com.github.avanlex.fundamentalsassignments
 
-
+import android.graphics.ColorFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
@@ -42,9 +42,12 @@ class  FragmentMoviesDetails : Fragment() {
             .placeholder(R.drawable.ic_movie_placeholder)
             .fallback(R.drawable.ic_movie_placeholder)
 
+        val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
-            fragment.movie = movie
+            val args = Bundle()
+            args.putParcelable(MOVIE_KEY, movie)
+            fragment.arguments = args
             return fragment
         }
     }
@@ -55,68 +58,39 @@ class  FragmentMoviesDetails : Fragment() {
         savedInstanceState: Bundle?
     ):View {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
-        loadSavedState(savedInstanceState)
+        loadSavedState()
         setupUi(v)
-        loadPoster()
+        loadPoster(v)
         initActorsRecyclerView()
         return v
     }
 
-    private fun loadSavedState(savedInstanceState: Bundle?){
-        if (savedInstanceState != null) {
-            movieID = savedInstanceState.getInt(MOVIE_ID_KEY)
-            loadMoviesData()
-        }
+    private fun loadSavedState(){
+        movie = arguments?.getParcelable(MOVIE_KEY)!!
     }
+
     private fun setupUi(v : View){
-//        vw.let { v->
-            rvActors = v.findViewById(R.id.rv_actor_list)
-            poster = v.findViewById(R.id.iv_details_poster)
-            tvTitle = v.findViewById(R.id.tv_details_movie_name)
-            tvPg = v.findViewById(R.id.tv_details_pg)
-            tvTagline = v.findViewById(R.id.tv_details_tagline)
-            tvOverview = v.findViewById(R.id.tv_details_storyline)
-            vrbRating = v.findViewById(R.id.vrb_details_rating)
-            tvReviews = v.findViewById(R.id.tv_details_review_count)
-            tvBack = v.findViewById(R.id.text_back)
+        rvActors = v.findViewById(R.id.rv_actor_list)
+        poster = v.findViewById(R.id.iv_details_poster)
+        tvTitle = v.findViewById(R.id.tv_details_movie_name)
+        tvPg = v.findViewById(R.id.tv_details_pg)
+        tvTagline = v.findViewById(R.id.tv_details_tagline)
+        tvOverview = v.findViewById(R.id.tv_details_storyline)
+        vrbRating = v.findViewById(R.id.vrb_details_rating)
+        tvReviews = v.findViewById(R.id.tv_details_review_count)
+        tvBack = v.findViewById(R.id.text_back)
 
-            tvTitle.text = movie.title
-            tvPg.text = context!!.getString(R.string.string_pg, movie.minimumAge)
-            tvTagline.text = movie.genres.joinToString { it.name }
-            tvOverview.text = movie.overview
-            vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
-            tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
+        tvTitle.text = movie.title
+        tvPg.text = context!!.getString(R.string.string_pg, movie.minimumAge)
+        tvTagline.text = movie.genres.joinToString { it.name }
+        tvOverview.text = movie.overview
+        vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
+        tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
 
-            // Listener
-            tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
-
+        // Listener
+        tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
     }
-
-    private fun setupUi(){
-        view?.let {v->
-            rvActors = v.findViewById(R.id.rv_actor_list)
-            poster = v.findViewById(R.id.iv_details_poster)
-            tvTitle = v.findViewById<TextView>(R.id.tv_details_movie_name)
-            tvPg = v.findViewById<TextView>(R.id.tv_details_pg)
-            tvTagline = v.findViewById<TextView>(R.id.tv_details_tagline)
-            tvOverview = v.findViewById<TextView>(R.id.tv_details_storyline)
-            vrbRating = v.findViewById<VectorRatingBar>(R.id.vrb_details_rating)
-            tvReviews = v.findViewById<TextView>(R.id.tv_details_review_count)
-
-            tvTitle.text = movie.title
-            tvPg.text = context!!.getString(R.string.string_pg, movie.minimumAge)
-            tvTagline.text = movie.genres.map{it.name}.joinToString()
-            tvOverview.text = movie.overview
-            vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
-            tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
-
-            // Listener
-            v.findViewById<TextView>(R.id.text_back).setOnClickListener {
-                fragmentManager?.popBackStack()
-            }
-        }
-    }
-
+   
     private fun loadPoster(){
         Glide.with(context)
             .load(movie.poster)
@@ -138,7 +112,8 @@ class  FragmentMoviesDetails : Fragment() {
         rvActors.setHasFixedSize(true)
 
         // Offset between items workaround
-        rvActors.addItemDecoration(ActorsListItemOffsetDecorator(24))
+        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        rvActors.addItemDecoration(ActorsListItemOffsetDecorator(offset))
 
         // Linear List
         val layoutManager = LinearLayoutManager(context)
@@ -149,10 +124,5 @@ class  FragmentMoviesDetails : Fragment() {
         val actorsAdapter = ActorsRecyclerViewAdapter()
         actorsAdapter.bindActors(movie.actors)
         rvActors.adapter = actorsAdapter
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(MOVIE_ID_KEY, movie.id)
-        super.onSaveInstanceState(outState)
     }
 }

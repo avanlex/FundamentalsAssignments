@@ -27,14 +27,12 @@ class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
         return ActorViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: ActorViewHolder, position: Int) = holder.onBind(actors[position])
+    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
+        holder.onBind(actors[position])
+    }
 
     override fun getItemCount(): Int = actors.size
 }
-
-val RecyclerView.ViewHolder.context: Context
-    get() = this.itemView.context
 
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val avatar: ImageView = itemView.findViewById(R.id.iv_actor_photo)

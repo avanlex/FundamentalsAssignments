@@ -74,11 +74,14 @@
                     android:textSize="@dimen/size_pg_text"
                     android:textStyle="bold" />
 
-                <com.github.avanlex.fundamentalsassignments.FontFitTextView
+                <TextView
                     android:id="@+id/tv_details_movie_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingMultiplier="0.9"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:text="@string/string_avengers_end_game"
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_movie_name"
@@ -167,9 +170,9 @@
             android:id="@+id/rv_actor_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="1dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -181,9 +184,7 @@
             tools:itemCount="6"
             tools:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/view_holder_actor"
-            tools:spanCount="2"
             tools:src="@tools:sample/avatars" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

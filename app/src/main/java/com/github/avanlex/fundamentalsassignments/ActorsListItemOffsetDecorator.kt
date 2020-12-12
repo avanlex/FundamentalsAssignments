@@ -14,8 +14,5 @@ class ActorsListItemOffsetDecorator(
         state: RecyclerView.State
     ) {
         outRect.right = offset
-        outRect.left = 0
-        outRect.top = offset
-        outRect.bottom = offset
     }
 }

@@ -22,16 +22,15 @@ class FragmentMoviesList : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View  = inflater.inflate(R.layout.fragment_movies_list, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initUi()
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
+        initUi(view)
         initMoviesRecyclerView()
-        loadMoviesData()
+        return view
     }
 
-    private fun initUi() {
-        rvMovies = view?.findViewById(R.id.rv_movie_list)!!
+    private fun initUi(v: View) {
+        rvMovies = v.findViewById(R.id.rv_movie_list)
     }
 
     private fun loadMoviesData() {
@@ -48,29 +47,64 @@ class FragmentMoviesList : Fragment() {
         rvMovies.setHasFixedSize(true)
 
         // Offset between items workaround
-        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(24))
+        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
 
-        val layoutManager = GridLayoutManager(context, 2)
+        val columns = 2
+        val layoutManager = GridLayoutManager(context, columns)
         rvMovies.layoutManager = layoutManager
 
-        // Setting adapter to RecyclerView
-        adapterMovies = MoviesRecyclerViewAdapter(clickListener)
+        val adapterMovies = MoviesRecyclerViewAdapter()
+        adapterMovies.setOnClickListener{ movieItem ->
+             openMovieDetails(movieItem)
+        }
+        adapterMovies.bindMovies(MoviesDataSource().getList())
         rvMovies.adapter = adapterMovies
     }
 
-    private fun doOnClick(movie: Movie) {
-        rvMovies.let {
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
-                .commit()
-        }
+    private fun openMovieDetails(movie: Movie) {
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .addToBackStack(null)
+            .commit()
     }
 
     private val clickListener = object : OnRecyclerMovieItemClicked {
         override fun onClick(movie: Movie) {
             doOnClick(movie)
         }
+    }
+
+    private fun initUi(v: View) {
+        rvMovies = v.findViewById(R.id.rv_movie_list)
+    }
+
+    private fun initMoviesRecyclerView() {
+        // Optimaze perfomance a little
+        rvMovies.setHasFixedSize(true)
+
+        // Offset between items workaround
+        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
+
+        val columns = 2
+        val layoutManager = GridLayoutManager(context, columns)
+        rvMovies.layoutManager = layoutManager
+
+        val adapterMovies = MoviesRecyclerViewAdapter()
+        adapterMovies.setOnClickListener{ movieItem ->
+             openMovieDetails(movieItem)
+        }
+        adapterMovies.bindMovies(MoviesDataSource().getList())
+        rvMovies.adapter = adapterMovies
+    }
+
+    private fun openMovieDetails(movie: Movie) {
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .addToBackStack(null)
+            .commit()
     }
 }

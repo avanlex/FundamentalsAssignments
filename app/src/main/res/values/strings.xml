@@ -16,7 +16,6 @@
     <string name="string_review_count">%d reviews</string>
     <string name="movie_pg">13+</string>
     <string name="movie_list">Movie List</string>
-
     <string name="string_pg">%d+</string>
     <string name="string_duration">%d min</string>
     <string name="chosen_item_name">You chose: %1$s</string>
