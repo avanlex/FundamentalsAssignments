@@ -13,7 +13,10 @@
     <string name="string_cast">Cast</string>
     <string name="string_storyline">Storyline</string>
     <string name="string_storyline_content">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
-    <string name="string_reviews">125 reviews</string>
+    <string name="string_review_count">%d reviews</string>
     <string name="movie_pg">13+</string>
     <string name="movie_list">Movie List</string>
+
+    <string name="string_duration">%d min</string>
+    <string name="chosen_item_name">You chose: %1$s</string>
 </resources>

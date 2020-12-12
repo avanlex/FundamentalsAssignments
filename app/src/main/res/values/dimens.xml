@@ -19,5 +19,9 @@
     <dimen name="item_movie_border_width">2dp</dimen>
     <dimen name="star_card_padding">2dp</dimen>
     <dimen name="card_border_width">2dp</dimen>
-    <dimen name="image_bottom_margin">48dp</dimen>
+    <dimen name="card_poster_bottom_margin">48dp</dimen>
+    <dimen name="size_actors_photo">80dp</dimen>
+    <dimen name="actor_item_spacing">8dp</dimen>
+    <dimen name="movie_item_spacing">10dp</dimen>
+
 </resources>

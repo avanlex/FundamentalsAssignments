@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/size_actors_photo"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_marginEnd="16dp"
+    tools:background="@color/background">
+
+
+    <com.github.avanlex.fundamentalsassignments.SquareImageView
+        android:id="@+id/iv_actor_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        tools:src="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/tv_actor_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/actor_text_margin"
+        android:text="@string/string_robert_downey_jr"
+        android:textColor="@color/color_white1"
+        android:textStyle="bold"
+        tools:text="@tools:sample/full_names" />
+</LinearLayout>

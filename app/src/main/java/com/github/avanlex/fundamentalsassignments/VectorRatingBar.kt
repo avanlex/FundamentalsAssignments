@@ -31,7 +31,7 @@ import androidx.core.view.marginTop
  * @param isCompensatingMarginActive The flag indicates that the view should be moved to the left so that
  * the left edge of the first drawable would align with the initial position of the views' left edge.
  */
-class RatingBarSvg @JvmOverloads constructor(
+class VectorRatingBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.ratingBarStyle,

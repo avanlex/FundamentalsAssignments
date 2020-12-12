@@ -6,39 +6,29 @@
     android:layout_width="170dp"
     android:layout_height="296dp"
     app:cardCornerRadius="8dp"
+    tools:layout_margin = "0dp"
     android:background="@drawable/shape_movie_card">
 
-    <TextView
-        android:id="@+id/textCardMovieName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/string_avengers_end_game"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shImageMoviePoster"
+        android:id="@+id/siv_card_poster"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/card_border_width"
         android:layout_marginTop="@dimen/card_border_width"
         android:layout_marginEnd="@dimen/card_border_width"
-        android:layout_marginBottom="@dimen/image_bottom_margin"
+        android:layout_marginBottom="@dimen/card_poster_bottom_margin"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
-        app:srcCompat="@drawable/endgame_card" />
+        android:scaleType="centerCrop"
+        tools:scaleType="fitCenter"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <ImageView
-        android:id="@+id/imageCardGradient"
+        android:id="@+id/iv_card_gradient"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="2dp"
@@ -48,30 +38,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
-        android:id="@+id/imagePG"
+        android:id="@+id/iv_card_pg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pg_rectangle" />
+        app:srcCompat="@drawable/ic_pg_rectangle"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
-        android:id="@+id/imageFavorit"
+        android:id="@+id/iv_favorit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_heart" />
+        app:srcCompat="@drawable/ic_heart"
+        tools:ignore="ContentDescription"/>
 
     <TextView
-        android:id="@+id/textCardTagline"
+        android:id="@+id/tv_card_pg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_pg"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_card_pg"
+        app:layout_constraintEnd_toEndOf="@+id/iv_card_pg"
+        app:layout_constraintStart_toStartOf="@+id/iv_card_pg"
+        app:layout_constraintTop_toTopOf="@+id/iv_card_pg" />
+
+    <TextView
+        android:id="@+id/tv_card_tagline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -80,22 +86,22 @@
         android:text="@string/string_tags"
         android:textColor="@color/pink"
         android:textSize="@dimen/size_card_tagline"
-        app:layout_constraintBottom_toBottomOf="@+id/shImageMoviePoster"
+        app:layout_constraintBottom_toBottomOf="@+id/siv_card_poster"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ll_card_rating"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/shImageMoviePoster"
+        app:layout_constraintBottom_toBottomOf="@+id/siv_card_poster"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.github.avanlex.fundamentalsassignments.RatingBarSvg
-            android:id="@+id/rb_ratingbarsvg"
+        <com.github.avanlex.fundamentalsassignments.VectorRatingBar
+            android:id="@+id/vrb_details_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -110,38 +116,43 @@
             app:innerPadding="@dimen/star_card_padding" />
 
         <TextView
+            android:id="@+id/tv_review_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="@string/string_reviews"
+            tools:text="135 review"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textPgRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:text="@string/movie_pg"
-        app:layout_constraintBottom_toBottomOf="@+id/imagePG"
-        app:layout_constraintEnd_toEndOf="@+id/imagePG"
-        app:layout_constraintStart_toStartOf="@+id/imagePG"
-        app:layout_constraintTop_toTopOf="@+id/imagePG"/>
 
     <TextView
-        android:id="@+id/textReviewCount"
+        android:id="@+id/tv_card_movie_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Some Awesome Movie" />
+
+    <TextView
+        android:id="@+id/tv_card_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:text="@string/string_reviews"
+        tools:text="135 min"
         android:textColor="@android:color/darker_gray"
         tools:ignore="SmallSp"
         android:textSize="8sp"
