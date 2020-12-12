@@ -22,10 +22,13 @@ class FragmentMoviesList : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
+        return inflater.inflate(R.layout.fragment_movies_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initUi(view)
         initMoviesRecyclerView()
-        return view
+        loadMoviesData()
     }
 
     private fun initUi(v: View) {
@@ -42,7 +45,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun initMoviesRecyclerView() {
-        // Optimaze perfomance a little
+        // Optimize performance a little
         rvMovies.setHasFixedSize(true)
 
         // Offset between items workaround
@@ -53,7 +56,7 @@ class FragmentMoviesList : Fragment() {
         val layoutManager = GridLayoutManager(context, columns)
         rvMovies.layoutManager = layoutManager
 
-        val adapterMovies = MoviesRecyclerViewAdapter()
+        adapterMovies = MoviesRecyclerViewAdapter()
         adapterMovies.setOnClickListener{ movieItem ->
              openMovieDetails(movieItem)
         }

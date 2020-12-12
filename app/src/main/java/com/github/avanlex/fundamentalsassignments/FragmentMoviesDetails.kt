@@ -58,8 +58,8 @@ class  FragmentMoviesDetails : Fragment() {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
         loadSavedState()
         setupUi(v)
-        loadPoster()
         initActorsRecyclerView()
+        loadPoster()
         return v
     }
 
@@ -94,6 +94,13 @@ class  FragmentMoviesDetails : Fragment() {
             .load(movie.poster)
             .apply(imageOption)
             .into(poster)
+        poster.colorFilter = getGreyScaleFilter()
+    }
+
+    private fun getGreyScaleFilter() : ColorFilter{
+        val matrix = ColorMatrix()
+        matrix.setSaturation(0f)
+        return ColorMatrixColorFilter(matrix)
     }
 
     private fun loadMoviesData() {

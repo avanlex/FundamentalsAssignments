@@ -49,13 +49,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_back_height"
                 android:layout_marginTop="@dimen/size_back_margin_top"
-                android:alpha="0.25"
+                android:alpha="0.5"
                 android:drawablePadding="@dimen/back_image_padding"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/back_padding_start"
                 android:paddingEnd="@dimen/back_padding_start"
                 android:text="@string/string_back"
-                android:textColor="@color/white"
+                android:textColor="@color/color_white1"
                 app:drawableStartCompat="@drawable/ic_back" />
 
             <LinearLayout
