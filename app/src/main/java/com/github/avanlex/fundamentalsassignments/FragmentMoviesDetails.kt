@@ -34,8 +34,6 @@ class  FragmentMoviesDetails : Fragment() {
     private lateinit var tvReviews: TextView
     private lateinit var tvBack: TextView
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-    private val MOVIE_ID_KEY = "MOVIE_ID"
-    lateinit var movieListMain: List<Movie>
 
     companion object {
         private val imageOption = RequestOptions()
@@ -60,7 +58,7 @@ class  FragmentMoviesDetails : Fragment() {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
         loadSavedState()
         setupUi(v)
-        loadPoster(v)
+        loadPoster()
         initActorsRecyclerView()
         return v
     }

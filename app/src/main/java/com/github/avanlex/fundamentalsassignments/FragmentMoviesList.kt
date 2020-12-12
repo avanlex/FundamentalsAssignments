@@ -12,7 +12,6 @@ import com.github.avanlex.fundamentalsassignments.data.Movie
 import com.github.avanlex.fundamentalsassignments.data.loadMovies
 import kotlinx.coroutines.*
 
-
 class FragmentMoviesList : Fragment() {
     private lateinit var rvMovies : RecyclerView
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -58,45 +57,6 @@ class FragmentMoviesList : Fragment() {
         adapterMovies.setOnClickListener{ movieItem ->
              openMovieDetails(movieItem)
         }
-        adapterMovies.bindMovies(MoviesDataSource().getList())
-        rvMovies.adapter = adapterMovies
-    }
-
-    private fun openMovieDetails(movie: Movie) {
-        fragmentManager!!.beginTransaction()
-            .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    private val clickListener = object : OnRecyclerMovieItemClicked {
-        override fun onClick(movie: Movie) {
-            doOnClick(movie)
-        }
-    }
-
-    private fun initUi(v: View) {
-        rvMovies = v.findViewById(R.id.rv_movie_list)
-    }
-
-    private fun initMoviesRecyclerView() {
-        // Optimaze perfomance a little
-        rvMovies.setHasFixedSize(true)
-
-        // Offset between items workaround
-        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
-        rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
-
-        val columns = 2
-        val layoutManager = GridLayoutManager(context, columns)
-        rvMovies.layoutManager = layoutManager
-
-        val adapterMovies = MoviesRecyclerViewAdapter()
-        adapterMovies.setOnClickListener{ movieItem ->
-             openMovieDetails(movieItem)
-        }
-        adapterMovies.bindMovies(MoviesDataSource().getList())
         rvMovies.adapter = adapterMovies
     }
 
