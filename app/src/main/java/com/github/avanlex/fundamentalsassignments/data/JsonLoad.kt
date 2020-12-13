@@ -97,6 +97,7 @@ internal fun parseMovies(
         numberOfRatings = jsonMovie.votesCount / 2,
         minimumAge = if (jsonMovie.adult) 16 else 13,
         runtime = jsonMovie.runtime,
+        favorite = false,
         genres = jsonMovie.genreIds.map {
             genresMap[it] ?: throw IllegalArgumentException("Genre not found")
         },

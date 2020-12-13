@@ -53,7 +53,7 @@
         tools:ignore="ContentDescription"/>
 
     <ImageView
-        android:id="@+id/iv_favorit"
+        android:id="@+id/iv_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -126,7 +126,6 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/tv_card_movie_name"

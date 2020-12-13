@@ -4,28 +4,22 @@ import android.graphics.ColorFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.data.Movie
-import com.github.avanlex.fundamentalsassignments.data.loadMovies
-import kotlinx.coroutines.*
-
 
 class  FragmentMoviesDetails : Fragment() {
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
-    private var movieID : Int = 0
     private lateinit var tvTitle: TextView
     private lateinit var tvPg: TextView
     private lateinit var tvTagline: TextView
@@ -33,14 +27,13 @@ class  FragmentMoviesDetails : Fragment() {
     private lateinit var vrbRating: VectorRatingBar
     private lateinit var tvReviews: TextView
     private lateinit var tvBack: TextView
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     companion object {
         private val imageOption = RequestOptions()
             .placeholder(R.drawable.ic_movie_placeholder)
             .fallback(R.drawable.ic_movie_placeholder)
 
-        val MOVIE_KEY = "MOVIE"
+        const val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
             val args = Bundle()
@@ -103,21 +96,12 @@ class  FragmentMoviesDetails : Fragment() {
         return ColorMatrixColorFilter(matrix)
     }
 
-    private fun loadMoviesData() {
-        scope.launch {
-            val movieList = loadMovies(view?.context!!)
-            activity?.runOnUiThread{
-                movie = movieList.find{ it.id == movieID }!!
-            }
-        }
-    }
-
     private fun initActorsRecyclerView() {
         // Optimaze perfomance a little
         rvActors.setHasFixedSize(true)
 
         // Offset between items workaround
-        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        val offset = resources.getDimension(R.dimen.actor_item_spacing).toInt()
         rvActors.addItemDecoration(ActorsListItemOffsetDecorator(offset))
 
         // Linear List

@@ -8,11 +8,10 @@
     tools:layout_marginEnd="16dp"
     tools:background="@color/background">
 
-
-    <com.github.avanlex.fundamentalsassignments.SquareImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_actor_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/size_actors_photo"
+        android:layout_height="@dimen/size_actors_photo"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/RoundedImageView"
         tools:src="@tools:sample/avatars"/>
@@ -22,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/actor_text_margin"
-        android:text="@string/string_robert_downey_jr"
         android:textColor="@color/color_white1"
         android:textStyle="bold"
         tools:text="@tools:sample/full_names" />

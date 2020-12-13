@@ -4,7 +4,6 @@
     <item>
         <shape>
             <size android:width="10dp"/>
-            <!--    <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp"/>-->
             <gradient
                 android:startColor="#636375"
                 android:endColor="#3B3B4D"

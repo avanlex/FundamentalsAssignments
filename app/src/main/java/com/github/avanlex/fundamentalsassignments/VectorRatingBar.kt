@@ -19,8 +19,6 @@ import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
 
-
-
 /**
  * Custom RatingBar with vector drawable support.
  * Additional attributes can be set via constructor or

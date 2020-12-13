@@ -1,6 +1,8 @@
 package com.github.avanlex.fundamentalsassignments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +20,9 @@ class FragmentMoviesList : Fragment() {
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
@@ -44,6 +46,17 @@ class FragmentMoviesList : Fragment() {
         }
     }
 
+    // You can vary the value held by the scalingFactor variable.
+    // The larger the value the less no. of columns will be calculated and vice versa
+    private fun calculateNoOfColumns(context: Context?): Int {
+        val displayMetrics: DisplayMetrics = context!!.resources.displayMetrics
+        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+        val scalingFactor = 200
+        val columnCount = (dpWidth / scalingFactor).toInt()
+        // If column no. is less than 2, we still display 2 columns
+        return if (columnCount >= 2) columnCount else 2
+    }
+
     private fun initMoviesRecyclerView() {
         // Optimize performance a little
         rvMovies.setHasFixedSize(true)
@@ -52,14 +65,12 @@ class FragmentMoviesList : Fragment() {
         val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
         rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
 
-        val columns = 2
+        val columns = calculateNoOfColumns(context)
         val layoutManager = GridLayoutManager(context, columns)
         rvMovies.layoutManager = layoutManager
 
         adapterMovies = MoviesRecyclerViewAdapter()
-        adapterMovies.setOnClickListener{ movieItem ->
-             openMovieDetails(movieItem)
-        }
+        adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem)}
         rvMovies.adapter = adapterMovies
     }
 
