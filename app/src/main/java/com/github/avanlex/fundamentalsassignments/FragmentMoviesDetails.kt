@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.data.Movie
 
-class  FragmentMoviesDetails : Fragment() {
+class   FragmentMoviesDetails : Fragment() {
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
@@ -72,7 +72,7 @@ class  FragmentMoviesDetails : Fragment() {
         tvBack = v.findViewById(R.id.text_back)
 
         tvTitle.text = movie.title
-        tvPg.text = context!!.getString(R.string.string_pg, movie.minimumAge)
+        tvPg.text = requireContext().getString(R.string.string_pg, movie.minimumAge)
         tvTagline.text = movie.genres.joinToString { it.name }
         tvOverview.text = movie.overview
         vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating

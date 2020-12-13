@@ -3,6 +3,7 @@ package com.github.avanlex.fundamentalsassignments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -14,19 +15,25 @@ import com.github.avanlex.fundamentalsassignments.data.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
-    private lateinit var onOpenDetailsClickListener: OnItemClickListener
-    private var movies: List<Movie> = listOf()
+    private var onOpenDetailsClickListener: OnItemClickListener? = null
+    private var onAddToFavoriteClickListener: OnItemAddToFavoriteClickListener? = null
+    var movies: List<Movie> = listOf()
 
-    fun setOnOpenMovieDetailsClickListener(listener : OnItemClickListener?){
+    fun setOnOpenMovieDetailsClickListener(listener: OnItemClickListener?){
         if (listener != null) {
             onOpenDetailsClickListener = listener
+        }
+    }
+
+    fun setAddToFavoriteClickListener(listener: OnItemAddToFavoriteClickListener?){
+        if (listener != null) {
+            onAddToFavoriteClickListener = listener
         }
     }
 
     fun bindMovies(movieList: List<Movie>) {
         movies = movieList
         notifyDataSetChanged()
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -37,11 +44,8 @@ class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.onBind(movies[position],
-            onOpenDetailsClickListener,
-            {
-                movies[position].favorite = ! movies[position].favorite
-                notifyDataSetChanged()
-            }
+                onOpenDetailsClickListener,
+                onAddToFavoriteClickListener
         )
     }
 
@@ -50,6 +54,10 @@ class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
 fun interface OnItemClickListener {
     fun onClick(movie: Movie)
+}
+
+fun interface OnItemAddToFavoriteClickListener {
+    fun onClick(v: ViewParent, movie: Movie, layoutPosition: Int)
 }
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -70,8 +78,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun onBind(movie: Movie,
-               onOpenDetails: OnItemClickListener,
-               onAddToFavorite: OnItemClickListener
+               onOpenDetails: OnItemClickListener?,
+               onAddToFavorite: OnItemAddToFavoriteClickListener?
     ) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
@@ -82,8 +90,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val color = if (movie.favorite) R.color.pink else R.color.color_white1
         DrawableCompat.setTint(favorite.drawable, ContextCompat.getColor(context, color))
 
-        itemView.setOnClickListener { onOpenDetails.onClick(movie) }
-        favorite.setOnClickListener { onAddToFavorite.onClick(movie) }
+        itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
+        favorite.setOnClickListener { onAddToFavorite?.onClick(itemView.parent, movie, layoutPosition) }
 
         Glide.with(context)
             .load(movie.poster)

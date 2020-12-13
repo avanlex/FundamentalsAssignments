@@ -1,13 +1,11 @@
 package com.github.avanlex.fundamentalsassignments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.Movie
@@ -16,8 +14,8 @@ import kotlinx.coroutines.*
 
 class FragmentMoviesList : Fragment() {
     private lateinit var rvMovies : RecyclerView
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
+    private val scope = CoroutineScope(Dispatchers.IO + Job())
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,28 +31,32 @@ class FragmentMoviesList : Fragment() {
         loadMoviesData()
     }
 
+    override fun onDestroy() {
+        scope.cancel("Fragment destroys")
+        super.onDestroy()
+    }
+
     private fun initUi(v: View) {
         rvMovies = v.findViewById(R.id.rv_movie_list)
     }
 
     private fun loadMoviesData() {
         scope.launch {
-            val movieList = loadMovies(view?.context!!)
-            activity?.runOnUiThread{
+            val movieList = loadMovies(requireContext())
+            withContext(Dispatchers.Main) {
                 adapterMovies.bindMovies(movieList)
             }
         }
     }
 
-    // You can vary the value held by the scalingFactor variable.
-    // The larger the value the less no. of columns will be calculated and vice versa
-    private fun calculateNoOfColumns(context: Context?): Int {
-        val displayMetrics: DisplayMetrics = context!!.resources.displayMetrics
-        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
-        val scalingFactor = 200
-        val columnCount = (dpWidth / scalingFactor).toInt()
-        // If column no. is less than 2, we still display 2 columns
-        return if (columnCount >= 2) columnCount else 2
+    /** Dynamic column count calculation for GridLayoutManager
+     * @param scalingFactor - requires value from dimens.xml
+     * the larger the value the less no. of columns will be calculated and vice versa
+     * @return column count Int
+     */
+    private fun calculateColumnCount(scalingFactor : Float): Int {
+        val dpWidth = resources.displayMetrics.widthPixels
+        return (dpWidth / scalingFactor).toInt()
     }
 
     private fun initMoviesRecyclerView() {
@@ -65,20 +67,26 @@ class FragmentMoviesList : Fragment() {
         val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
         rvMovies.addItemDecoration(MoviesListItemOffsetDecorator(offset))
 
-        val columns = calculateNoOfColumns(context)
+        val columns = calculateColumnCount(resources.getDimension(R.dimen.span_scaling_factor))
         val layoutManager = GridLayoutManager(context, columns)
         rvMovies.layoutManager = layoutManager
 
         adapterMovies = MoviesRecyclerViewAdapter()
         adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem)}
+        adapterMovies.setAddToFavoriteClickListener{rv, movie, pos -> addToFavorite(rv, movie, pos)}
         rvMovies.adapter = adapterMovies
     }
 
     private fun openMovieDetails(movie: Movie) {
         fragmentManager!!.beginTransaction()
             .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun addToFavorite(v: ViewParent, movie: Movie, position: Int) {
+        val recyclerView = v as RecyclerView
+        movie.favorite = ! movie.favorite
+        recyclerView.adapter?.notifyItemChanged(position)
     }
 }
