@@ -57,7 +57,7 @@ fun interface OnItemClickListener {
 }
 
 fun interface OnItemAddToFavoriteClickListener {
-    fun onClick(v: ViewParent, movie: Movie, layoutPosition: Int)
+    fun onClick(movie: Movie, layoutPosition: Int)
 }
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -91,7 +91,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         DrawableCompat.setTint(favorite.drawable, ContextCompat.getColor(context, color))
 
         itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
-        favorite.setOnClickListener { onAddToFavorite?.onClick(itemView.parent, movie, layoutPosition) }
+        favorite.setOnClickListener { onAddToFavorite?.onClick(movie, layoutPosition) }
 
         Glide.with(context)
             .load(movie.poster)

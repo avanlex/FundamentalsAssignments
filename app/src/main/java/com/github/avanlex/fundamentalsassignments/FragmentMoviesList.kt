@@ -49,7 +49,8 @@ class FragmentMoviesList : Fragment() {
         }
     }
 
-    /** Dynamic column count calculation for GridLayoutManager
+    /**
+     * Dynamic column count calculation for GridLayoutManager
      * @param scalingFactor - requires value from dimens.xml
      * the larger the value the less no. of columns will be calculated and vice versa
      * @return column count Int
@@ -73,7 +74,7 @@ class FragmentMoviesList : Fragment() {
 
         adapterMovies = MoviesRecyclerViewAdapter()
         adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem)}
-        adapterMovies.setAddToFavoriteClickListener{rv, movie, pos -> addToFavorite(rv, movie, pos)}
+        adapterMovies.setAddToFavoriteClickListener{movie, pos -> addToFavorite(movie, pos)}
         rvMovies.adapter = adapterMovies
     }
 
@@ -84,9 +85,8 @@ class FragmentMoviesList : Fragment() {
             .commit()
     }
 
-    private fun addToFavorite(v: ViewParent, movie: Movie, position: Int) {
-        val recyclerView = v as RecyclerView
+    private fun addToFavorite(movie: Movie, position: Int) {
         movie.favorite = ! movie.favorite
-        recyclerView.adapter?.notifyItemChanged(position)
+        adapterMovies.notifyItemChanged(position)
     }
 }
