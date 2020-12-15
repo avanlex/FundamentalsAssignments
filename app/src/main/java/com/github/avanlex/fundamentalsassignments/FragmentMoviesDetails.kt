@@ -1,6 +1,5 @@
 package com.github.avanlex.fundamentalsassignments
 
-
 import android.graphics.ColorFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -10,14 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.avanlex.fundamentalsassignments.data.models.Movie
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.github.avanlex.fundamentalsassignments.data.Movie
 
-
-class  FragmentMoviesDetails : Fragment() {
+class   FragmentMoviesDetails : Fragment() {
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
@@ -30,7 +29,11 @@ class  FragmentMoviesDetails : Fragment() {
     private lateinit var tvBack: TextView
 
     companion object {
-        val MOVIE_KEY = "MOVIE"
+        private val imageOption = RequestOptions()
+            .placeholder(R.drawable.ic_movie_placeholder)
+            .fallback(R.drawable.ic_movie_placeholder)
+
+        const val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails{
             val fragment = FragmentMoviesDetails()
             val args = Bundle()
@@ -48,8 +51,8 @@ class  FragmentMoviesDetails : Fragment() {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
         loadSavedState()
         setupUi(v)
-        loadPoster(v)
         initActorsRecyclerView()
+        loadPoster()
         return v
     }
 
@@ -68,15 +71,23 @@ class  FragmentMoviesDetails : Fragment() {
         tvReviews = v.findViewById(R.id.tv_details_review_count)
         tvBack = v.findViewById(R.id.text_back)
 
-        tvTitle.text = movie.name
-        tvPg.text = movie.pg
-        tvTagline.text = movie.tagline
-        tvOverview.text = movie.storyline
-        vrbRating.rating = movie.rating.toFloat()
-        tvReviews.text = getString(R.string.string_review_count, movie.reviewCount)
+        tvTitle.text = movie.title
+        tvPg.text = requireContext().getString(R.string.string_pg, movie.minimumAge)
+        tvTagline.text = movie.genres.joinToString { it.name }
+        tvOverview.text = movie.overview
+        vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
+        tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
 
         // Listener
         tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
+    }
+   
+    private fun loadPoster(){
+        Glide.with(context)
+            .load(movie.poster)
+            .apply(imageOption)
+            .into(poster)
+        poster.colorFilter = getGreyScaleFilter()
     }
 
     private fun getGreyScaleFilter() : ColorFilter{
@@ -84,18 +95,13 @@ class  FragmentMoviesDetails : Fragment() {
         matrix.setSaturation(0f)
         return ColorMatrixColorFilter(matrix)
     }
-    
-    private fun loadPoster(v: View) {
-        poster.setImageDrawable( ContextCompat.getDrawable(v.context, movie.poster))
-        poster.colorFilter = getGreyScaleFilter()
-    }
 
     private fun initActorsRecyclerView() {
         // Optimaze perfomance a little
         rvActors.setHasFixedSize(true)
 
         // Offset between items workaround
-        val offset = resources.getDimension(R.dimen.movie_item_spacing).toInt()
+        val offset = resources.getDimension(R.dimen.actor_item_spacing).toInt()
         rvActors.addItemDecoration(ActorsListItemOffsetDecorator(offset))
 
         // Linear List
@@ -104,8 +110,8 @@ class  FragmentMoviesDetails : Fragment() {
         rvActors.layoutManager = layoutManager
 
         // Setting adapter to RecyclerView
-        val moviesAdapter = ActorsRecyclerViewAdapter()
-        movie.let { moviesAdapter.bindActors(it.actors) }
-        rvActors.adapter = moviesAdapter
+        val actorsAdapter = ActorsRecyclerViewAdapter()
+        actorsAdapter.bindActors(movie.actors)
+        rvActors.adapter = actorsAdapter
     }
 }

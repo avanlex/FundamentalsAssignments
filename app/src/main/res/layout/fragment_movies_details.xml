@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    app:layout_constraintDimensionRatio="1:1">
+    app:layout_constraintDimensionRatio="1:1"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,13 +50,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_back_height"
                 android:layout_marginTop="@dimen/size_back_margin_top"
-                android:alpha="0.25"
+                android:alpha="0.5"
                 android:drawablePadding="@dimen/back_image_padding"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/back_padding_start"
                 android:paddingEnd="@dimen/back_padding_start"
                 android:text="@string/string_back"
-                android:textColor="@color/white"
+                android:textColor="@color/color_white1"
                 app:drawableStartCompat="@drawable/ic_back" />
 
             <LinearLayout
@@ -116,8 +117,8 @@
                     android:progressTint="@color/pink"
                     android:rating="3"
                     android:secondaryProgressTint="@color/grey"
-                    app:drawableHeight="12dp"
-                    app:drawableWidth="12dp"
+                    app:drawableHeight="@dimen/star_size"
+                    app:drawableWidth="@dimen/star_size"
                     app:innerPadding="3.9dp" />
 
                 <TextView
@@ -125,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8.9dp"
-                    android:text="@string/string_review_count"
+                    tools:text="195 reviews"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp"
                     android:textStyle="bold" />

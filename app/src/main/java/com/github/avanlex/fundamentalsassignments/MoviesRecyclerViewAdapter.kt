@@ -3,27 +3,37 @@ package com.github.avanlex.fundamentalsassignments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.github.avanlex.fundamentalsassignments.data.models.Movie
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.github.avanlex.fundamentalsassignments.data.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
-    private lateinit var clickListener: OnRecyclerMovieItemClickListener
+    private var onOpenDetailsClickListener: OnItemClickListener? = null
+    private var onAddToFavoriteClickListener: OnItemAddToFavoriteClickListener? = null
+    var movies: List<Movie> = listOf()
 
-    private var movies: List<Movie> = listOf()
-
-    fun setOnClickListener( listener : OnRecyclerMovieItemClickListener?){
+    fun setOnOpenMovieDetailsClickListener(listener: OnItemClickListener?){
         if (listener != null) {
-            clickListener = listener
+            onOpenDetailsClickListener = listener
+        }
+    }
+
+    fun setAddToFavoriteClickListener(listener: OnItemAddToFavoriteClickListener?){
+        if (listener != null) {
+            onAddToFavoriteClickListener = listener
         }
     }
 
     fun bindMovies(movieList: List<Movie>) {
         movies = movieList
         notifyDataSetChanged()
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -33,17 +43,21 @@ class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.onBind(movies[position])
-        holder.itemView.setOnClickListener {
-            clickListener.onClick(movies[position])
-        }
+        holder.onBind(movies[position],
+                onOpenDetailsClickListener,
+                onAddToFavoriteClickListener
+        )
     }
 
     override fun getItemCount(): Int = movies.size
 }
 
-fun interface OnRecyclerMovieItemClickListener {
+fun interface OnItemClickListener {
     fun onClick(movie: Movie)
+}
+
+fun interface OnItemAddToFavoriteClickListener {
+    fun onClick(movie: Movie, layoutPosition: Int)
 }
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -55,14 +69,33 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val rating: VectorRatingBar = itemView.findViewById(R.id.vrb_details_rating)
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
+    private val favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
 
-    fun onBind(movie: Movie) {
-        tagline.text = movie.tagline
-        name.text = movie.name
-        duration.text = context.getString(R.string.string_duration, movie.duration)
-        pg.text = movie.pg
-        rating.rating = movie.rating.toFloat()
-        reviewCount.text = context.getString(R.string.string_review_count, movie.reviewCount)
-        poster.setImageDrawable(ContextCompat.getDrawable(context, movie.poster))
+    companion object {
+        private val imageOption = RequestOptions()
+            .placeholder(R.drawable.ic_movie_placeholder)
+            .fallback(R.drawable.ic_movie_placeholder)
+    }
+
+    fun onBind(movie: Movie,
+               onOpenDetails: OnItemClickListener?,
+               onAddToFavorite: OnItemAddToFavoriteClickListener?
+    ) {
+        tagline.text = movie.genres.joinToString { it.name }
+        name.text = movie.title
+        duration.text = context.getString(R.string.string_duration, movie.runtime)
+        pg.text = context.getString(R.string.string_pg, movie.minimumAge)
+        rating.rating = movie.ratings
+        reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
+        val color = if (movie.favorite) R.color.pink else R.color.color_white1
+        DrawableCompat.setTint(favorite.drawable, ContextCompat.getColor(context, color))
+
+        itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
+        favorite.setOnClickListener { onAddToFavorite?.onClick(movie, layoutPosition) }
+
+        Glide.with(context)
+            .load(movie.poster)
+            .apply(imageOption)
+            .into(poster)
     }
 }

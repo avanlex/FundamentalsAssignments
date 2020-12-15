@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FundamentalsAssignments</string>
     <string name="movie_cover">movie_cover</string>
     <string name="movie_cover_gradient">movie_cover_gradient</string>
@@ -6,17 +6,12 @@
     <string name="string_pg13">13+</string>
     <string name="string_avengers_end_game">Avengers: End Game</string>
     <string name="string_tags">Action, Adventure, Fantasy</string>
-    <string name="string_robert_downey_jr">Robert Downey Jr.</string>
-    <string name="string_chris_evans">Chris Evans</string>
-    <string name="string_mark_ruffalo">Mark Ruffalo</string>
-    <string name="string_chris_hemsworth">Chris Hemsworth</string>
     <string name="string_cast">Cast</string>
     <string name="string_storyline">Storyline</string>
     <string name="string_storyline_content">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
-    <string name="string_review_count">%d reviews</string>
+    <string name="string_review_count" tools:ignore="PluralsCandidate">%d reviews</string>
     <string name="movie_pg">13+</string>
     <string name="movie_list">Movie List</string>
-
+    <string name="string_pg">%d+</string>
     <string name="string_duration">%d min</string>
-    <string name="chosen_item_name">You chose: %1$s</string>
 </resources>
