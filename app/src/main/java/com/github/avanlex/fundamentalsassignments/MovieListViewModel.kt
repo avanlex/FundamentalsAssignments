@@ -6,7 +6,7 @@ import com.github.avanlex.fundamentalsassignments.data.Movie
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
-    private val movieListLoader: MovieListLoader
+    private val movieListLoader: IMovieListLoader
 ) : ViewModel() {
 
     private val _mutableMovieList = MutableLiveData<List<Movie>>(emptyList())
@@ -15,10 +15,10 @@ class MovieListViewModel(
     val movieList: LiveData<List<Movie>> get() = _mutableMovieList
     val loadingState: LiveData<Boolean> get() = _mutableLoadingState
 
-    fun loadMovies(context: Context) {
+    fun loadMovies() {
         viewModelScope.launch {
             _mutableLoadingState.value = true
-            _mutableMovieList.value = movieListLoader.getMovies(context)
+            _mutableMovieList.value = movieListLoader.getMovies()
             _mutableLoadingState.value = false
         }
     }

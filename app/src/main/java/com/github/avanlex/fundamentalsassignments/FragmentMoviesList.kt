@@ -11,16 +11,16 @@ import kotlinx.coroutines.*
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
-    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(requireContext()) }
+    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory() }
 
     private lateinit var rvMovies : RecyclerView
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
-//    private val scope = CoroutineScope(Dispatchers.IO + Job())
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initView(view)
         initMoviesRecyclerView()
-        viewModel.loadMovies(requireContext())
+        viewModel.loadMovies()
         viewModel.movieList.observe(this.viewLifecycleOwner, this::updateAdapter)
     }
 
@@ -31,15 +31,6 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
     private fun initView(v: View) {
         rvMovies = v.findViewById(R.id.rv_movie_list)
     }
-
-//    private fun loadMoviesData() {
-//        scope.launch {
-//            val movieList = loadMovies(requireContext())
-//            withContext(Dispatchers.Main) {
-//                adapterMovies.bindMovies(movieList)
-//            }
-//        }
-//    }
 
     /**
      * Dynamic column count calculation for GridLayoutManager
