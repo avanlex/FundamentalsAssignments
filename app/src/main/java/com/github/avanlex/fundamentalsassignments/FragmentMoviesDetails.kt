@@ -79,7 +79,8 @@ class   FragmentMoviesDetails : Fragment() {
         tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
 
         // Listener
-        tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
+//        tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
+        tvBack.setOnClickListener{ parentFragmentManager.popBackStack() }
     }
    
     private fun loadPoster(){
