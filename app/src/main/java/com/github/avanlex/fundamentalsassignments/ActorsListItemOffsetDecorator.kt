@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ActorsListItemOffsetDecorator(
     private val offset: Int
 ): RecyclerView.ItemDecoration() {
+
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -15,4 +16,5 @@ class ActorsListItemOffsetDecorator(
     ) {
         outRect.right = offset
     }
+
 }

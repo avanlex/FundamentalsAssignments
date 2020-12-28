@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MoviesListItemOffsetDecorator(
     private val offset: Int
 ): RecyclerView.ItemDecoration() {
+
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -18,4 +19,5 @@ class MoviesListItemOffsetDecorator(
         outRect.top = offset
         outRect.bottom = offset
     }
+
 }

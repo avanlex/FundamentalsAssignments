@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.data.Movie
-import kotlinx.coroutines.*
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
@@ -21,11 +20,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
         initView(view)
         initMoviesRecyclerView()
         viewModel.loadMovies()
-        viewModel.movieList.observe(this.viewLifecycleOwner, this::updateAdapter)
-    }
-
-    private fun updateAdapter(movieList: List<Movie>) {
-        adapterMovies.bindMovies(movieList)
+        viewModel.movieList.observe(this.viewLifecycleOwner, this.adapterMovies::bindMovies)
     }
 
     private fun initView(v: View) {

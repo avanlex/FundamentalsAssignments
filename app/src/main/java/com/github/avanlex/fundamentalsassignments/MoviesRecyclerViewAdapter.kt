@@ -3,7 +3,6 @@ package com.github.avanlex.fundamentalsassignments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -17,7 +16,7 @@ import com.google.android.material.imageview.ShapeableImageView
 class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     private var onOpenDetailsClickListener: OnItemClickListener? = null
     private var onAddToFavoriteClickListener: OnItemAddToFavoriteClickListener? = null
-    var movies: List<Movie> = listOf()
+    private var movies: List<Movie> = listOf()
 
     fun setOnOpenMovieDetailsClickListener(listener: OnItemClickListener?){
         if (listener != null) {

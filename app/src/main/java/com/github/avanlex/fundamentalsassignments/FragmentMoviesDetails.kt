@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.data.Movie
 
 class   FragmentMoviesDetails : Fragment() {
+
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
@@ -84,7 +85,7 @@ class   FragmentMoviesDetails : Fragment() {
     }
    
     private fun loadPoster(){
-        Glide.with(context)
+        Glide.with(requireContext())
             .load(movie.poster)
             .apply(imageOption)
             .into(poster)
@@ -115,4 +116,5 @@ class   FragmentMoviesDetails : Fragment() {
         actorsAdapter.bindActors(movie.actors)
         rvActors.adapter = actorsAdapter
     }
+
 }

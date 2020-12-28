@@ -33,6 +33,7 @@ class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
 }
 
 class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     private val avatar: ImageView = itemView.findViewById(R.id.iv_actor_photo)
     private val name: TextView = itemView.findViewById(R.id.tv_actor_name)
 
@@ -49,4 +50,5 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .apply(imageOption)
             .into(avatar)
     }
+
 }
