@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

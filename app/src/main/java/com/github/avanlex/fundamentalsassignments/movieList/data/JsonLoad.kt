@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments.data
+package com.github.avanlex.fundamentalsassignments.movieList.data
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.avanlex.fundamentalsassignments.data.Movie
+import com.github.avanlex.fundamentalsassignments.R
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.FragmentMoviesDetails
+import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListViewModel
+import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListViewModelFactory
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 

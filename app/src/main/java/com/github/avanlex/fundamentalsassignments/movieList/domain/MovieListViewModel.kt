@@ -1,10 +1,10 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.domain
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.avanlex.fundamentalsassignments.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(

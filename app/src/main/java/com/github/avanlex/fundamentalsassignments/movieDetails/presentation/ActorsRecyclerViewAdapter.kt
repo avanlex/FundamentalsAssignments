@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieDetails.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.avanlex.fundamentalsassignments.data.Actor
+import com.github.avanlex.fundamentalsassignments.R
+import com.github.avanlex.fundamentalsassignments.context
+import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 
 class ActorsRecyclerViewAdapter :  RecyclerView.Adapter<ActorViewHolder>() {
 

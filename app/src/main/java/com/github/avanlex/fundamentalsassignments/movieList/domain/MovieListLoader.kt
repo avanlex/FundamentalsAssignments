@@ -1,12 +1,13 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.domain
 
-import com.github.avanlex.fundamentalsassignments.data.Movie
-import com.github.avanlex.fundamentalsassignments.data.loadMovies
+import com.github.avanlex.fundamentalsassignments.App
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieList.data.loadMovies
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class MovieListLoader(private val dispatcher: CoroutineDispatcher) :
-    IMovieListLoader {
+        IMovieListLoader {
 
     override suspend fun getMovies(): List<Movie> = withContext(dispatcher) {
         loadMovies(App.instance.applicationContext)

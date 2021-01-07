@@ -1,10 +1,10 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class ActorsListItemOffsetDecorator(
+class MoviesListItemOffsetDecorator(
     private val offset: Int
 ): RecyclerView.ItemDecoration() {
 
@@ -14,7 +14,10 @@ class ActorsListItemOffsetDecorator(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.right = offset
+        outRect.right = 0
+        outRect.left = offset
+        outRect.top = offset
+        outRect.bottom = offset
     }
 
 }
