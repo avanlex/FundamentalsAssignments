@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.FragmentMoviesDetails
-import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListViewModel
-import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListViewModelFactory
+import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListLoader
+import kotlinx.coroutines.Dispatchers
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
-    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory() }
+    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(MovieListLoader( requireContext(), Dispatchers.Default )) }
 
     private lateinit var rvMovies : RecyclerView
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
