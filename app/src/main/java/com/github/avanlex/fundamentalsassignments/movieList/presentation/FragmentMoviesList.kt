@@ -28,6 +28,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
         viewModel.loadMovies()
         viewModel.movieList.observe(this.viewLifecycleOwner, this.adapterMovies::bindMovies)
         viewModel.loadingState.observe(this.viewLifecycleOwner, this::setProgressVisibility)
+        viewModel.addToFavorite.observe(this.viewLifecycleOwner, this.adapterMovies::notifyItemChanged)
     }
 
     private fun setProgressVisibility(state: Boolean) {
@@ -64,7 +65,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
         adapterMovies = MoviesRecyclerViewAdapter()
         adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem) }
-        adapterMovies.setAddToFavoriteClickListener{ movie, pos -> addToFavorite(movie, pos) }
+        adapterMovies.setAddToFavoriteClickListener{ movie, pos -> viewModel.addToFavorite(movie, pos) }
         rvMovies.adapter = adapterMovies
     }
 
@@ -75,10 +76,6 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
             .commit()
     }
 
-    private fun addToFavorite(movie: Movie, position: Int) {
-        movie.favorite = ! movie.favorite
-        adapterMovies.notifyItemChanged(position)
-    }
 }
 
 
