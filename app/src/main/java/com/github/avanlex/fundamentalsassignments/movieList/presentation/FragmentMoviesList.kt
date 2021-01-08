@@ -2,21 +2,23 @@ package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.avanlex.fundamentalsassignments.R
-import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.FragmentMoviesDetails
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListLoader
 import kotlinx.coroutines.Dispatchers
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
-    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(MovieListLoader( requireContext(), Dispatchers.Default )) }
+    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(MovieListLoader(requireContext(), Dispatchers.Default)) }
 
     private lateinit var rvMovies : RecyclerView
+    private lateinit var pbLoading : ProgressBar
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
 
 
@@ -25,10 +27,16 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
         initMoviesRecyclerView()
         viewModel.loadMovies()
         viewModel.movieList.observe(this.viewLifecycleOwner, this.adapterMovies::bindMovies)
+        viewModel.loadingState.observe(this.viewLifecycleOwner, this::setProgressVisibility)
+    }
+
+    private fun setProgressVisibility(state: Boolean) {
+        pbLoading.visibility = if (state) ProgressBar.VISIBLE else ProgressBar.GONE
     }
 
     private fun initView(v: View) {
         rvMovies = v.findViewById(R.id.rv_movie_list)
+        pbLoading = v.findViewById(R.id.pb_loading)
     }
 
     /**
@@ -37,7 +45,7 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
      * the larger the value the less no. of columns will be calculated and vice versa
      * @return column count Int
      */
-    private fun calculateColumnCount(scalingFactor : Float): Int {
+    private fun calculateColumnCount(scalingFactor: Float): Int {
         val dpWidth = resources.displayMetrics.widthPixels
         return (dpWidth / scalingFactor).toInt()
     }

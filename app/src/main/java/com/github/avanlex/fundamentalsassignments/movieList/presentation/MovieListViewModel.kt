@@ -16,12 +16,13 @@ class MovieListViewModel(
     private val _mutableLoadingState = MutableLiveData(false)
 
     val movieList: LiveData<List<Movie>> get() = _mutableMovieList
+    val loadingState: LiveData<Boolean> get() = _mutableLoadingState
 
     fun loadMovies() {
         if (_mutableMovieList.value?.isEmpty() == true) {
             viewModelScope.launch {
-                _mutableMovieList.value = movieListLoader.getMovies()
                 _mutableLoadingState.value = true
+                _mutableMovieList.value = movieListLoader.getMovies()
                 _mutableLoadingState.value = false
             }
         }
