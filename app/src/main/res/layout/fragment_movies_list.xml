@@ -15,6 +15,17 @@
 
         <include layout="@layout/item_header"/>
 
+        <ProgressBar
+            android:id="@+id/pb_loading"
+
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:indeterminate="true"
+            android:progressTint="@color/pink"
+            android:secondaryProgressTint="@color/grey"
+            android:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movie_list"
             android:layout_width="match_parent"

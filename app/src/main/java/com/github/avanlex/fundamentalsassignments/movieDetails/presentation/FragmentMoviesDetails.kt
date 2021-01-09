@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieDetails.presentation
 
 import android.graphics.ColorFilter
 import android.graphics.ColorMatrix
@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.avanlex.fundamentalsassignments.data.Movie
+import com.github.avanlex.fundamentalsassignments.R
+import com.github.avanlex.fundamentalsassignments.VectorRatingBar
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 
 class   FragmentMoviesDetails : Fragment() {
+
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
@@ -34,7 +37,7 @@ class   FragmentMoviesDetails : Fragment() {
             .fallback(R.drawable.ic_movie_placeholder)
 
         const val MOVIE_KEY = "MOVIE"
-        fun newInstance(movie: Movie): FragmentMoviesDetails{
+        fun newInstance(movie: Movie): FragmentMoviesDetails {
             val fragment = FragmentMoviesDetails()
             val args = Bundle()
             args.putParcelable(MOVIE_KEY, movie)
@@ -79,11 +82,11 @@ class   FragmentMoviesDetails : Fragment() {
         tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
 
         // Listener
-        tvBack.setOnClickListener{ fragmentManager?.popBackStack() }
+        tvBack.setOnClickListener{ parentFragmentManager.popBackStack() }
     }
    
     private fun loadPoster(){
-        Glide.with(context)
+        Glide.with(requireContext())
             .load(movie.poster)
             .apply(imageOption)
             .into(poster)
@@ -114,4 +117,5 @@ class   FragmentMoviesDetails : Fragment() {
         actorsAdapter.bindActors(movie.actors)
         rvActors.adapter = actorsAdapter
     }
+
 }

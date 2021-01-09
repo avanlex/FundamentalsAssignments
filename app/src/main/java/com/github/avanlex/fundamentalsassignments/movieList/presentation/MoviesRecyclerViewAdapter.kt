@@ -1,9 +1,8 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -11,13 +10,16 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.avanlex.fundamentalsassignments.data.Movie
+import com.github.avanlex.fundamentalsassignments.R
+import com.github.avanlex.fundamentalsassignments.VectorRatingBar
+import com.github.avanlex.fundamentalsassignments.context
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.google.android.material.imageview.ShapeableImageView
 
 class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     private var onOpenDetailsClickListener: OnItemClickListener? = null
     private var onAddToFavoriteClickListener: OnItemAddToFavoriteClickListener? = null
-    var movies: List<Movie> = listOf()
+    private var movies: List<Movie> = listOf()
 
     fun setOnOpenMovieDetailsClickListener(listener: OnItemClickListener?){
         if (listener != null) {
@@ -43,7 +45,7 @@ class MoviesRecyclerViewAdapter : RecyclerView.Adapter<MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.onBind(movies[position],
+        holder.bindItem(movies[position],
                 onOpenDetailsClickListener,
                 onAddToFavoriteClickListener
         )
@@ -77,9 +79,9 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .fallback(R.drawable.ic_movie_placeholder)
     }
 
-    fun onBind(movie: Movie,
-               onOpenDetails: OnItemClickListener?,
-               onAddToFavorite: OnItemAddToFavoriteClickListener?
+    fun bindItem(movie: Movie,
+                 onOpenDetails: OnItemClickListener?,
+                 onAddToFavorite: OnItemAddToFavoriteClickListener?
     ) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title

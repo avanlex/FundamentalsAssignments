@@ -1,52 +1,43 @@
-package com.github.avanlex.fundamentalsassignments
+package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewParent
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.avanlex.fundamentalsassignments.data.Movie
-import com.github.avanlex.fundamentalsassignments.data.loadMovies
-import kotlinx.coroutines.*
+import com.github.avanlex.fundamentalsassignments.R
+import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.FragmentMoviesDetails
+import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListLoader
+import kotlinx.coroutines.Dispatchers
 
-class FragmentMoviesList : Fragment() {
+class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
+
+    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(MovieListLoader(requireContext(), Dispatchers.Default)) }
+
     private lateinit var rvMovies : RecyclerView
+    private lateinit var pbLoading : ProgressBar
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
-    private val scope = CoroutineScope(Dispatchers.IO + Job())
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_movies_list, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initUi(view)
+        initView(view)
         initMoviesRecyclerView()
-        loadMoviesData()
+        viewModel.loadMovies()
+        viewModel.movieList.observe(this.viewLifecycleOwner, this.adapterMovies::bindMovies)
+        viewModel.loadingState.observe(this.viewLifecycleOwner, this::setProgressVisibility)
+        viewModel.addToFavorite.observe(this.viewLifecycleOwner, this.adapterMovies::notifyItemChanged)
     }
 
-    override fun onDestroy() {
-        scope.cancel("Fragment destroys")
-        super.onDestroy()
+    private fun setProgressVisibility(state: Boolean) {
+        pbLoading.visibility = if (state) ProgressBar.VISIBLE else ProgressBar.GONE
     }
 
-    private fun initUi(v: View) {
+    private fun initView(v: View) {
         rvMovies = v.findViewById(R.id.rv_movie_list)
-    }
-
-    private fun loadMoviesData() {
-        scope.launch {
-            val movieList = loadMovies(requireContext())
-            withContext(Dispatchers.Main) {
-                adapterMovies.bindMovies(movieList)
-            }
-        }
+        pbLoading = v.findViewById(R.id.pb_loading)
     }
 
     /**
@@ -55,7 +46,7 @@ class FragmentMoviesList : Fragment() {
      * the larger the value the less no. of columns will be calculated and vice versa
      * @return column count Int
      */
-    private fun calculateColumnCount(scalingFactor : Float): Int {
+    private fun calculateColumnCount(scalingFactor: Float): Int {
         val dpWidth = resources.displayMetrics.widthPixels
         return (dpWidth / scalingFactor).toInt()
     }
@@ -73,20 +64,18 @@ class FragmentMoviesList : Fragment() {
         rvMovies.layoutManager = layoutManager
 
         adapterMovies = MoviesRecyclerViewAdapter()
-        adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem)}
-        adapterMovies.setAddToFavoriteClickListener{movie, pos -> addToFavorite(movie, pos)}
+        adapterMovies.setOnOpenMovieDetailsClickListener{ movieItem -> openMovieDetails(movieItem) }
+        adapterMovies.setAddToFavoriteClickListener{ movie, pos -> viewModel.addToFavorite(movie, pos) }
         rvMovies.adapter = adapterMovies
     }
 
     private fun openMovieDetails(movie: Movie) {
-        fragmentManager!!.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
             .addToBackStack(null)
             .commit()
     }
 
-    private fun addToFavorite(movie: Movie, position: Int) {
-        movie.favorite = ! movie.favorite
-        adapterMovies.notifyItemChanged(position)
-    }
 }
+
+
