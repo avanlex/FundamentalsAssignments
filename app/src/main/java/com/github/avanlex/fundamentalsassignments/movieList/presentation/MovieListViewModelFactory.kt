@@ -3,7 +3,6 @@ package com.github.avanlex.fundamentalsassignments.movieList.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListLoader
-import kotlinx.coroutines.Dispatchers
 
 
 class MovieListViewModelFactory(

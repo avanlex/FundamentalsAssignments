@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.github.avanlex.fundamentalsassignments.movieList.domain.IMovieListLoader
 import kotlinx.coroutines.launch
-import java.text.FieldPosition
 
 class MovieListViewModel(
     private val movieListLoader: IMovieListLoader
