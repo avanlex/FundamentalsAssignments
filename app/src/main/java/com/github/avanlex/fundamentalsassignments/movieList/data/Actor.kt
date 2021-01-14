@@ -10,6 +10,6 @@ import kotlinx.serialization.Serializable
 data class Actor(
     val id: Int,
     val name: String,
-    @SerialName("results")
+    @SerialName("profile_path")
     val picture: String
 ) : Parcelable

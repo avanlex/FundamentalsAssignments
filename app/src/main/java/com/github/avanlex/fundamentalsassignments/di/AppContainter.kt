@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.data.MovieGateway
-import com.github.avanlex.fundamentalsassignments.data.MovieLocalDataSource
 import com.github.avanlex.fundamentalsassignments.data.MovieRemoteDataSource
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
 import com.github.avanlex.fundamentalsassignments.movieList.presentation.MovieListViewModelFactory
@@ -61,12 +60,11 @@ class AppContainer {
 
     @ExperimentalSerializationApi
     private val remoteDataSource = MovieRemoteDataSource(retrofit)
-    private val localDataSource = MovieLocalDataSource()
 
     // userRepository is not private; it'll be exposed
 //    val movieGateway: MovieGateway = MovieGateway(localDataSource, remoteDataSource, Dispatchers.Default)
     @ExperimentalSerializationApi
-    val movieGateway by lazy { MovieGateway(localDataSource, remoteDataSource, Dispatchers.Default) }
+    val movieGateway by lazy { MovieGateway(remoteDataSource, Dispatchers.Default) }
 
     @ExperimentalSerializationApi
     fun getMoviesViewModel(fragment: Fragment): MoviesViewModel =

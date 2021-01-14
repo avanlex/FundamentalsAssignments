@@ -7,7 +7,7 @@ import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MovieRemoteDataSource(val retrofit: MovieApi) : IMovieDataSource {
+class MovieRemoteDataSource(private val retrofit: MovieApi) : IMovieDataSource {
     override suspend fun loadMovies() = withContext(Dispatchers.IO) {
         retrofit.loadMovies().movieList
         val genresMap = loadGenres().associateBy { it.id }
@@ -15,20 +15,20 @@ class MovieRemoteDataSource(val retrofit: MovieApi) : IMovieDataSource {
 
          movieList.map { movie ->
             Movie(
-                    id = movie.id,
-                    title = movie.title,
-                    overview = movie.overview,
-                    posterPath = movie.posterPath,
-                    backdropPath = movie.backdropPath,
-                    rating = (movie.voteAverage / 2) .toFloat(),
-                    votesCount = movie.votesCount,
-                    adult = movie.adult,
-                    runtime = 0,
-                    favorite = false,
-                    genres = movie.genreIds.map {
-                        genresMap[it] ?: throw IllegalArgumentException("Genre not found")
-                    },
-                    actors = null
+                id = movie.id,
+                title = movie.title,
+                overview = movie.overview,
+                posterPath = movie.posterPath,
+                backdropPath = movie.backdropPath,
+                rating = (movie.voteAverage / 2) .toFloat(),
+                votesCount = movie.votesCount,
+                adult = movie.adult,
+                runtime = 0,
+                favorite = false,
+                genres = movie.genreIds.map {
+                    genresMap[it] ?: throw IllegalArgumentException("Genre not found")
+                },
+                actors = null
             )
         }
     }
@@ -40,7 +40,7 @@ class MovieRemoteDataSource(val retrofit: MovieApi) : IMovieDataSource {
 
     override suspend fun loadActors(movieId: Int):  List<Actor> = withContext(Dispatchers.IO) {
         val actors = retrofit.loadActors(movieId).cast
-        actors.map { Actor(it.id, it.name, it.profilePath) }
+        actors.map { Actor(it.id, it.name, it.picture) }
     }
 
 }
