@@ -92,13 +92,13 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
-        pg.text = when (movie.minimumAge) {
-            18 -> context.getString(R.string.string_pg, movie.minimumAge)
+        pg.text = when (movie.adult) {
+            true -> context.getString(R.string.string_pg, 18)
             else -> { pg_card.isVisible = false; "" }
         }
 
-        rating.rating = movie.ratings
-        reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
+        rating.rating = movie.rating
+        reviewCount.text = context.getString(R.string.string_review_count, movie.votesCount)
         val color = if (movie.favorite) R.color.pink else R.color.color_white1
         DrawableCompat.setTint(favorite.drawable, ContextCompat.getColor(context, color))
 
@@ -107,7 +107,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         poster.load(BuildConfig.BASE_IMAGE_URL +
                 "original" +
-                movie.poster
+                movie.posterPath
         ) {
             crossfade(true)
             placeholder(R.drawable.ic_image)

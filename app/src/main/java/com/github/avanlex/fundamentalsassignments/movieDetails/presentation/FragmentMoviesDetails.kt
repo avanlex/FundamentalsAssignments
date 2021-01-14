@@ -76,11 +76,11 @@ class   FragmentMoviesDetails : Fragment() {
         tvBack = v.findViewById(R.id.text_back)
 
         tvTitle.text = movie.title
-        tvPg.text = requireContext().getString(R.string.string_pg, movie.minimumAge)
+//        tvPg.text = requireContext().getString(R.string.string_pg, movie.adult ?: "18" : "0")
         tvTagline.text = movie.genres.joinToString { it.name }
         tvOverview.text = movie.overview
-        vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
-        tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
+        vrbRating.rating = movie.rating  // movie.ratings is 10 degree rating
+        tvReviews.text = getString(R.string.string_review_count, movie.votesCount)
 
         // Listener
         tvBack.setOnClickListener{ parentFragmentManager.popBackStack() }
@@ -94,7 +94,7 @@ class   FragmentMoviesDetails : Fragment() {
         poster.load(
             BuildConfig.BASE_IMAGE_URL +
                 "original" +
-                movie.backdrop
+                movie.backdropPath
         ) {
             crossfade(true)
             placeholder(R.drawable.ic_image)

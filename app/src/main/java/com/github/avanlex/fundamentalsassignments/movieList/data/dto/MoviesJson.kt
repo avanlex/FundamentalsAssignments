@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments.movieList.data
+package com.github.avanlex.fundamentalsassignments.movieList.data.dto
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -7,17 +7,17 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class MoviesPage(
-//	val page: Int,
-//	val totalPages: Int,
+data class MoviesJson(
+	val page: Int,
+	val totalPages: Int,
 	@SerialName("results")
-	val movieList: List<MovieItem>
-//	val totalMovies: Int
+	val movieList: List<MovieJson>,
+	val totalMovies: Int
 ) : Parcelable
 
 @Serializable
 @Parcelize
-data class MovieItem(
+data class MovieJson(
 	val id: Int,
 	val overview: String,
 	val title: String,
@@ -33,5 +33,6 @@ data class MovieItem(
 	val voteAverage: Double,
 	val adult: Boolean,
 	@SerialName("vote_count")
-	val voteCount: Int
+	val votesCount: Int
 ) : Parcelable
+

@@ -1,13 +1,13 @@
 package com.github.avanlex.fundamentalsassignments.data
 
-import com.github.avanlex.fundamentalsassignments.movieList.data.Credits
-import com.github.avanlex.fundamentalsassignments.movieList.data.GenresJson
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
-import com.github.avanlex.fundamentalsassignments.movieList.data.MoviesPage
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.CreditsJson
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.GenresJson
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MoviesJson
 
 class MovieLocalDataSource: MovieApi {
 
-    override suspend fun loadMovies(): MoviesPage {
+    override suspend fun loadMovies(): MoviesJson {
         TODO("Not yet implemented")
     }
 
@@ -15,7 +15,7 @@ class MovieLocalDataSource: MovieApi {
         TODO("Not yet implemented")
     }
 
-    override suspend fun loadActors(movieId: Int): Credits {
+    override suspend fun loadActors(movieId: Int): CreditsJson {
         TODO("Not yet implemented")
     }
 }
