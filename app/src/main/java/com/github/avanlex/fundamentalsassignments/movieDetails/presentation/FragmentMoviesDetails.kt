@@ -12,8 +12,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.bumptech.glide.request.RequestOptions
+import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
@@ -86,10 +87,20 @@ class   FragmentMoviesDetails : Fragment() {
     }
    
     private fun loadPoster(){
-        Glide.with(requireContext())
-            .load(movie.poster)
-            .apply(imageOption)
-            .into(poster)
+//        Glide.with(requireContext())
+//            .load(movie.poster)
+//            .apply(imageOption)
+//            .into(poster)
+        poster.load(
+            BuildConfig.BASE_IMAGE_URL +
+                "original" +
+                movie.backdrop
+        ) {
+            crossfade(true)
+            placeholder(R.drawable.ic_image)
+            error(R.drawable.ic_broken_image)
+//            transformations(CircleCropTransformation())
+        }
         poster.colorFilter = getGreyScaleFilter()
     }
 
@@ -114,7 +125,8 @@ class   FragmentMoviesDetails : Fragment() {
 
         // Setting adapter to RecyclerView
         val actorsAdapter = ActorsRecyclerViewAdapter()
-        actorsAdapter.bindActors(movie.actors)
+//        actorsAdapter.bindActors(movie.actors)
+        actorsAdapter.bindActors(emptyList()) // TODO
         rvActors.adapter = actorsAdapter
     }
 

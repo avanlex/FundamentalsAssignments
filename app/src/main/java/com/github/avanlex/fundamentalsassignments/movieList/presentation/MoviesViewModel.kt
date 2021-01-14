@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.avanlex.fundamentalsassignments.data.IMovieGateway
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
-import com.github.avanlex.fundamentalsassignments.movieList.domain.IMovieListLoader
 import kotlinx.coroutines.launch
 
-class MovieListViewModel(
-    private val movieListLoader: IMovieListLoader
+class MoviesViewModel(
+    private val movieListLoader: IMovieGateway
 ) : ViewModel() {
 
     private val _mutableMovieList = MutableLiveData<List<Movie>>(emptyList())

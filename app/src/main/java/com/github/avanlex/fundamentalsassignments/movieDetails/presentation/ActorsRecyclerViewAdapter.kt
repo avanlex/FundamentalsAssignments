@@ -51,6 +51,7 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .load(actor.picture)
             .apply(imageOption)
             .into(avatar)
+
     }
 
 }

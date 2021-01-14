@@ -1,5 +1,9 @@
 package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
+//import com.bumptech.glide.Glide
+//import com.bumptech.glide.request.RequestOptions
+
+//import com.github.avanlex.fundamentalsassignments.ApiConfig.imageSecureBase
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import coil.load
+import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
 import com.github.avanlex.fundamentalsassignments.context
@@ -72,12 +77,13 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
     private val favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
+    private val pg_card: ImageView = itemView.findViewById(R.id.iv_card_pg)
 
-    companion object {
+/*    companion object {
         private val imageOption = RequestOptions()
             .placeholder(R.drawable.ic_movie_placeholder)
             .fallback(R.drawable.ic_movie_placeholder)
-    }
+    }*/
 
     fun bindItem(movie: Movie,
                  onOpenDetails: OnItemClickListener?,
@@ -86,7 +92,11 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
-        pg.text = context.getString(R.string.string_pg, movie.minimumAge)
+        pg.text = when (movie.minimumAge) {
+            18 -> context.getString(R.string.string_pg, movie.minimumAge)
+            else -> { pg_card.isVisible = false; "" }
+        }
+
         rating.rating = movie.ratings
         reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
         val color = if (movie.favorite) R.color.pink else R.color.color_white1
@@ -95,9 +105,14 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
         favorite.setOnClickListener { onAddToFavorite?.onClick(movie, layoutPosition) }
 
-        Glide.with(context)
-            .load(movie.poster)
-            .apply(imageOption)
-            .into(poster)
+        poster.load(BuildConfig.BASE_IMAGE_URL +
+                "original" +
+                movie.poster
+        ) {
+            crossfade(true)
+            placeholder(R.drawable.ic_image)
+            error(R.drawable.ic_broken_image)
+//            transformations(CircleCropTransformation())
+        }
     }
 }

@@ -4,31 +4,37 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.avanlex.fundamentalsassignments.MovieApplication
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.FragmentMoviesDetails
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
-import com.github.avanlex.fundamentalsassignments.movieList.domain.MovieListLoader
-import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.ExperimentalSerializationApi
 
 class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
-    private val viewModel: MovieListViewModel by viewModels { MovieListViewModelFactory(MovieListLoader(requireContext(), Dispatchers.Default)) }
+    private lateinit var viewModel: MoviesViewModel
+         // by viewModels { MovieListViewModelFactory(MovieListLoader(Dispatchers.Default)) }
 
     private lateinit var rvMovies : RecyclerView
     private lateinit var pbLoading : ProgressBar
     private lateinit var adapterMovies: MoviesRecyclerViewAdapter
 
-
+    @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel = (requireActivity().application as MovieApplication).appContainer.getMoviesViewModel(this)
         initView(view)
         initMoviesRecyclerView()
         viewModel.loadMovies()
         viewModel.movieList.observe(this.viewLifecycleOwner, this.adapterMovies::bindMovies)
         viewModel.loadingState.observe(this.viewLifecycleOwner, this::setProgressVisibility)
         viewModel.addToFavorite.observe(this.viewLifecycleOwner, this.adapterMovies::notifyItemChanged)
+
+        // Gets userRepository from the instance of AppContainer in Application
+        val appContainer = (requireActivity().application as MovieApplication).appContainer
+//        loginViewModel = LoginViewModel(appContainer.userRepository)
+
     }
 
     private fun setProgressVisibility(state: Boolean) {
@@ -48,7 +54,8 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
      */
     private fun calculateColumnCount(scalingFactor: Float): Int {
         val dpWidth = resources.displayMetrics.widthPixels
-        return (dpWidth / scalingFactor).toInt()
+        val count=  (dpWidth / scalingFactor).toInt()
+        return if (count < 2) 2 else count
     }
 
     private fun initMoviesRecyclerView() {
@@ -74,6 +81,13 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
             .replace(R.id.main_activity, FragmentMoviesDetails.newInstance(movie))
             .addToBackStack(null)
             .commit()
+    }
+
+    companion object {
+        private val TAG = FragmentMoviesList::class.java.simpleName
+        private const val API_KEY_HEADER = "x-api-key"
+
+        fun create() = FragmentMoviesList()
     }
 
 }
