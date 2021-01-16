@@ -33,7 +33,7 @@ class MovieRemoteDataSource(private val retrofit: MovieApi) : IMovieDataSource {
         }
     }
 
-    override suspend fun loadGenres(): List<Genre> = withContext(Dispatchers.IO) {
+    suspend fun loadGenres(): List<Genre> = withContext(Dispatchers.IO) {
         val genres = retrofit.loadGenres().genres
         genres.map { Genre(id = it.id, name = it.name) }
     }

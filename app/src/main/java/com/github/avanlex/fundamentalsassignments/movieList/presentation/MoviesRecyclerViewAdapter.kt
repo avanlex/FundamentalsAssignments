@@ -79,12 +79,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
     private val pg_card: ImageView = itemView.findViewById(R.id.iv_card_pg)
 
-/*    companion object {
-        private val imageOption = RequestOptions()
-            .placeholder(R.drawable.ic_movie_placeholder)
-            .fallback(R.drawable.ic_movie_placeholder)
-    }*/
-
     fun bindItem(movie: Movie,
                  onOpenDetails: OnItemClickListener?,
                  onAddToFavorite: OnItemAddToFavoriteClickListener?
@@ -92,10 +86,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
-        pg.text = when (movie.adult) {
-            true -> context.getString(R.string.string_pg, 18)
-            else -> { pg_card.isVisible = false; "" }
-        }
+        pg.text = if (movie.adult == true) {context.getString(R.string.string_pg, 18)}
+        else { pg_card.isVisible = false; "" }
 
         rating.rating = movie.rating
         reviewCount.text = context.getString(R.string.string_review_count, movie.votesCount)
@@ -112,7 +104,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             crossfade(true)
             placeholder(R.drawable.ic_image)
             error(R.drawable.ic_broken_image)
-//            transformations(CircleCropTransformation())
         }
     }
 }

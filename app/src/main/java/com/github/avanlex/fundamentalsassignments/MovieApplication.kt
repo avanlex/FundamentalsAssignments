@@ -1,6 +1,6 @@
-package com.github.avanlex.fundamentalsassignments;
+package com.github.avanlex.fundamentalsassignments
 
-import android.app.Application;
+import android.app.Application
 import com.github.avanlex.fundamentalsassignments.di.AppContainer
 
 class MovieApplication : Application() {

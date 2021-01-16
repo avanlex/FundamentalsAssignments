@@ -85,8 +85,6 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
 
     companion object {
         private val TAG = FragmentMoviesList::class.java.simpleName
-        private const val API_KEY_HEADER = "x-api-key"
-
         fun create() = FragmentMoviesList()
     }
 

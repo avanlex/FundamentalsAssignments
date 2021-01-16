@@ -38,7 +38,7 @@ class AppContainer {
             val originalRequest = chain.request()
             val originalHttpUrl = originalRequest.url.newBuilder()
                 .addQueryParameter("api_key", BuildConfig.API_KEY)
-                .build();
+                .build()
 
             val request = originalRequest.newBuilder()
                 .url(originalHttpUrl)
