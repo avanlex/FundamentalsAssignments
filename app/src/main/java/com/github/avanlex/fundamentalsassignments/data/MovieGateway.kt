@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class MovieGateway(
     private val remoteDataSource: IMovieDataSource,
-    override val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher
 ) : IMovieGateway {
 
     override suspend fun getMovies(): List<Movie> = withContext(dispatcher) {
