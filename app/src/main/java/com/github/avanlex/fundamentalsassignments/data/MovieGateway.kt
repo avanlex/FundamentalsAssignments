@@ -2,6 +2,7 @@ package com.github.avanlex.fundamentalsassignments.data
 
 import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -16,5 +17,9 @@ class MovieGateway(
 
     override suspend fun getActors(movieId: Int): List<Actor> = withContext(dispatcher) {
         remoteDataSource.loadActors(movieId)
+    }
+
+    override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean {
+        return remoteDataSource.markAsFavorite(favorite)
     }
 }

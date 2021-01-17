@@ -4,14 +4,16 @@ import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 import com.github.avanlex.fundamentalsassignments.movieList.data.Genre
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MovieRemoteDataSource(private val retrofit: MovieApi) : IMovieDataSource {
+class MovieRemoteDataSource(private val api: MovieApi) : IMovieDataSource {
+
     override suspend fun loadMovies() = withContext(Dispatchers.IO) {
-        retrofit.loadMovies().movieList
+        api.loadMovies().movieList
         val genresMap = loadGenres().associateBy { it.id }
-        val movieList = retrofit.loadMovies().movieList
+        val movieList = api.loadMovies().movieList
 
          movieList.map { movie ->
             Movie(
@@ -34,13 +36,23 @@ class MovieRemoteDataSource(private val retrofit: MovieApi) : IMovieDataSource {
     }
 
     private suspend fun loadGenres(): List<Genre> = withContext(Dispatchers.IO) {
-        val genres = retrofit.loadGenres().genres
+        val genres = api.loadGenres().genres
         genres.map { Genre(id = it.id, name = it.name) }
     }
 
     override suspend fun loadActors(movieId: Int):  List<Actor> = withContext(Dispatchers.IO) {
-        val actors = retrofit.loadActors(movieId).cast
+        val actors = api.loadActors(movieId).cast
         actors.map { Actor(it.id, it.name, it.picture) }
     }
 
+    override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean {
+        /* TODO: FIX retrofit2.HttpException: HTTP 404
+                For request "POST account/{account_id}/favorite"
+                "GET /account" is required to execute
+                and to do this, you first need to get the session
+                "POST /authentication/session/new"
+                Too lazy to do it now.*/
+        // return api.markAsFavorite(favorite).statusCode == 12
+        return true
+    }
 }

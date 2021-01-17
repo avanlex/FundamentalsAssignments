@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.avanlex.fundamentalsassignments.BuildConfig
@@ -77,7 +76,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
     private val favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
-    private val pg_card: ImageView = itemView.findViewById(R.id.iv_card_pg)
 
     fun bindItem(movie: Movie,
                  onOpenDetails: OnItemClickListener?,
@@ -86,8 +84,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
-        pg.text = if (movie.adult == true) {context.getString(R.string.string_pg, 18)}
-        else { pg_card.isVisible = false; "" }
+        pg.text = if (movie.adult) {context.getString(R.string.string_pg, 18)} else ""
 
         rating.rating = movie.rating
         reviewCount.text = context.getString(R.string.string_review_count, movie.votesCount)

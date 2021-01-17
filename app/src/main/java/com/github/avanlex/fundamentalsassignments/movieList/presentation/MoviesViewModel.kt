@@ -1,11 +1,13 @@
 package com.github.avanlex.fundamentalsassignments.movieList.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.avanlex.fundamentalsassignments.data.IMovieGateway
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import kotlinx.coroutines.launch
 
 class MoviesViewModel(
@@ -23,17 +25,29 @@ class MoviesViewModel(
     fun loadMovies() {
         if (_mutableMovieList.value?.isEmpty() == true) {
             viewModelScope.launch {
-                _mutableLoadingState.value = true
-                _mutableMovieList.value = movieListLoader.getMovies()
-                _mutableLoadingState.value = false
+                try {
+                    _mutableLoadingState.value = true
+                    _mutableMovieList.value = movieListLoader.getMovies()
+                }catch (throwable: Throwable){
+                    Log.d("MoviesViewModel", "Movie List Loading Error")
+                }
+                    _mutableLoadingState.value = false
             }
         }
     }
 
     fun addToFavorite(movie: Movie, position: Int){
         viewModelScope.launch {
-            movie.favorite = !movie.favorite
-            _mutableAddToFavorite.value = position
+            val favorite = FavoriteMovieJson( movie.id, !movie.favorite)
+
+            try {
+                if (movieListLoader.markAsFavorite(favorite)){
+                    movie.favorite = !movie.favorite
+                    _mutableAddToFavorite.value = position
+                }
+            }catch (throwable: Throwable){
+                Log.d("MoviesViewModel", "Mark As Favorite Request Failed")
+            }
         }
     }
 }

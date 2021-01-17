@@ -11,5 +11,5 @@ data class Actor(
     val id: Int,
     val name: String,
     @SerialName("profile_path")
-    val picture: String
+    val picture: String? = null
 ) : Parcelable

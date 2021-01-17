@@ -6,6 +6,8 @@ import androidx.lifecycle.get
 import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.data.MovieGateway
 import com.github.avanlex.fundamentalsassignments.data.MovieRemoteDataSource
+import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.DetailsViewModel
+import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.MovieDetailsViewModelFactory
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
 import com.github.avanlex.fundamentalsassignments.movieList.presentation.MovieListViewModelFactory
 import com.github.avanlex.fundamentalsassignments.movieList.presentation.MoviesViewModel
@@ -26,6 +28,7 @@ class AppContainer {
 
     private val json = Json {
         ignoreUnknownKeys = true
+        coerceInputValues = true
     }
 
     private val client = OkHttpClient().newBuilder()
@@ -56,18 +59,21 @@ class AppContainer {
         .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(this.json.asConverterFactory("application/json".toMediaType()))
         .build()
-        .create<MovieApi>() // .create<MovieApi::class.java>
+        .create<MovieApi>()
 
     @ExperimentalSerializationApi
     private val remoteDataSource = MovieRemoteDataSource(retrofit)
 
     // userRepository is not private; it'll be exposed
-//    val movieGateway: MovieGateway = MovieGateway(localDataSource, remoteDataSource, Dispatchers.Default)
     @ExperimentalSerializationApi
     val movieGateway by lazy { MovieGateway(remoteDataSource, Dispatchers.Default) }
 
     @ExperimentalSerializationApi
     fun getMoviesViewModel(fragment: Fragment): MoviesViewModel =
-         ViewModelProvider(fragment, MovieListViewModelFactory(movieGateway)).get() // .get(MoviesViewModel::class.java)
+         ViewModelProvider(fragment, MovieListViewModelFactory(movieGateway)).get()
+
+    @ExperimentalSerializationApi
+    fun getDetailsViewModel(fragment: Fragment): DetailsViewModel =
+            ViewModelProvider(fragment, MovieDetailsViewModelFactory(movieGateway)).get()
 
 }

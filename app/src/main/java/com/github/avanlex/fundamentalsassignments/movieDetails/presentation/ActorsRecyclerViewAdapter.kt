@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.context
 import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
@@ -48,7 +49,9 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun onBind(actor: Actor) {
         name.text = actor.name
         Glide.with(context)
-            .load(actor.picture)
+            .load(BuildConfig.BASE_IMAGE_URL +
+                    "original" +
+                    actor.picture)
             .apply(imageOption)
             .into(avatar)
 
