@@ -126,7 +126,7 @@ class   FragmentMoviesDetails : Fragment() {
 
         // Setting adapter to RecyclerView
         actorsAdapter = ActorsRecyclerViewAdapter()
-//        actorsAdapter.bindActors(movie.actors)
+
         actorsAdapter.bindActors(emptyList()) // TODO
         rvActors.adapter = actorsAdapter
     }
