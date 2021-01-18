@@ -55,7 +55,8 @@ class   FragmentMoviesDetails : Fragment() {
         savedInstanceState: Bundle?
     ):View {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
-        viewModel = (requireActivity().application as MovieApplication).appContainer.getDetailsViewModel(this)
+        viewModel = (requireActivity().application as MovieApplication)
+            .appContainer.getDetailsViewModel(this)
         loadSavedState()
         viewModel.loadActors(movie.id)
         setupUi(v)
