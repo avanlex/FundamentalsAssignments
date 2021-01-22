@@ -9,7 +9,7 @@ import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMov
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ActorRemoteDataSource(private val api: MovieApi) : IActorDataSource {
+class ActorsRemoteDataSource(private val api: MovieApi) : IActorDataSource {
 
     override suspend fun loadActors(movieId: Int):  List<Actor> = withContext(Dispatchers.IO) {
         val actors = api.loadActors(movieId).cast
