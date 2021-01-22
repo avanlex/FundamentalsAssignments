@@ -9,6 +9,6 @@ data class FavoriteMovieJson(
 	val mediaId: Int? = null,
 	val favorite: Boolean? = null,
 	@SerialName("media_type")
-	val mediaType: String? = "movie"
+	val mediaType: String? = null
 )
 

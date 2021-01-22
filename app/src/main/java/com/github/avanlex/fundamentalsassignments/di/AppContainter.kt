@@ -13,7 +13,6 @@ import com.github.avanlex.fundamentalsassignments.movieList.presentation.MovieLi
 import com.github.avanlex.fundamentalsassignments.movieList.presentation.MoviesViewModel
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -53,7 +52,7 @@ class AppContainer {
 
     // Since you want to expose userRepository out of the container, you need to satisfy
     // its dependencies as you did before
-    @ExperimentalSerializationApi
+    @Suppress("EXPERIMENTAL_API_USAGE")
     private val retrofit = Retrofit.Builder()
         .client(this.client)
         .baseUrl(BuildConfig.BASE_URL)
@@ -61,18 +60,17 @@ class AppContainer {
         .build()
         .create<MovieApi>()
 
-    @ExperimentalSerializationApi
-    private val remoteDataSource = MovieRemoteDataSource(retrofit)
+    private val movieDataSource = MovieRemoteDataSource(retrofit)
+    private val actorsDataSource = MovieRemoteDataSource(retrofit)
 
     // userRepository is not private; it'll be exposed
-    @ExperimentalSerializationApi
-    val movieGateway by lazy { MovieGateway(remoteDataSource, Dispatchers.Default) }
+    val movieGateway by lazy { MovieGateway(movieDataSource, Dispatchers.Default) }
 
-    @ExperimentalSerializationApi
+
     fun getMoviesViewModel(fragment: Fragment): MoviesViewModel =
          ViewModelProvider(fragment, MovieListViewModelFactory(movieGateway)).get()
 
-    @ExperimentalSerializationApi
+
     fun getDetailsViewModel(fragment: Fragment): DetailsViewModel =
             ViewModelProvider(fragment, MovieDetailsViewModelFactory(movieGateway)).get()
 

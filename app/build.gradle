@@ -31,7 +31,11 @@ android {
             dimension "serverType"
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
             buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/\""
-            buildConfigField "String", "API_KEY", "\"c058d9a291e7f1dd69f97f1afac69b61\""
+
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            def apiKey = properties.getProperty('api.key')
+            buildConfigField "String", "API_KEY", apiKey
         }
     }
 

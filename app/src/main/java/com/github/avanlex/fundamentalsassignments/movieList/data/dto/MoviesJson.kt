@@ -8,11 +8,8 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class MoviesJson(
-//	val page: Int,
-//	val totalPages: Int,
 	@SerialName("results")
 	val movieList: List<MovieJson>,
-//	val totalMovies: Int
 ) : Parcelable
 
 @Serializable

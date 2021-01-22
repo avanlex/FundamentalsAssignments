@@ -1,5 +1,6 @@
 package com.github.avanlex.fundamentalsassignments.data
 
+import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 import com.github.avanlex.fundamentalsassignments.movieList.data.Genre
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
@@ -20,7 +21,7 @@ class MovieRemoteDataSource(private val api: MovieApi) : IMovieDataSource {
                 id = movie.id,
                 title = movie.title,
                 overview = movie.overview,
-                posterPath = movie.posterPath,
+                posterPath = BuildConfig.BASE_IMAGE_URL + "original" + movie.posterPath,
                 backdropPath = movie.backdropPath,
                 rating = (movie.voteAverage / 2) .toFloat(),
                 votesCount = movie.votesCount,
@@ -38,11 +39,6 @@ class MovieRemoteDataSource(private val api: MovieApi) : IMovieDataSource {
     private suspend fun loadGenres(): List<Genre> = withContext(Dispatchers.IO) {
         val genres = api.loadGenres().genres
         genres.map { Genre(id = it.id, name = it.name) }
-    }
-
-    override suspend fun loadActors(movieId: Int):  List<Actor> = withContext(Dispatchers.IO) {
-        val actors = api.loadActors(movieId).cast
-        actors.map { Actor(it.id, it.name, it.picture) }
     }
 
     override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean {

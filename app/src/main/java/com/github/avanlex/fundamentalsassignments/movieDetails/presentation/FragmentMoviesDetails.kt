@@ -93,11 +93,7 @@ class   FragmentMoviesDetails : Fragment() {
     }
    
     private fun loadPoster(){
-        poster.load(
-            BuildConfig.BASE_IMAGE_URL +
-                "original" +
-                movie.backdropPath
-        ) {
+        poster.load(movie.backdropPath) {
             crossfade(true)
             placeholder(R.drawable.ic_image)
             error(R.drawable.ic_broken_image)

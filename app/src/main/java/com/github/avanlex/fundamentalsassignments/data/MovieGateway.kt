@@ -7,19 +7,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class MovieGateway(
-    private val remoteDataSource: IMovieDataSource,
+    private val moviesDataSource: IMovieDataSource,
+    private val actorsDataSource: IActorDataSource,
     private val dispatcher: CoroutineDispatcher
 ) : IMovieGateway {
 
     override suspend fun getMovies(): List<Movie> = withContext(dispatcher) {
-        remoteDataSource.loadMovies()
+        moviesDataSource.loadMovies()
     }
 
     override suspend fun getActors(movieId: Int): List<Actor> = withContext(dispatcher) {
-        remoteDataSource.loadActors(movieId)
+        actorsDataSource.loadActors(movieId)
     }
 
     override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean {
-        return remoteDataSource.markAsFavorite(favorite)
+        return moviesDataSource.markAsFavorite(favorite)
     }
 }

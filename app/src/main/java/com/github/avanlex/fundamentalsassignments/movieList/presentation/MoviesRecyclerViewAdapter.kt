@@ -90,10 +90,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
         favorite.setOnClickListener { onAddToFavorite?.onClick(movie, layoutPosition) }
 
-        poster.load(BuildConfig.BASE_IMAGE_URL +
-                "original" +
-                movie.posterPath
-        ) {
+        poster.load(movie.posterPath) {
             crossfade(true)
             placeholder(R.drawable.ic_image)
             error(R.drawable.ic_broken_image)

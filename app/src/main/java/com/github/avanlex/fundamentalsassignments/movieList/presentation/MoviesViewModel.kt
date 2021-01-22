@@ -38,7 +38,7 @@ class MoviesViewModel(
 
     fun addToFavorite(movie: Movie, position: Int){
         viewModelScope.launch {
-            val favorite = FavoriteMovieJson( movie.id, !movie.favorite)
+            val favorite = FavoriteMovieJson( movie.id, !movie.favorite, "movie")
 
             try {
                 if (movieListLoader.markAsFavorite(favorite)){
