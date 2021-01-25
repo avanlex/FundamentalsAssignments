@@ -11,7 +11,7 @@ import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMov
 import kotlinx.coroutines.launch
 
 class MoviesViewModel(
-    private val movieListLoader: IMovieGateway
+    private val moviesGateway: IMovieGateway
 ) : ViewModel() {
 
     private val _mutableMovieList = MutableLiveData<List<Movie>>(emptyList())
@@ -27,7 +27,7 @@ class MoviesViewModel(
             viewModelScope.launch {
                 try {
                     _mutableLoadingState.value = true
-                    _mutableMovieList.value = movieListLoader.getMovies()
+                    _mutableMovieList.value = moviesGateway.getMovies()
                 }catch (throwable: Throwable){
                     Log.d("MoviesViewModel", "Movie List Loading Error")
                 }
@@ -41,7 +41,7 @@ class MoviesViewModel(
             val favorite = FavoriteMovieJson( movie.id, !movie.favorite, "movie")
 
             try {
-                if (movieListLoader.markAsFavorite(favorite)){
+                if (moviesGateway.markAsFavorite(favorite)){
                     movie.favorite = !movie.favorite
                     _mutableAddToFavorite.value = position
                 }

@@ -8,5 +8,9 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class GenresJson(
-	val genres: List<Genre>
+	val genres: List<GenreJson>
 ) : Parcelable
+
+@Parcelize
+@Serializable
+data class GenreJson(val id: Int, val name: String) : Parcelable

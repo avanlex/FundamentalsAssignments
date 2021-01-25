@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Parcelize
-@Serializable
 data class Movie(
         val id: Int,
         val overview: String,

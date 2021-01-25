@@ -4,9 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.github.avanlex.fundamentalsassignments.BuildConfig
-import com.github.avanlex.fundamentalsassignments.data.ActorsRemoteDataSource
+import com.github.avanlex.fundamentalsassignments.data.ActorsProvider
+import com.github.avanlex.fundamentalsassignments.data.GenresProvider
 import com.github.avanlex.fundamentalsassignments.data.MovieGateway
-import com.github.avanlex.fundamentalsassignments.data.MoviesRemoteDataSource
+import com.github.avanlex.fundamentalsassignments.data.MoviesProvider
 import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.DetailsViewModel
 import com.github.avanlex.fundamentalsassignments.movieDetails.presentation.MovieDetailsViewModelFactory
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
@@ -61,16 +62,23 @@ class AppContainer {
         .build()
         .create<MovieApi>()
 
-    private val movieDataSource = MoviesRemoteDataSource(retrofit)
-    private val actorsDataSource = ActorsRemoteDataSource(retrofit)
+    private val movieProvider = MoviesProvider(retrofit)
+    private val actorsProvider = ActorsProvider(retrofit)
+    private val genresProvider = GenresProvider(retrofit)
 
     // userRepository is not private; it'll be exposed
-    val movieGateway by lazy { MovieGateway(movieDataSource, actorsDataSource, Dispatchers.Default) }
-
+    @Suppress("MemberVisibilityCanBePrivate")
+    val movieGateway by lazy {
+        MovieGateway(
+            movieProvider, 
+            actorsProvider,
+            genresProvider,
+            Dispatchers.IO
+        ) 
+    }
 
     fun getMoviesViewModel(fragment: Fragment): MoviesViewModel =
          ViewModelProvider(fragment, MovieListViewModelFactory(movieGateway)).get()
-
 
     fun getDetailsViewModel(fragment: Fragment): DetailsViewModel =
             ViewModelProvider(fragment, MovieDetailsViewModelFactory(movieGateway)).get()
