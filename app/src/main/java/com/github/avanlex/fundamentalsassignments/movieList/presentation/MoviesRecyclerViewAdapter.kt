@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import coil.load
+import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
 import com.github.avanlex.fundamentalsassignments.context
@@ -73,12 +73,6 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
     private val favorite: ImageView = itemView.findViewById(R.id.iv_favorite)
 
-    companion object {
-        private val imageOption = RequestOptions()
-            .placeholder(R.drawable.ic_movie_placeholder)
-            .fallback(R.drawable.ic_movie_placeholder)
-    }
-
     fun bindItem(movie: Movie,
                  onOpenDetails: OnItemClickListener?,
                  onAddToFavorite: OnItemAddToFavoriteClickListener?
@@ -86,18 +80,20 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tagline.text = movie.genres.joinToString { it.name }
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
-        pg.text = context.getString(R.string.string_pg, movie.minimumAge)
-        rating.rating = movie.ratings
-        reviewCount.text = context.getString(R.string.string_review_count, movie.numberOfRatings)
+        pg.text = if (movie.adult) {context.getString(R.string.string_pg, 18)} else ""
+
+        rating.rating = movie.rating
+        reviewCount.text = context.getString(R.string.string_review_count, movie.votesCount)
         val color = if (movie.favorite) R.color.pink else R.color.color_white1
         DrawableCompat.setTint(favorite.drawable, ContextCompat.getColor(context, color))
 
         itemView.setOnClickListener { onOpenDetails?.onClick(movie) }
         favorite.setOnClickListener { onAddToFavorite?.onClick(movie, layoutPosition) }
 
-        Glide.with(context)
-            .load(movie.poster)
-            .apply(imageOption)
-            .into(poster)
+        poster.load(movie.posterPath) {
+            crossfade(true)
+            placeholder(R.drawable.ic_image)
+            error(R.drawable.ic_broken_image)
+        }
     }
 }

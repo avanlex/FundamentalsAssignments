@@ -12,13 +12,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import coil.load
+import com.github.avanlex.fundamentalsassignments.BuildConfig
+import com.github.avanlex.fundamentalsassignments.MovieApplication
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
+import kotlinx.serialization.ExperimentalSerializationApi
 
 class   FragmentMoviesDetails : Fragment() {
+
+    private lateinit var viewModel: DetailsViewModel
 
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
@@ -31,11 +35,9 @@ class   FragmentMoviesDetails : Fragment() {
     private lateinit var tvReviews: TextView
     private lateinit var tvBack: TextView
 
-    companion object {
-        private val imageOption = RequestOptions()
-            .placeholder(R.drawable.ic_movie_placeholder)
-            .fallback(R.drawable.ic_movie_placeholder)
+    private lateinit var actorsAdapter: ActorsRecyclerViewAdapter
 
+    companion object {
         const val MOVIE_KEY = "MOVIE"
         fun newInstance(movie: Movie): FragmentMoviesDetails {
             val fragment = FragmentMoviesDetails()
@@ -46,21 +48,26 @@ class   FragmentMoviesDetails : Fragment() {
         }
     }
 
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ):View {
         val v = inflater.inflate(R.layout.fragment_movies_details, container, false)
+        viewModel = (requireActivity().application as MovieApplication)
+            .appContainer.getDetailsViewModel(this)
         loadSavedState()
+        viewModel.loadActors(movie.id)
         setupUi(v)
         initActorsRecyclerView()
+        viewModel.actorList.observe(this.viewLifecycleOwner, this.actorsAdapter::bindActors)
         loadPoster()
         return v
     }
 
     private fun loadSavedState(){
-        movie = arguments?.getParcelable(MOVIE_KEY)!!
+        movie = requireArguments().getParcelable(MOVIE_KEY)!!
     }
 
     private fun setupUi(v : View){
@@ -75,21 +82,22 @@ class   FragmentMoviesDetails : Fragment() {
         tvBack = v.findViewById(R.id.text_back)
 
         tvTitle.text = movie.title
-        tvPg.text = requireContext().getString(R.string.string_pg, movie.minimumAge)
+//        tvPg.text = requireContext().getString(R.string.string_pg, movie.adult ?: "18" : "0")
         tvTagline.text = movie.genres.joinToString { it.name }
         tvOverview.text = movie.overview
-        vrbRating.rating = movie.ratings  // movie.ratings is 10 degree rating
-        tvReviews.text = getString(R.string.string_review_count, movie.numberOfRatings)
+        vrbRating.rating = movie.rating  // movie.ratings is 10 degree rating
+        tvReviews.text = getString(R.string.string_review_count, movie.votesCount)
 
         // Listener
         tvBack.setOnClickListener{ parentFragmentManager.popBackStack() }
     }
    
     private fun loadPoster(){
-        Glide.with(requireContext())
-            .load(movie.poster)
-            .apply(imageOption)
-            .into(poster)
+        poster.load(movie.backdropPath) {
+            crossfade(true)
+            placeholder(R.drawable.ic_image)
+            error(R.drawable.ic_broken_image)
+        }
         poster.colorFilter = getGreyScaleFilter()
     }
 
@@ -113,8 +121,9 @@ class   FragmentMoviesDetails : Fragment() {
         rvActors.layoutManager = layoutManager
 
         // Setting adapter to RecyclerView
-        val actorsAdapter = ActorsRecyclerViewAdapter()
-        actorsAdapter.bindActors(movie.actors)
+        actorsAdapter = ActorsRecyclerViewAdapter()
+
+        actorsAdapter.bindActors(emptyList()) // TODO
         rvActors.adapter = actorsAdapter
     }
 

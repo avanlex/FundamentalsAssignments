@@ -2,19 +2,20 @@ package com.github.avanlex.fundamentalsassignments.movieList.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 @Parcelize
 data class Movie(
         val id: Int,
-        val title: String,
         val overview: String,
-        val poster: String,
-        val backdrop: String,
-        val ratings: Float,
-        val numberOfRatings: Int,
-        val minimumAge: Int,
+        val title: String,
+        val posterPath: String,
+        val backdropPath: String,
+        val rating: Float,
+        val votesCount: Int,
+        val adult: Boolean,
         val runtime: Int,
         var favorite: Boolean,
         val genres: List<Genre>,
-        val actors: List<Actor>
+        val actors: List<Actor>?
 ) : Parcelable
