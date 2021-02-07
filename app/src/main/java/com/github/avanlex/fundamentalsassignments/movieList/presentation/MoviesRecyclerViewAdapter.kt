@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.avanlex.fundamentalsassignments.BuildConfig
@@ -68,6 +69,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val duration: TextView = itemView.findViewById(R.id.tv_card_duration)
     private val tagline: TextView = itemView.findViewById(R.id.tv_card_tagline)
     private val pg: TextView = itemView.findViewById(R.id.tv_card_pg)
+    private val pgCard: ImageView  = itemView.findViewById(R.id.iv_card_pg)
     private val rating: VectorRatingBar = itemView.findViewById(R.id.vrb_details_rating)
     private val reviewCount: TextView = itemView.findViewById(R.id.tv_review_count)
     private val poster: ShapeableImageView = itemView.findViewById(R.id.siv_card_poster)
@@ -81,6 +83,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name.text = movie.title
         duration.text = context.getString(R.string.string_duration, movie.runtime)
         pg.text = if (movie.adult) {context.getString(R.string.string_pg, 18)} else ""
+        pgCard.isVisible = movie.adult
+
 
         rating.rating = movie.rating
         reviewCount.text = context.getString(R.string.string_review_count, movie.votesCount)

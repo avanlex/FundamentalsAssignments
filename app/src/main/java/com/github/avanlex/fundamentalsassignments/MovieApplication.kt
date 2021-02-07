@@ -5,6 +5,6 @@ import com.github.avanlex.fundamentalsassignments.di.AppContainer
 
 class MovieApplication : Application() {
 
-    val appContainer: AppContainer by lazy { AppContainer() }
+    val appContainer: AppContainer by lazy { AppContainer(applicationContext) }
 
 }

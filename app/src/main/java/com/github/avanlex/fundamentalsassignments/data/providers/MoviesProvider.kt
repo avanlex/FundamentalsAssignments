@@ -1,13 +1,11 @@
-package com.github.avanlex.fundamentalsassignments.data
+package com.github.avanlex.fundamentalsassignments.data.providers
 
-import com.github.avanlex.fundamentalsassignments.movieList.data.Genre
+import com.github.avanlex.fundamentalsassignments.data.DataBase
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MovieJson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
-class MoviesProvider(private val api: MovieApi) : IMovieProvider {
+class MoviesProvider(private val api: MovieApi, database: DataBase) : IMovieProvider {
 
     override suspend fun loadMovies(): List<MovieJson> {
         return api.loadMovies().movieList

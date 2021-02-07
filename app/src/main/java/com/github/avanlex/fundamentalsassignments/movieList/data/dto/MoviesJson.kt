@@ -5,18 +5,20 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Parcelize
-@Serializable
-data class MoviesJson(
-	@SerialName("results")
-	val movieList: List<MovieJson>,
-) : Parcelable
 
 @Serializable
-@Parcelize
+data class MoviesJson(
+ 	@SerialName("results")
+	val movieList: List<MovieJson>,
+)
+
+@Serializable
 data class MovieJson(
-	val id: Int,
+	@SerialName("id")
+	val movieId: Int,
+	@SerialName("overview")
 	val overview: String,
+	@SerialName("title")
 	val title: String,
 	@SerialName("genre_ids")
 	val genreIds: List<Int>,
@@ -28,8 +30,9 @@ data class MovieJson(
 	val releaseDate: String,
 	@SerialName("vote_average")
 	val voteAverage: Double,
+	@SerialName("adult")
 	val adult: Boolean,
 	@SerialName("vote_count")
 	val votesCount: Int
-) : Parcelable
+)
 

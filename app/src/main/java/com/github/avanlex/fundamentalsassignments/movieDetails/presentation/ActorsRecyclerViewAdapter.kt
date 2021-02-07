@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import coil.load
+//import com.bumptech.glide.Glide
+//import com.bumptech.glide.request.RequestOptions
 import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.context
@@ -40,18 +41,14 @@ class ActorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val avatar: ImageView = itemView.findViewById(R.id.iv_actor_photo)
     private val name: TextView = itemView.findViewById(R.id.tv_actor_name)
 
-    companion object {
-        private val imageOption = RequestOptions()
-            .placeholder(R.drawable.ic_movie_placeholder)
-            .fallback(R.drawable.ic_movie_placeholder)
-    }
-
     fun onBind(actor: Actor) {
         name.text = actor.name
-        Glide.with(context)
-            .load(actor.picture)
-            .apply(imageOption)
-            .into(avatar)
+
+        avatar.load(actor.picture) {
+            crossfade(true)
+            placeholder(R.drawable.ic_image)
+            error(R.drawable.ic_broken_image)
+        }
     }
 
 }
