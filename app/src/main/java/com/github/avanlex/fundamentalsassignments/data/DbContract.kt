@@ -12,9 +12,7 @@ object DbContract {
     object Genres {
         const val TABLE_NAME = "genres"
         const val COLUMN_NAME_ID = BaseColumns._ID
-        const val COLUMN_NAME_TITLE = "title"
-        const val COLUMN_NAME_LATITUDE = "latitude"
-        const val COLUMN_NAME_LONGITUDE = "longitude"
+        const val COLUMN_NAME_GENRE = "genre"
     }
 
     object Actors {

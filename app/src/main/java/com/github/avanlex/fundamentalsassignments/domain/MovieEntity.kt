@@ -7,11 +7,16 @@ import com.github.avanlex.fundamentalsassignments.data.DbContract
 import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 import com.github.avanlex.fundamentalsassignments.movieList.data.Genre
 
-@Entity(
+@Entity
+//    (
+//    foreignKeys = [ForeignKey(GenreEntity::class, arrayOf(""))]
+//)
+    (
     tableName = DbContract.Movies.TABLE_NAME,
     indices = [Index(DbContract.Movies.COLUMN_NAME_ID)],
 )
 data class MovieEntity (
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_ID)
     var id: Int,
@@ -34,8 +39,5 @@ data class MovieEntity (
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_FAVORITE)
     var favorite: Boolean,
 
-){
-    constructor() : this(0, "", "", "", "", 0F, 0, false, 0, false)
-}
-
+)
 

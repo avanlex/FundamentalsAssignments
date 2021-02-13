@@ -1,11 +1,12 @@
 package com.github.avanlex.fundamentalsassignments.data.providers
 
 import com.github.avanlex.fundamentalsassignments.data.DataBase
+import com.github.avanlex.fundamentalsassignments.domain.MovieEntity
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MovieJson
 
-class MoviesProvider(private val api: MovieApi, database: DataBase) : IMovieProvider {
+class MoviesProvider(private val api: MovieApi) : IMovieProvider {
 
     override suspend fun loadMovies(): List<MovieJson> {
         return api.loadMovies().movieList
