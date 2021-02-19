@@ -11,20 +11,25 @@ object DbContract {
     
     object Genres {
         const val TABLE_NAME = "genres"
-        const val COLUMN_NAME_ID = BaseColumns._ID
-        const val COLUMN_NAME_GENRE = "genre"
+//        const val COLUMN_NAME_ID = BaseColumns._ID
+        const val COLUMN_NAME_ID = "genreId"
+        const val COLUMN_NAME_TITLE = "title"
+        const val COLUMN_NAME_LATITUDE = "latitude"
+        const val COLUMN_NAME_LONGITUDE = "longitude"
     }
 
     object Actors {
         const val TABLE_NAME = "actors"
-        const val COLUMN_NAME_ID = BaseColumns._ID
+//        const val COLUMN_NAME_ID = BaseColumns._ID
+        const val COLUMN_NAME_ID = "actorId"
         const val COLUMN_NAME_NAME = "name"
         const val COLUMN_NAME_PROFILE_PATH = "profile_path"
     }
 
     object Movies{
         const val TABLE_NAME = "movies"
-        const val COLUMN_NAME_ID = BaseColumns._ID
+//        const val COLUMN_NAME_ID = BaseColumns._ID
+        const val COLUMN_NAME_ID = "movieId"
         const val COLUMN_NAME_OVERVIEW = "overview"
         const val COLUMN_NAME_TITLE = "title"
         const val COLUMN_NAME_POSTER_PATH = "posterPath"

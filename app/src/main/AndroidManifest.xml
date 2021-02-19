@@ -7,8 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
-
-
     <application
         android:name=".MovieApplication"
         android:allowBackup="true"

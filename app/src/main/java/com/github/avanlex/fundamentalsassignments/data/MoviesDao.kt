@@ -1,30 +1,40 @@
 package com.github.avanlex.fundamentalsassignments.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
-import com.github.avanlex.fundamentalsassignments.domain.MovieActor
-import com.github.avanlex.fundamentalsassignments.domain.MovieEntity
-import com.github.avanlex.fundamentalsassignments.domain.MovieWithActors
+import androidx.room.*
+import com.github.avanlex.fundamentalsassignments.entities.*
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieActorJoin
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJoin
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenresActors
 
 @Dao
 interface MoviesDao {
-    @Transaction
-    @Query("SELECT * FROM movies ORDER BY rating DESC")
-	suspend fun getAllMovies() : List<MovieEntity>
 
     @Transaction
-    @Query("SELECT * FROM MovieActor ORDER BY movieId ASC")
-    suspend fun getAllMoviesWithActors() : List<MovieActor>
+    @Query("SELECT * FROM movies ORDER BY favorite DESC")
+    fun getMovies(): List<MovieWithGenresActors>
 
+    @Transaction
+    @Query("SELECT * FROM actors WHERE movieId == :movieId")
+    fun getActors(movieId: Long): List<ActorEntity>
 
-//    @Insert
-//	suspend fun insert(movie: MovieWithActors)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+	suspend fun insert(movie: MovieEntity)
 
-//    @Insert
-//    suspend fun insert(movies: List<MovieWithRelations>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGenresList(genres: List<GenreEntity>)
 
-    @Query("DELETE FROM movies WHERE _id == :id")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertActorsList(actors: List<ActorEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+	suspend fun insertMoviesList(moviesList: List<MovieEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMovieGenreJoin(join: MovieGenreJoin)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMovieActorJoin(join: MovieActorJoin)
+
+    @Query("DELETE FROM movies WHERE movieId == :id")
 	suspend fun deleteById(id: Long)
 }

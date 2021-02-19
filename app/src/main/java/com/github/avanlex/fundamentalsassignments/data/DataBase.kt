@@ -4,16 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.github.avanlex.fundamentalsassignments.domain.*
+import com.github.avanlex.fundamentalsassignments.entities.*
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieActorJoin
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJoin
 
-@Database(entities = [MovieEntity::class, GenreEntity::class, ActorEntity::class, MovieActor::class, MovieGenre::class], version = 1)
+@Database(entities = [MovieEntity::class, MovieGenreJoin::class, MovieActorJoin::class, GenreEntity::class, ActorEntity::class], version = 1)
 abstract class DataBase : RoomDatabase(){
 
-	abstract val movieDao : MoviesDao
+	abstract val moviesDao : MoviesDao
 	companion object {
 		fun create(application: Context): DataBase {
-			return Room.databaseBuilder(
-				application,
+			return Room.databaseBuilder(application,
 				DataBase::class.java,
 				DbContract.DATABASE_NAME
 			).fallbackToDestructiveMigration()
