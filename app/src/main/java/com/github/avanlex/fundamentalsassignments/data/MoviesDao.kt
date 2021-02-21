@@ -4,14 +4,14 @@ import androidx.room.*
 import com.github.avanlex.fundamentalsassignments.entities.*
 import com.github.avanlex.fundamentalsassignments.entities.relations.MovieActorJoin
 import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJoin
-import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenresActors
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenres
 
 @Dao
 interface MoviesDao {
 
     @Transaction
     @Query("SELECT * FROM movies ORDER BY favorite DESC")
-    fun getMovies(): List<MovieWithGenresActors>
+    fun getMovies(): List<MovieWithGenres>
 
     @Transaction
     @Query("SELECT * FROM actors WHERE movieId == :movieId")

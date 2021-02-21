@@ -1,9 +1,6 @@
 package com.github.avanlex.fundamentalsassignments.di
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -42,18 +39,6 @@ class AppContainer(applicationContext: Context) {
                 .build()
     }
 
-    private var offlineInterceptor = Interceptor { chain ->
-        var request: Request = chain.request()
-        if (!isInternetAvailable(applicationContext)) {
-            val maxStale = 60 * 60 * 24 * 30 // Offline cache available for 30 days
-            request = request.newBuilder()
-                    .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
-                    .removeHeader("Pragma")
-                    .build()
-        }
-        chain.proceed(request)
-    }
-
     private var apiKeyInsertInterceptor = Interceptor { chain ->
         val originalRequest = chain.request()
         val originalHttpUrl = originalRequest.url.newBuilder()
@@ -74,41 +59,9 @@ class AppContainer(applicationContext: Context) {
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .addInterceptor(apiKeyInsertInterceptor)
-        .addInterceptor(offlineInterceptor)
         .addNetworkInterceptor(onlineInterceptor)
         .cache(cache)
         .build()
-
-
-
-    private fun isInternetAvailable(context: Context): Boolean {
-        var result = false
-        val connectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val networkCapabilities = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager
-                    .getNetworkCapabilities(networkCapabilities) ?: return false
-            result = when {
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
-            }
-        } else {
-            connectivityManager.run {
-                connectivityManager.activeNetworkInfo?.run {
-                    result = when (type) {
-                        ConnectivityManager.TYPE_WIFI -> true
-                        ConnectivityManager.TYPE_MOBILE -> true
-                        ConnectivityManager.TYPE_ETHERNET -> true
-                        else -> false
-                    }
-                }
-            }
-        }
-        return result
-    }
 
     private val applicationJson = "application/json".toMediaType()
 
@@ -124,9 +77,9 @@ class AppContainer(applicationContext: Context) {
 
     private val database = DataBase.create(applicationContext)
 
-    private val movieProvider = MoviesProvider(movieApi, database)
-    private val actorsProvider = ActorsProvider(movieApi, database)
-    private val genresProvider = GenresProvider(movieApi, database)
+    private val movieProvider = MoviesProvider(movieApi)
+    private val actorsProvider = ActorsProvider(movieApi)
+    private val genresProvider = GenresProvider(movieApi)
 
     // userRepository is not private; it'll be exposed
     @Suppress("MemberVisibilityCanBePrivate")

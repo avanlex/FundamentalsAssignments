@@ -10,7 +10,7 @@ import com.github.avanlex.fundamentalsassignments.entities.ActorEntity
 import com.github.avanlex.fundamentalsassignments.entities.GenreEntity
 import com.github.avanlex.fundamentalsassignments.entities.MovieEntity
 import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJoin
-import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenresActors
+import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenres
 import com.github.avanlex.fundamentalsassignments.movieList.data.Actor
 import com.github.avanlex.fundamentalsassignments.movieList.data.Genre
 import com.github.avanlex.fundamentalsassignments.movieList.data.Movie
@@ -47,7 +47,7 @@ class MovieGateway(
                 dataBase.moviesDao.insert(movieWebDtoToEntity(movieJson))
             }
         } catch (e: HttpException) {
-            Log.d("MovieGateway", "Movies Json load error")
+            Log.d(TAG, "Movies Json load error")
         }
 
         try {
@@ -55,14 +55,14 @@ class MovieGateway(
             genreEntityList = genresWebDtoToEntityList(genreDtoList)
             dataBase.moviesDao.insertGenresList(genreEntityList)
         } catch (e: HttpException) {
-            Log.d("MovieGateway", "Genres Json load error")
+            Log.d(TAG, "Genres Json load error")
         }
 
         val movieDbEntityList = dataBase.moviesDao.getMovies()
         movieEntityListToPojoList(movieDbEntityList)
     }
 
-    private fun movieEntityListToPojoList(movieDbItemList: List<MovieWithGenresActors>) : List<Movie> =
+    private fun movieEntityListToPojoList(movieDbItemList: List<MovieWithGenres>) : List<Movie> =
     movieDbItemList.map{ movieEntity ->
         with(movieEntity) {
             Movie(
@@ -108,7 +108,7 @@ class MovieGateway(
                 )
             })
         } catch (e: HttpException) {
-            Log.d("MovieGateway", "Actor Json load error")
+            Log.d(TAG, "Actor Json load error")
         }
 
         val actorEntityList = dataBase.moviesDao.getActors(movieId.toLong())
@@ -128,6 +128,10 @@ class MovieGateway(
 
     override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean = withContext(dispatcher) {
         moviesDataProvider.markAsFavorite(favorite)
+    }
+
+    companion object {
+        private val TAG = this::class.java.simpleName
     }
 
 }

@@ -17,7 +17,4 @@ interface MovieApi {
     @GET("movie/{movie_id}/credits")
     suspend fun loadActors(@Path("movie_id") movieId : Int): CreditsJson
 
-    @POST("/account//favorite")
-    suspend fun markAsFavorite(@Body favorite: FavoriteMovieJson): ResponseJson
-
 }

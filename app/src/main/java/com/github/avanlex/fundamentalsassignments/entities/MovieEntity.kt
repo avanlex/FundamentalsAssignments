@@ -10,6 +10,7 @@ import com.github.avanlex.fundamentalsassignments.data.DbContract
     indices = [Index(DbContract.Movies.COLUMN_NAME_ID)]
 )
 data class MovieEntity(
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_ID)
     var id: Int,
@@ -32,12 +33,6 @@ data class MovieEntity(
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_FAVORITE)
     var favorite: Boolean,
 
-    ){
-//    constructor() : this(0, "testOverv${i}", "title${i}", "posterPath${i}", "backdrop${i*2}", i*1.2F, random().toInt(), false, 0, false)
-
-//    companion object {
-//        var i : Int = 0
-//    }
-}
+)
 
 

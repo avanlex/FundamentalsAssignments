@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.MovieApplication
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
@@ -23,7 +22,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 class   FragmentMoviesDetails : Fragment() {
 
     private lateinit var viewModel: DetailsViewModel
-
     private lateinit var movie: Movie
     private lateinit var rvActors : RecyclerView
     private lateinit var poster: ImageView
@@ -34,7 +32,6 @@ class   FragmentMoviesDetails : Fragment() {
     private lateinit var vrbRating: VectorRatingBar
     private lateinit var tvReviews: TextView
     private lateinit var tvBack: TextView
-
     private lateinit var actorsAdapter: ActorsRecyclerViewAdapter
 
     companion object {
@@ -82,7 +79,6 @@ class   FragmentMoviesDetails : Fragment() {
         tvBack = v.findViewById(R.id.text_back)
 
         tvTitle.text = movie.title
-//        tvPg.text = requireContext().getString(R.string.string_pg, movie.adult ?: "18" : "0")
         tvTagline.text = movie.genres.joinToString { it.name }
         tvOverview.text = movie.overview
         vrbRating.rating = movie.rating  // movie.ratings is 10 degree rating
@@ -95,7 +91,7 @@ class   FragmentMoviesDetails : Fragment() {
     private fun loadPoster(){
         poster.load(movie.backdropPath) {
             crossfade(true)
-            placeholder(R.drawable.ic_image)
+            placeholder(R.drawable.ic_movie)
             error(R.drawable.ic_broken_image)
         }
         poster.colorFilter = getGreyScaleFilter()

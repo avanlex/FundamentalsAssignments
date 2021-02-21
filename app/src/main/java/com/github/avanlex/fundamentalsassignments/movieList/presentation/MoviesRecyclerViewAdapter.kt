@@ -10,7 +10,6 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.R
 import com.github.avanlex.fundamentalsassignments.VectorRatingBar
 import com.github.avanlex.fundamentalsassignments.context
@@ -96,7 +95,7 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         poster.load(movie.posterPath) {
             crossfade(true)
-            placeholder(R.drawable.ic_image)
+            placeholder(R.drawable.ic_movie)
             error(R.drawable.ic_broken_image)
         }
     }
