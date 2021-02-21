@@ -29,7 +29,7 @@ data class MovieJson(
 	@SerialName("release_date")
 	val releaseDate: String,
 	@SerialName("vote_average")
-	val voteAverage: Double,
+	val voteAverage: Float,
 	@SerialName("adult")
 	val adult: Boolean,
 	@SerialName("vote_count")

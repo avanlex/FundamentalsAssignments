@@ -6,4 +6,6 @@ import androidx.room.Entity
 data class MovieGenreJoin(
         val movieId: Long,
         val genreId: Long
-)
+){
+        constructor(movieId: Int, genreId: Int) : this(movieId.toLong(), genreId.toLong())
+}
