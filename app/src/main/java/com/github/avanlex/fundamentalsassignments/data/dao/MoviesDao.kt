@@ -1,4 +1,4 @@
-package com.github.avanlex.fundamentalsassignments.data
+package com.github.avanlex.fundamentalsassignments.data.dao
 
 import androidx.room.*
 import com.github.avanlex.fundamentalsassignments.entities.*

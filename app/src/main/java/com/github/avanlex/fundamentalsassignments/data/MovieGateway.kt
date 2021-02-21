@@ -3,6 +3,9 @@ package com.github.avanlex.fundamentalsassignments.data
 import android.util.Log
 import androidx.room.Dao
 import com.github.avanlex.fundamentalsassignments.BuildConfig
+import com.github.avanlex.fundamentalsassignments.data.dao.ActorsDao
+import com.github.avanlex.fundamentalsassignments.data.dao.GenresDao
+import com.github.avanlex.fundamentalsassignments.data.dao.MoviesDao
 import com.github.avanlex.fundamentalsassignments.data.providers.IActorProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.IGenresProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.IMovieProvider
@@ -27,38 +30,30 @@ class MovieGateway(
         private val moviesDataProvider: IMovieProvider,
         private val actorsDataProvider: IActorProvider,
         private val genresDataProvider: IGenresProvider,
-        private val dispatcher: CoroutineDispatcher,
-        private val dataBase: DataBase
+        private val moviesDao: MoviesDao,
+        private val genresDao: GenresDao,
+        private val actorsDao: ActorsDao,
+        private val dispatcher: CoroutineDispatcher
 ) : IMovieGateway {
 
     override suspend fun getMovies(): List<Movie> = withContext(dispatcher) {
-
-        val movieDtoList: List<MovieJson>
-        val genreDtoList: List<GenreJson>
-        val genreEntityList: List<GenreEntity>
-
         try {
-            movieDtoList = moviesDataProvider.loadMovies()
+            val movieDtoList = moviesDataProvider.loadMovies()
             movieDtoList.map{ movieJson ->
                 movieJson.genreIds.map { genreId ->
                     val movieGenreJoin = MovieGenreJoin( movieJson.movieId, genreId )
-                    dataBase.moviesDao.insertMovieGenreJoin(movieGenreJoin)
+                    genresDao.insertMovieGenreJoin(movieGenreJoin)
                 }
-                dataBase.moviesDao.insert(movieWebDtoToEntity(movieJson))
+                moviesDao.insert(movieJson.convertToEntity())
             }
+            val genreDtoList = genresDataProvider.loadGenres()
+            moviesDao.insertGenresList(genreDtoList.mapToEntityList())
+
         } catch (e: HttpException) {
             Log.d(TAG, "Movies Json load error")
         }
 
-        try {
-            genreDtoList = genresDataProvider.loadGenres()
-            genreEntityList = genresWebDtoToEntityList(genreDtoList)
-            dataBase.moviesDao.insertGenresList(genreEntityList)
-        } catch (e: HttpException) {
-            Log.d(TAG, "Genres Json load error")
-        }
-
-        val movieDbEntityList = dataBase.moviesDao.getMovies()
+        val movieDbEntityList = moviesDao.getMovies()
         movieEntityListToPojoList(movieDbEntityList)
     }
 
@@ -82,24 +77,25 @@ class MovieGateway(
         }
     }
 
-    private fun movieWebDtoToEntity(movies: MovieJson) = MovieEntity(
-            movies.movieId,
-            movies.overview,
-            movies.title,
-            movies.posterPath,
-            movies.backdropPath,
-            movies.voteAverage,
-            movies.votesCount,
-            movies.adult,
+    private fun MovieJson.convertToEntity() =
+        MovieEntity(
+            this.movieId,
+            this.overview,
+            this.title,
+            this.posterPath,
+            this.backdropPath,
+            this.voteAverage,
+            this.votesCount,
+            this.adult,
             0,
             false
-    )
+        )
 
     override suspend fun getActors(movieId: Int): List<Actor> = withContext(dispatcher) {
         try {
             val actors: List<ActorJson> = actorsDataProvider.loadActors(movieId)
 
-            dataBase.moviesDao.insertActorsList(actors.map {
+            actorsDao.insertList(actors.map {
                 ActorEntity(
                     it.actorId,
                     it.name,
@@ -111,7 +107,7 @@ class MovieGateway(
             Log.d(TAG, "Actor Json load error")
         }
 
-        val actorEntityList = dataBase.moviesDao.getActors(movieId.toLong())
+        val actorEntityList = actorsDao.getByMovieId(movieId.toLong())
         actorEntityList.map { Actor(
             it.id,
             it.name,
@@ -119,12 +115,8 @@ class MovieGateway(
         )}
     }
 
-    private fun genresWebDtoToEntityList(genres: List<GenreJson>) = genres.map{
-        GenreEntity(
-                it.genreId,
-                it.name
-        )
-    }
+    private fun List<GenreJson>.mapToEntityList() =
+        this.map{ GenreEntity( it.genreId, it.name ) }
 
     override suspend fun markAsFavorite(favorite: FavoriteMovieJson): Boolean = withContext(dispatcher) {
         moviesDataProvider.markAsFavorite(favorite)

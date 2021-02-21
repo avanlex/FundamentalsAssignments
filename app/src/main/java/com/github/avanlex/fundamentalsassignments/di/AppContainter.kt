@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.github.avanlex.fundamentalsassignments.BuildConfig
-import com.github.avanlex.fundamentalsassignments.data.DataBase
+import com.github.avanlex.fundamentalsassignments.data.MovieDatabase
 import com.github.avanlex.fundamentalsassignments.data.MovieGateway
 import com.github.avanlex.fundamentalsassignments.data.providers.ActorsProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.GenresProvider
@@ -75,7 +75,7 @@ class AppContainer(applicationContext: Context) {
         .build()
         .create<MovieApi>()
 
-    private val database = DataBase.create(applicationContext)
+    private val database = MovieDatabase.create(applicationContext)
 
     private val movieProvider = MoviesProvider(movieApi)
     private val actorsProvider = ActorsProvider(movieApi)
@@ -88,9 +88,11 @@ class AppContainer(applicationContext: Context) {
                 movieProvider,
                 actorsProvider,
                 genresProvider,
+                database.moviesDao,
+                database.genresDao,
+                database.actorsDao,
                 Dispatchers.IO,
-                database
-        ) 
+        )
     }
 
     fun getMoviesViewModel(fragment: Fragment): MoviesViewModel =
