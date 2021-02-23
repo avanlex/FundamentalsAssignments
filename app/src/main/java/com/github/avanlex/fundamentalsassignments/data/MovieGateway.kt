@@ -41,7 +41,7 @@ class MovieGateway(
             val movieDtoList = moviesDataProvider.loadMovies()
             movieDtoList.map{ movieJson ->
                 movieJson.genreIds.map { genreId ->
-                    val movieGenreJoin = MovieGenreJoin( movieJson.movieId, genreId )
+                    val movieGenreJoin = MovieGenreJoin( movieJson.movieId.toLong(), genreId.toLong() )
                     genresDao.insertMovieGenreJoin(movieGenreJoin)
                 }
                 moviesDao.insert(movieJson.convertToEntity())
@@ -54,29 +54,28 @@ class MovieGateway(
             Log.d(TAG, "Movies Json load error")
         }
 
-        val movieDbEntityList = moviesDao.getMovies()
-        movieEntityListToPojoList(movieDbEntityList)
+        moviesDao.getMovies().toPojoList()
     }
 
-    private fun movieEntityListToPojoList(movieDbItemList: List<MovieWithGenres>) : List<Movie> =
-    movieDbItemList.map{ movieEntity ->
-        with(movieEntity) {
-            Movie(
-                id = movie.id,
-                title = movie.title,
-                overview = movie.overview,
-                posterPath = BuildConfig.BASE_IMAGE_URL + movie.posterPath,
-                backdropPath = movie.backdropPath,
-                rating = movie.rating / 2,
-                votesCount = movie.votesCount,
-                adult = movie.adult,
-                runtime = 0,
-                favorite = false,
-                genres = genres.map {genre -> Genre(genre.genreId, genre.name) },
-                actors = null
-            )
+    private fun List<MovieWithGenres>.toPojoList() : List<Movie> =
+        this.map{ movieEntity ->
+            with(movieEntity) {
+                Movie(
+                    id = movie.id,
+                    title = movie.title,
+                    overview = movie.overview,
+                    posterPath = BuildConfig.BASE_IMAGE_URL + movie.posterPath,
+                    backdropPath = movie.backdropPath,
+                    rating = movie.rating / 2,
+                    votesCount = movie.votesCount,
+                    adult = movie.adult,
+                    runtime = 0,
+                    favorite = false,
+                    genres = genres.map {genre -> Genre(genre.genreId, genre.name) },
+                    actors = null
+                )
+            }
         }
-    }
 
     private fun MovieJson.convertToEntity() =
         MovieEntity(
