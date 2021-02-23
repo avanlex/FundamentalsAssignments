@@ -46,8 +46,9 @@ class MovieGateway(
                 }
                 moviesDao.insert(movieJson.convertToEntity())
             }
+
             val genreDtoList = genresDataProvider.loadGenres()
-            moviesDao.insertGenresList(genreDtoList.mapToEntityList())
+            genresDao.insertList(genreDtoList.mapToEntityList())
 
         } catch (e: HttpException) {
             Log.d(TAG, "Movies Json load error")

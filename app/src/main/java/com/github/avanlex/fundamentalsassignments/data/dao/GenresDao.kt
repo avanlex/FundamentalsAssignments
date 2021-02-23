@@ -10,7 +10,7 @@ import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJ
 @Dao
 interface GenresDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(genres: List<GenreEntity>)
+    suspend fun insertList(genres: List<GenreEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieGenreJoin(join: MovieGenreJoin)
