@@ -38,9 +38,9 @@ class MovieGateway(
     override suspend fun getMovies(): List<Movie> = withContext(dispatcher) {
         try {
             val movieDtoList = moviesDataProvider.loadMovies()
-            movieDtoList.map{ movieJson ->
+            movieDtoList.forEach{ movieJson ->
                 moviesDataProvider.insert(movieJson.convertToEntity())
-                movieJson.genreIds.map { genreId ->
+                movieJson.genreIds.forEach { genreId ->
                     val movieGenreJoin = MovieGenreJoin( movieJson.movieId, genreId )
                     try {
                         genresDataProvider.dbInsertMovieGenreJoin(movieGenreJoin)

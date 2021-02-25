@@ -91,9 +91,6 @@ class AppContainer(applicationContext: Context) {
                 movieProvider,
                 actorsProvider,
                 genresProvider,
-                database.moviesDao,
-                database.genresDao,
-                database.actorsDao,
                 Dispatchers.IO,
         )
     }
