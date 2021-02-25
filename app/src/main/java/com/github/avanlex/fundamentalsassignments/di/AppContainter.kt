@@ -7,6 +7,7 @@ import androidx.lifecycle.get
 import com.github.avanlex.fundamentalsassignments.BuildConfig
 import com.github.avanlex.fundamentalsassignments.data.MovieDatabase
 import com.github.avanlex.fundamentalsassignments.data.MovieGateway
+import com.github.avanlex.fundamentalsassignments.data.providers.AccountProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.ActorsProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.GenresProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.MoviesProvider
@@ -77,14 +78,16 @@ class AppContainer(applicationContext: Context) {
 
     private val database = MovieDatabase.create(applicationContext)
 
-    private val movieProvider = MoviesProvider(movieApi)
-    private val actorsProvider = ActorsProvider(movieApi)
-    private val genresProvider = GenresProvider(movieApi)
+    private val movieProvider = MoviesProvider(movieApi, database.moviesDao)
+    private val actorsProvider = ActorsProvider(movieApi, database.actorsDao)
+    private val genresProvider = GenresProvider(movieApi, database.genresDao)
+    private val accountProvider = AccountProvider(movieApi, database.moviesDao)
 
     // userRepository is not private; it'll be exposed
     @Suppress("MemberVisibilityCanBePrivate")
     val movieGateway by lazy {
         MovieGateway(
+                accountProvider,
                 movieProvider,
                 actorsProvider,
                 genresProvider,

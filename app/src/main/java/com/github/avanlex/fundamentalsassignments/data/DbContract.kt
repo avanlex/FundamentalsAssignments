@@ -7,17 +7,17 @@ object DbContract {
     
     object Genres {
         const val TABLE_NAME = "genres"
-        const val COLUMN_NAME_ID = "genreId"
+        const val COLUMN_NAME_ID = "genre_id"
     }
 
     object Actors {
         const val TABLE_NAME = "actors"
-        const val COLUMN_NAME_ID = "actorId"
+        const val COLUMN_NAME_ID = "actor_id"
     }
 
     object Movies{
         const val TABLE_NAME = "movies"
-        const val COLUMN_NAME_ID = "movieId"
+        const val COLUMN_NAME_ID = "movie_id"
         const val COLUMN_NAME_OVERVIEW = "overview"
         const val COLUMN_NAME_TITLE = "title"
         const val COLUMN_NAME_POSTER_PATH = "posterPath"

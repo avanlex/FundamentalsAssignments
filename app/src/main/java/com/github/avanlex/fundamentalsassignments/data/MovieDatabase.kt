@@ -19,7 +19,8 @@ import com.github.avanlex.fundamentalsassignments.entities.relations.MovieGenreJ
 		ActorEntity::class,
 		MovieActorJoin::class
  	],
-	version = 1
+	version = 1,
+	exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase(){
 

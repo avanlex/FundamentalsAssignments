@@ -9,7 +9,6 @@ import com.github.avanlex.fundamentalsassignments.data.DbContract
 
 @Entity(
     tableName = DbContract.Genres.TABLE_NAME,
-    indices = [Index(DbContract.Genres.COLUMN_NAME_ID)]
 )
 data class GenreEntity(
     @PrimaryKey

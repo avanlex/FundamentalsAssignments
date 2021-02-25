@@ -6,14 +6,13 @@ import androidx.room.*
 import com.github.avanlex.fundamentalsassignments.data.DbContract
 
 @Entity(
-    tableName = DbContract.Movies.TABLE_NAME,
-    indices = [Index(DbContract.Movies.COLUMN_NAME_ID)]
+    tableName = DbContract.Movies.TABLE_NAME
 )
 data class MovieEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_ID)
-    var id: Int,
+    var movieId: Int,
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_OVERVIEW)
     var overview: String,
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_TITLE)
@@ -33,6 +32,8 @@ data class MovieEntity(
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_FAVORITE)
     var favorite: Boolean,
 
-)
+){
+
+}
 
 

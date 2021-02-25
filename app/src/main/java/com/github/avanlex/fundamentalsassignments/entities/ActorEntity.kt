@@ -8,7 +8,6 @@ import com.github.avanlex.fundamentalsassignments.data.DbContract
 
 @Entity(
     tableName = DbContract.Actors.TABLE_NAME,
-    indices = [Index(DbContract.Actors.COLUMN_NAME_ID)]
 )
 data class ActorEntity (
     @PrimaryKey
