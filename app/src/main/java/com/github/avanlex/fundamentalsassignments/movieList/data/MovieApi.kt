@@ -1,9 +1,9 @@
 package com.github.avanlex.fundamentalsassignments.movieList.data
 
-import com.github.avanlex.fundamentalsassignments.movieList.data.dto.*
-import retrofit2.http.Body
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.CreditsJson
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.GenresJson
+import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MoviesJson
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MovieApi {
@@ -16,8 +16,5 @@ interface MovieApi {
 
     @GET("movie/{movie_id}/credits")
     suspend fun loadActors(@Path("movie_id") movieId : Int): CreditsJson
-
-    @POST("/account//favorite")
-    suspend fun markAsFavorite(@Body favorite: FavoriteMovieJson): ResponseJson
 
 }

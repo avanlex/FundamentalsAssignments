@@ -79,7 +79,6 @@ class FragmentMoviesList : Fragment(R.layout.fragment_movies_list) {
     }
 
     companion object {
-        private val TAG = FragmentMoviesList::class.java.simpleName
         fun create() = FragmentMoviesList()
     }
 
