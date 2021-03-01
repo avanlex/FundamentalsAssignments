@@ -4,17 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.Index
 import com.github.avanlex.fundamentalsassignments.data.DbContract
 import com.github.avanlex.fundamentalsassignments.entities.GenreEntity
 import com.github.avanlex.fundamentalsassignments.entities.MovieEntity
 
 @Entity(
     primaryKeys = [DbContract.Movies.COLUMN_NAME_ID, DbContract.Genres.COLUMN_NAME_ID],
-//    indices = [
-//        Index(DbContract.Movies.COLUMN_NAME_ID),
-//        Index(DbContract.Genres.COLUMN_NAME_ID),
-//    ],
     foreignKeys = [
         ForeignKey(
             entity = MovieEntity::class,

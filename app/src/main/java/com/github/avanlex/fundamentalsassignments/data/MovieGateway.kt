@@ -3,9 +3,6 @@ package com.github.avanlex.fundamentalsassignments.data
 import android.util.Log
 import androidx.room.Dao
 import com.github.avanlex.fundamentalsassignments.BuildConfig
-import com.github.avanlex.fundamentalsassignments.data.dao.ActorsDao
-import com.github.avanlex.fundamentalsassignments.data.dao.GenresDao
-import com.github.avanlex.fundamentalsassignments.data.dao.MoviesDao
 import com.github.avanlex.fundamentalsassignments.data.providers.AccountProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.IActorProvider
 import com.github.avanlex.fundamentalsassignments.data.providers.IGenresProvider

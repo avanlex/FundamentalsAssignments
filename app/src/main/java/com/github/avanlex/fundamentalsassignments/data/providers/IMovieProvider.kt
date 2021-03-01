@@ -1,9 +1,5 @@
 package com.github.avanlex.fundamentalsassignments.data.providers
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
 import com.github.avanlex.fundamentalsassignments.entities.MovieEntity
 import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenres
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MovieJson

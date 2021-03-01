@@ -4,7 +4,6 @@ import com.github.avanlex.fundamentalsassignments.data.dao.MoviesDao
 import com.github.avanlex.fundamentalsassignments.entities.MovieEntity
 import com.github.avanlex.fundamentalsassignments.entities.relations.MovieWithGenres
 import com.github.avanlex.fundamentalsassignments.movieList.data.MovieApi
-import com.github.avanlex.fundamentalsassignments.movieList.data.dto.FavoriteMovieJson
 import com.github.avanlex.fundamentalsassignments.movieList.data.dto.MovieJson
 
 class MoviesProvider(private val api: MovieApi, private val moviesDao: MoviesDao) : IMovieProvider {

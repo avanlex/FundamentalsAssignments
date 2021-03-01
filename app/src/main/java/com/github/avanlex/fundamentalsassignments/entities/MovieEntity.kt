@@ -32,8 +32,6 @@ data class MovieEntity(
     @ColumnInfo(name = DbContract.Movies.COLUMN_NAME_FAVORITE)
     var favorite: Boolean,
 
-){
-
-}
+)
 
 

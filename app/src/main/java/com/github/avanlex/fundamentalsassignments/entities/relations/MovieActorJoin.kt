@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import com.github.avanlex.fundamentalsassignments.data.DbContract
 import com.github.avanlex.fundamentalsassignments.entities.ActorEntity
-import com.github.avanlex.fundamentalsassignments.entities.GenreEntity
 import com.github.avanlex.fundamentalsassignments.entities.MovieEntity
 
 @Entity(primaryKeys = [DbContract.Movies.COLUMN_NAME_ID, DbContract.Actors.COLUMN_NAME_ID],
